@@ -6587,11 +6587,19 @@ body.ve-active [data-edit].ve-selected {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   HERO REBUILD — building layer (added 2026-05-01)
-   World image as background, building.png as separate floating layer
-   The world.jpg already contains the logo + tagline, so the HTML
-   .mh-tagline-overlay below the image is hidden to avoid duplication.
+   HERO REBUILD — building layer (added 2026-05-01, refined)
+   - Hero image scaled to 75% on desktop (-25% per chano)
+   - Building moved further inward
+   - Mobile: building shifted off-center so it doesn't cover the logo
    ═══════════════════════════════════════════════════════════════ */
+
+/* Cap hero at fixed pixel width — image stays the same height on big monitors,
+   #1b3152 background fills the gutters left/right.
+   world.jpg is 1893×821 (aspect 2.31), so max-width: 1100px → height ~477px */
+.mh-hero-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+}
 
 /* World image — slight saturation/contrast lift so it doesn't look dead */
 .mh-hero-image {
@@ -6601,9 +6609,9 @@ body.ve-active [data-edit].ve-selected {
 /* Building layer */
 .mh-hero-building {
   position: absolute;
-  bottom: -2px;          /* sits flush on hero bottom edge */
-  left: 4%;
-  width: clamp(140px, 22%, 280px);
+  bottom: -2px;
+  left: 8%;              /* moved inward (was 4%) */
+  width: clamp(120px, 18%, 220px);  /* slightly smaller */
   height: auto;
   z-index: 12;
   pointer-events: none;
@@ -6620,28 +6628,37 @@ body.ve-active [data-edit].ve-selected {
   50%      { transform: translateY(-6px); }
 }
 
-/* Tablet: shrink the building a touch */
+/* Tablet: hero fills screen, building stays inset on the left */
 @media (max-width: 900px) {
+  .mh-hero-wrap {
+    max-width: 100%;
+  }
   .mh-hero-building {
-    left: 3%;
-    width: clamp(110px, 24%, 200px);
+    left: 5%;
+    width: clamp(95px, 20%, 170px);
   }
 }
 
-/* Mobile: building moves to bottom-center, smaller, gentler glow */
+/* Mobile: hero is full width, building tucks into far-left bottom corner
+   so it doesn't cover the centered logo in world.jpg */
 @media (max-width: 600px) {
-  .mh-hero-building {
-    left: 50%;
-    width: clamp(90px, 32%, 160px);
-    animation: mhBuildingFloatMobile 6s ease-in-out infinite;
-    filter:
-      drop-shadow(0 0 18px rgba(201, 169, 97, 0.40))
-      drop-shadow(0 0 6px rgba(232, 201, 125, 0.30))
-      drop-shadow(0 3px 10px rgba(0, 0, 0, 0.55));
+  .mh-hero-wrap {
+    max-width: 100%;
   }
-  @keyframes mhBuildingFloatMobile {
-    0%, 100% { transform: translate(-50%, 0); }
-    50%      { transform: translate(-50%, -4px); }
+  .mh-hero-building {
+    left: 2%;
+    width: clamp(75px, 22%, 120px);
+    filter:
+      drop-shadow(0 0 16px rgba(201, 169, 97, 0.40))
+      drop-shadow(0 0 5px rgba(232, 201, 125, 0.30))
+      drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
+  }
+}
+
+/* Very small phones: building even smaller */
+@media (max-width: 380px) {
+  .mh-hero-building {
+    width: clamp(60px, 20%, 95px);
   }
 }
 
