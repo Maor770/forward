@@ -228,9 +228,9 @@ input.calc-input:focus {
   padding: 0;
   position: relative;
   background:
-    radial-gradient(ellipse at 50% 30%, rgba(201, 169, 97, 0.18) 0%, transparent 55%),
-    radial-gradient(ellipse at 50% 100%, rgba(155, 27, 46, 0.12) 0%, transparent 60%),
-    var(--bg-navy-deep);
+    radial-gradient(ellipse at 50% 30%, rgba(201, 169, 97, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(155, 27, 46, 0.08) 0%, transparent 60%),
+    #1b3152;
   border-bottom: none;
   overflow: hidden;
 }
@@ -6586,3 +6586,69 @@ body.ve-active [data-edit].ve-selected {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   HERO REBUILD — building layer (added 2026-05-01)
+   World image as background, building.png as separate floating layer
+   The world.jpg already contains the logo + tagline, so the HTML
+   .mh-tagline-overlay below the image is hidden to avoid duplication.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* World image — slight saturation/contrast lift so it doesn't look dead */
+.mh-hero-image {
+  filter: saturate(1.18) contrast(1.06) brightness(1.02);
+}
+
+/* Building layer */
+.mh-hero-building {
+  position: absolute;
+  bottom: -2px;          /* sits flush on hero bottom edge */
+  left: 4%;
+  width: clamp(140px, 22%, 280px);
+  height: auto;
+  z-index: 12;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 28px rgba(201, 169, 97, 0.45))
+    drop-shadow(0 0 8px rgba(232, 201, 125, 0.40))
+    drop-shadow(0 4px 14px rgba(0, 0, 0, 0.55));
+  animation: mhBuildingFloat 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes mhBuildingFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* Tablet: shrink the building a touch */
+@media (max-width: 900px) {
+  .mh-hero-building {
+    left: 3%;
+    width: clamp(110px, 24%, 200px);
+  }
+}
+
+/* Mobile: building moves to bottom-center, smaller, gentler glow */
+@media (max-width: 600px) {
+  .mh-hero-building {
+    left: 50%;
+    width: clamp(90px, 32%, 160px);
+    animation: mhBuildingFloatMobile 6s ease-in-out infinite;
+    filter:
+      drop-shadow(0 0 18px rgba(201, 169, 97, 0.40))
+      drop-shadow(0 0 6px rgba(232, 201, 125, 0.30))
+      drop-shadow(0 3px 10px rgba(0, 0, 0, 0.55));
+  }
+  @keyframes mhBuildingFloatMobile {
+    0%, 100% { transform: translate(-50%, 0); }
+    50%      { transform: translate(-50%, -4px); }
+  }
+}
+
+/* Reduced motion: stop the float */
+@media (prefers-reduced-motion: reduce) {
+  .mh-hero-building { animation: none; }
+}
+
+/* Hide the duplicate HTML tagline — it's already baked into world.jpg */
+.mh-tagline.mh-tagline-overlay { display: none; }
