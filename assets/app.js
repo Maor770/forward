@@ -318,7 +318,9 @@ const AI_DATA = {
 // =============================================================
 // =============================================================
 
-const DATA = {
+// Default DATA = 417 Maple. Per-property pages can override the defaults via
+// window.PROPERTY_DATA_OVERRIDE (e.g., property-653.html sets it before loading app.js).
+const DATA_417 = {
 
   // -------- Property Identity --------
   property: {
@@ -330,6 +332,7 @@ const DATA = {
     lot: "40 × 100",
     lotSub: "4,000 sqft",
     zoning: "R6",
+    options: { bargain: 'Maybe', growth: 'Yes' },
   },
 
   // -------- Financial Defaults --------
@@ -353,6 +356,13 @@ const DATA = {
       targetDscr:  1.25,
       downPayments: [20, 25, 30, 35],
     },
+    bargainSale: {
+      salePrice: 2004000,
+      fmv:       2700000,
+      basis:     1550000,
+      rpttRate:  2.625,
+      bracket:   35,
+    },
   },
 
   // -------- Scoring (visual, not calculated) --------
@@ -375,6 +385,8 @@ const DATA = {
   patternNote: "Both institutions are on Rutland Road - within walking distance of each other and of 417 Maple. This is not a coincidence; it's a corridor. Each institution that anchored here has helped the area become central.",
 
 };
+
+const DATA = (typeof window !== 'undefined' && window.PROPERTY_DATA_OVERRIDE) || DATA_417;
 
 // =============================================================
 // =============================================================
@@ -629,6 +641,15 @@ function loadDefaults() {
   const defaultDown = d.mortgage.downPayments[1] || 25;
   setVal('i-down-slider', defaultDown);
   setVal('i-down-range',  defaultDown);
+
+  // Bargain Sale calculator defaults
+  if (d.bargainSale) {
+    setVal('i-bs-sale',    d.bargainSale.salePrice);
+    setVal('i-bs-fmv',     d.bargainSale.fmv);
+    setVal('i-bs-basis',   d.bargainSale.basis);
+    setVal('i-bs-rptt',    d.bargainSale.rpttRate);
+    setVal('i-bs-bracket', d.bargainSale.bracket);
+  }
 }
 
 // ---- Recalc + Render cycle ----
@@ -636,6 +657,8 @@ function recalc() {
   const inputs = readInputs();
   const result = calculate(inputs);
   render(result, inputs);
+  // Bargain Sale - independent calculator, recalc whenever any input changes
+  if (typeof calcBargainSale === 'function') calcBargainSale();
 }
 
 // ---- Accordion / collapsible toggle ----
@@ -751,11 +774,13 @@ function initLayerNav() {
     });
   });
 
-  // Property cards in building hub → enter property
+  // Property cards in building hub → navigate to the property's own page
   document.querySelectorAll('[data-target-property]').forEach((btn) => {
     if (btn.classList.contains('is-pending')) return;
     btn.addEventListener('click', () => {
-      showLayer('property');
+      const slug = btn.dataset.targetProperty;
+      const page = PROPERTY_PAGES[slug] || 'property';
+      window.location.href = page;
     });
   });
 
@@ -1111,7 +1136,14 @@ const ROUTES = {
   '#home': { layer: 'master' },
   '#building': { layer: 'building' },
   '#building/properties/417-maple': { layer: 'property' },
+  '#building/properties/653-maple': { layer: 'property' },
   '#ai': { layer: 'ai' },
+};
+
+// Map property slug -> page URL (Cloudflare Pages strips .html, so omit it)
+const PROPERTY_PAGES = {
+  '417-maple': 'property',
+  '653-maple': 'property-653',
 };
 
 // Engine routes (5)
@@ -1540,6 +1572,7 @@ function _pageSplit_layerForCurrentPage() {
     'index.html': 'master',
     'building.html': 'building',
     'property.html': 'property',
+    'property-653.html': 'property',
     'ai.html': 'ai',
     'engine.html': 'engine',
     'audience.html': 'audience'
@@ -1598,12 +1631,17 @@ function initRouting() {
     });
   });
 
-  // Property card - full navigation
+  // Property card - full navigation to the property's dedicated page.
+  // Note: this listener and the one in initLayerNav both fire; both navigate to
+  // the same URL, so the duplicate is harmless. We update hash here so a user
+  // who lands directly on /building#building/properties/653-maple gets a sane URL.
   document.querySelectorAll('[data-target-property]').forEach((btn) => {
     if (btn.classList.contains('is-pending')) return;
     btn.addEventListener('click', () => {
-      setHash('#building/properties/417-maple');
-      navigateTo('property');
+      const slug = btn.dataset.targetProperty;
+      setHash(`#building/properties/${slug}`);
+      const page = PROPERTY_PAGES[slug] || 'property';
+      window.location.href = page;
     });
   });
 
@@ -1787,28 +1825,123 @@ if (document.readyState !== 'loading') {
 //   PROPERTY CARD V2 - Lean version helpers
 // =============================================================
 
-// Static defaults for new "Options" section (Bargain Sell + Growth)
+// =========================================
+// Property Options (Bargain / Growth toggles)
+// =========================================
+// Storage key per page (so 417 and 653 keep separate values)
+const OPT_STORAGE_KEY = 'maorforward.options.' + (
+  (typeof location !== 'undefined' && location.pathname.includes('653')) ? '653' : '417'
+);
+
+function getOptionState() {
+  // Load from localStorage if present, else use DATA defaults
+  try {
+    const raw = localStorage.getItem(OPT_STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) { /* ignore */ }
+  return (DATA && DATA.property && DATA.property.options) || { bargain: 'Maybe', growth: 'Yes' };
+}
+
+function saveOptionState(state) {
+  try {
+    localStorage.setItem(OPT_STORAGE_KEY, JSON.stringify(state));
+  } catch (e) { /* ignore */ }
+}
+
+function setOption(name, value) {
+  document.querySelectorAll(`[data-out="${name}"]`).forEach(el => {
+    el.textContent = value;
+    el.classList.remove('opt-yes', 'opt-no', 'opt-maybe');
+    const v = String(value).toLowerCase();
+    if (v === 'yes' || v === '✓') el.classList.add('opt-yes');
+    else if (v === 'no' || v === '✗') el.classList.add('opt-no');
+    else el.classList.add('opt-maybe');
+  });
+}
+
+function applyBargainVisibility(value) {
+  const section = document.getElementById('bargainSection');
+  if (!section) return;
+  const v = String(value).toLowerCase();
+  if (v === 'no') section.classList.add('is-hidden');
+  else            section.classList.remove('is-hidden');
+}
+
+// Cycle order: Yes → Maybe → No → Yes
+const OPT_CYCLE = ['Yes', 'Maybe', 'No'];
+function nextOptValue(current) {
+  const idx = OPT_CYCLE.findIndex(v => v.toLowerCase() === String(current).toLowerCase());
+  return OPT_CYCLE[(idx + 1) % OPT_CYCLE.length];
+}
+
 function renderPropertyOptions() {
-  // Default values - can be overridden via DATA.property.options if present
-  const opts = (typeof DATA !== 'undefined' && DATA.property && DATA.property.options) || {
-    bargain: 'Maybe',  // Yes / No / Maybe
-    growth: 'Yes',     // R6 zoning permits expansion → Yes by default for 417 Maple
-  };
-
-  function setOption(name, value) {
-    document.querySelectorAll(`[data-out="${name}"]`).forEach(el => {
-      el.textContent = value;
-      // Reset class
-      el.classList.remove('opt-yes', 'opt-no', 'opt-maybe');
-      const v = String(value).toLowerCase();
-      if (v === 'yes' || v === '✓') el.classList.add('opt-yes');
-      else if (v === 'no' || v === '✗') el.classList.add('opt-no');
-      else el.classList.add('opt-maybe');
-    });
-  }
-
+  const opts = getOptionState();
   setOption('bargainOption', opts.bargain);
   setOption('growthOption',  opts.growth);
+  applyBargainVisibility(opts.bargain);
+
+  // Wire up toggle buttons (idempotent: skip if already wired)
+  document.querySelectorAll('[data-toggle]').forEach(btn => {
+    if (btn.dataset.wired === '1') return;
+    btn.dataset.wired = '1';
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.toggle; // 'bargainOption' or 'growthOption'
+      const current = btn.textContent.trim();
+      const next = nextOptValue(current);
+      const state = getOptionState();
+      if (name === 'bargainOption') state.bargain = next;
+      else if (name === 'growthOption') state.growth = next;
+      saveOptionState(state);
+      setOption(name, next);
+      if (name === 'bargainOption') applyBargainVisibility(next);
+    });
+  });
+}
+
+// =========================================
+// Bargain Sale Calculator
+// =========================================
+function calcBargainSale() {
+  const get = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return 0;
+    const clean = String(el.value).replace(/,/g, '');
+    return parseFloat(clean) || 0;
+  };
+
+  // If the section isn't on this page, abort silently
+  if (!document.getElementById('i-bs-sale')) return;
+
+  const sale    = get('i-bs-sale');     // Maor's offer (cash)
+  const fmv     = get('i-bs-fmv');      // Appraised value
+  const basis   = get('i-bs-basis');    // Seller's adjusted basis
+  const rpttPct = get('i-bs-rptt');     // NYC RPTT %
+  const bracket = get('i-bs-bracket');  // Tax bracket %
+
+  // Per Excel model:
+  //   Charitable Deduction = FMV - Sale Price
+  //   NYC Transfer Tax Saved = Sale Price * RPTT Rate
+  //   Income Tax Savings = Charitable Deduction * Bracket
+  //   Total Savings = Transfer Tax + Income Tax
+  //   For-Profit Equivalent = Sale Price + Total Savings
+  const deduction      = Math.max(0, fmv - sale);
+  const rpttSaved      = sale * (rpttPct / 100);
+  const taxSavings     = deduction * (bracket / 100);
+  const totalSavings   = rpttSaved + taxSavings;
+  const forProfitEquiv = sale + totalSavings;
+
+  // Discount calculations (from Maor's perspective)
+  const discountFmv   = fmv > 0 ? (fmv - sale) / fmv : 0;
+  const discountAdj   = fmv > 0 ? (fmv - forProfitEquiv) / fmv : 0;
+
+  setOut('bs-deduction',      fmt.dollar(deduction));
+  setOut('bs-rptt-saved',     fmt.dollar(rpttSaved));
+  setOut('bs-tax-saved',      fmt.dollar(taxSavings));
+  setOut('bs-sale-display',   fmt.dollar(sale));
+  setOut('bs-equiv',          fmt.dollar(forProfitEquiv));
+  setOut('bs-total-savings',  fmt.dollar(totalSavings));
+  setOut('bs-discount-fmv',   fmt.percent(discountFmv * 100, 1));
+  setOut('bs-discount-adj',   fmt.percent(discountAdj * 100, 1));
 }
 
 // Score-jump button (header → score section)
@@ -2471,161 +2604,4 @@ function veCreateFlameButton() {
           <stop offset="100%" stop-color="#C9A961"/>
         </linearGradient>
       </defs>
-      <path d="M 17 3 C 14 8, 10 12, 9 17 C 8 22, 10 28, 14 31 C 11 27, 12 22, 15 18 C 16 22, 17 26, 21 28 C 26 30, 28 24, 27 19 C 26 14, 22 10, 19 6 C 18 9, 18 11, 17 13 C 17 9, 17 6, 17 3 Z" fill="url(#ve-flame-grad)" stroke="#9B7F3F" stroke-width="0.6" stroke-linejoin="round"/>
-    </svg>
-  `;
-  document.body.appendChild(btn);
-
-  // Menu
-  const menu = document.createElement('div');
-  menu.id = 've-flame-menu';
-  menu.className = 've-flame-menu';
-  menu.innerHTML = `
-    <div class="vfm-header">Editor Tools</div>
-    <button class="vfm-item" data-action="visual" type="button">
-      <span class="vfm-icon">✎</span>
-      <span class="vfm-label">
-        <strong>Visual Editor</strong>
-        <em>Edit text, fonts, colors</em>
-      </span>
-    </button>
-    <button class="vfm-item" data-action="financial" type="button">
-      <span class="vfm-icon">$</span>
-      <span class="vfm-label">
-        <strong>Financial Editor</strong>
-        <em>Edit prices, scenarios, defaults</em>
-      </span>
-    </button>
-    <button class="vfm-item" data-action="export-edits" type="button">
-      <span class="vfm-icon">⬇</span>
-      <span class="vfm-label">
-        <strong>Export All Edits</strong>
-        <em>Download JSON to share</em>
-      </span>
-    </button>
-    <button class="vfm-item vfm-item-danger" data-action="reset" type="button">
-      <span class="vfm-icon">↺</span>
-      <span class="vfm-label">
-        <strong>Reset Everything</strong>
-        <em>Restore originals</em>
-      </span>
-    </button>
-  `;
-  document.body.appendChild(menu);
-
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    menu.classList.toggle('is-open');
-  });
-
-  // Close menu on outside click
-  document.addEventListener('click', (e) => {
-    if (!menu.contains(e.target) && !btn.contains(e.target)) {
-      menu.classList.remove('is-open');
-    }
-  });
-
-  // Menu actions
-  menu.addEventListener('click', (e) => {
-    const item = e.target.closest('.vfm-item');
-    if (!item) return;
-    const action = item.dataset.action;
-    menu.classList.remove('is-open');
-
-    if (action === 'visual') {
-      veCreatePanel();
-      veToggleEditMode();
-    } else if (action === 'financial') {
-      // Re-initialize save panel listeners (in case they failed at first load)
-      if (typeof initSavePanel === 'function') {
-        initSavePanel();
-      }
-      if (typeof openSavePanel === 'function') {
-        openSavePanel();
-      }
-    } else if (action === 'export-edits') {
-      veExport();
-    } else if (action === 'reset') {
-      if (confirm('Reset all visual edits? This cannot be undone.')) {
-        VE.changes = {};
-        veSave();
-        location.reload();
-      }
-    }
-  });
-}
-
-// =============================================================
-// Init
-// =============================================================
-function veInit() {
-  veLoad();
-  veCreateFlameButton();
-
-  // Apply saved changes after layers/sub-pages render
-  setTimeout(() => {
-    veGenerateCodes();
-    veApplyChanges();
-  }, 200);
-
-  // Re-generate codes when navigating to detail pages (engine, audience)
-  // Hook into the existing navigateTo
-  if (typeof navigateTo === 'function') {
-    const origNavigate = navigateTo;
-    window.navigateTo = function(layerId, opts = {}) {
-      origNavigate(layerId, opts);
-      setTimeout(() => {
-        veGenerateCodes();
-        veApplyChanges();
-      }, 100);
-    };
-  }
-}
-
-if (document.readyState !== 'loading') {
-  veInit();
-} else {
-  document.addEventListener('DOMContentLoaded', veInit);
-}
-
-
-// ═══════════════════════════════════════════════════════════════
-// PAGE-SPLIT NAVIGATION (auto-injected by split.py)
-// Each layer is now its own HTML file. showLayer() is wrapped to
-// navigate to the right page when a layer isn't on the current one.
-// ═══════════════════════════════════════════════════════════════
-(function() {
-  const PAGE_MAP = {
-    master:   'index.html',
-    building: 'building.html',
-    property: 'property.html',
-    ai:       'ai.html',
-    engine:   'engine.html',
-    audience: 'audience.html'
-  };
-
-  function currentFile() {
-    // Cloudflare Pages strips .html — normalize to always include it
-    let f = (window.location.pathname.split('/').filter(Boolean).pop() || '').toLowerCase();
-    if (f && !f.includes('.')) f = f + '.html';
-    return f || 'index.html';
-  }
-
-  // Wrap the (final) showLayer to redirect across pages when needed.
-  const _pageSplit_origShowLayer = window.showLayer;
-  window.showLayer = function(layerId) {
-    const targetFile = PAGE_MAP[layerId];
-    if (!targetFile) return _pageSplit_origShowLayer.apply(this, arguments);
-
-    const here = currentFile();
-    const isHere = (here === targetFile) || (layerId === 'master' && (here === '' || here === 'index.html'));
-    if (isHere) {
-      // Same page → behave as before (scroll to top, activate layer)
-      return _pageSplit_origShowLayer.apply(this, arguments);
-    }
-
-    // Different page → navigate, preserving hash (so engine/audience slug routing keeps working)
-    const hash = window.location.hash || '';
-    window.location.href = targetFile + hash;
-  };
-})();
+      <path d="M 17 3 C 14 8, 10 12, 9 17 C 8 22, 10 28, 14 31 C 11 27, 12 22,
