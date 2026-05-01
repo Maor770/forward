@@ -1531,9 +1531,12 @@ function readHashAndNavigate() {
 }
 
 function _pageSplit_layerForCurrentPage() {
-  const file = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  // Cloudflare Pages strips .html from URLs, so pathname can be /building OR /building.html
+  let file = (window.location.pathname.split('/').filter(Boolean).pop() || '').toLowerCase();
+  // Strip trailing slash, add .html if no extension
+  if (file && !file.includes('.')) file = file + '.html';
+  if (!file) file = 'index.html';
   const map = {
-    '': 'master',
     'index.html': 'master',
     'building.html': 'building',
     'property.html': 'property',
@@ -2602,8 +2605,10 @@ if (document.readyState !== 'loading') {
   };
 
   function currentFile() {
-    const p = window.location.pathname.split('/').pop();
-    return p || 'index.html';
+    // Cloudflare Pages strips .html — normalize to always include it
+    let f = (window.location.pathname.split('/').filter(Boolean).pop() || '').toLowerCase();
+    if (f && !f.includes('.')) f = f + '.html';
+    return f || 'index.html';
   }
 
   // Wrap the (final) showLayer to redirect across pages when needed.
