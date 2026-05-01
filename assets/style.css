@@ -227,12 +227,15 @@ input.calc-input:focus {
   text-align: center;
   padding: 0;
   position: relative;
-  background:
-    radial-gradient(ellipse at 50% 30%, rgba(201, 169, 97, 0.10) 0%, transparent 55%),
-    radial-gradient(ellipse at 50% 100%, rgba(155, 27, 46, 0.08) 0%, transparent 60%),
-    #1b3152;
+  /* Background matched to the dark edges of world.jpg so they blend invisibly */
+  background: #000914;
   border-bottom: none;
   overflow: hidden;
+  /* Make this section span the full viewport so the gold strip + bg color
+     extend edge-to-edge regardless of the parent container's width */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 .mh-hero::before {
   content: '';
@@ -6593,25 +6596,26 @@ body.ve-active [data-edit].ve-selected {
    - Mobile: building shifted off-center so it doesn't cover the logo
    ═══════════════════════════════════════════════════════════════ */
 
-/* Cap hero at fixed pixel width — image stays the same height on big monitors,
-   #1b3152 background fills the gutters left/right.
-   world.jpg is 1893×821 (aspect 2.31), so max-width: 1100px → height ~477px */
+/* Image area capped at 1100px on desktop — height stays constant on big screens,
+   #000914 fills the gutters left/right. */
 .mh-hero-wrap {
   max-width: 1100px;
   margin: 0 auto;
+  position: relative;
 }
 
 /* World image — slight saturation/contrast lift so it doesn't look dead */
 .mh-hero-image {
   filter: saturate(1.18) contrast(1.06) brightness(1.02);
+  display: block;
 }
 
 /* Building layer */
 .mh-hero-building {
   position: absolute;
   bottom: -2px;
-  left: 8%;              /* moved inward (was 4%) */
-  width: clamp(120px, 18%, 220px);  /* slightly smaller */
+  left: 8%;
+  width: clamp(120px, 18%, 220px);
   height: auto;
   z-index: 12;
   pointer-events: none;
@@ -6628,7 +6632,7 @@ body.ve-active [data-edit].ve-selected {
   50%      { transform: translateY(-6px); }
 }
 
-/* Tablet: hero fills screen, building stays inset on the left */
+/* Tablet */
 @media (max-width: 900px) {
   .mh-hero-wrap {
     max-width: 100%;
@@ -6639,11 +6643,19 @@ body.ve-active [data-edit].ve-selected {
   }
 }
 
-/* Mobile: hero is full width, building tucks into far-left bottom corner
-   so it doesn't cover the centered logo in world.jpg */
+/* Mobile: fixed minimum height so the hero never collapses into a thin strip;
+   image fills the box via object-fit: cover (sides may crop, height fixed) */
 @media (max-width: 600px) {
   .mh-hero-wrap {
     max-width: 100%;
+    height: 320px;
+    overflow: hidden;
+  }
+  .mh-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
   }
   .mh-hero-building {
     left: 2%;
@@ -6655,8 +6667,11 @@ body.ve-active [data-edit].ve-selected {
   }
 }
 
-/* Very small phones: building even smaller */
+/* Very small phones */
 @media (max-width: 380px) {
+  .mh-hero-wrap {
+    height: 280px;
+  }
   .mh-hero-building {
     width: clamp(60px, 20%, 95px);
   }
@@ -6667,5 +6682,5 @@ body.ve-active [data-edit].ve-selected {
   .mh-hero-building { animation: none; }
 }
 
-/* Hide the duplicate HTML tagline — it's already baked into world.jpg */
+/* Hide the duplicate HTML tagline — text already in world.jpg */
 .mh-tagline.mh-tagline-overlay { display: none; }
