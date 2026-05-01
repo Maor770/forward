@@ -1524,9 +1524,24 @@ function readHashAndNavigate() {
   if (route) {
     navigateTo(route.layer, route);
   } else {
-    // Unknown hash → home
-    navigateTo('master');
+    // No matching hash → activate the layer for the current page
+    // (do NOT navigate to master from a deeper page on first load)
+    navigateTo(_pageSplit_layerForCurrentPage());
   }
+}
+
+function _pageSplit_layerForCurrentPage() {
+  const file = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const map = {
+    '': 'master',
+    'index.html': 'master',
+    'building.html': 'building',
+    'property.html': 'property',
+    'ai.html': 'ai',
+    'engine.html': 'engine',
+    'audience.html': 'audience'
+  };
+  return map[file] || 'master';
 }
 
 function setHash(hash) {
