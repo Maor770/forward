@@ -346,9 +346,6 @@ input.calc-input:focus {
   grid-template-columns: 1fr;
   gap: 2.5rem;
   margin-bottom: 3rem;
-  /* Each block sized to its own content (no stretching to match the tallest)
-     so blocks with less text don't show empty space at the bottom */
-  align-items: start;
 }
 @media (min-width: 800px) {
   .mh-about-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
@@ -3118,13 +3115,10 @@ input.calc-input:focus {
 .mh-mark.mh-mark-overlay {
   position: absolute;
   top: 3px;
-  /* Stretch full viewport width even though parent (.mh-hero-wrap) is capped at 1100px */
-  left: 50%;
-  right: auto;
-  transform: translateX(-50%);
-  width: 100vw;
-  max-width: 100vw;
+  left: 0;
+  right: 0;
   display: block;
+  width: 100%;
   text-align: center;
   background: rgba(7, 21, 45, 0.78);
   border: none;
@@ -3220,7 +3214,7 @@ input.calc-input:focus {
 }
 .gf-logo {
   width: 100%;
-  max-width: 178px;  /* was 210px (-15%) */
+  max-width: 210px;
   height: auto;
   filter:
     drop-shadow(0 0 20px rgba(232, 201, 125, 0.3))
@@ -3229,7 +3223,7 @@ input.calc-input:focus {
 }
 .gf-slogan {
   font-family: var(--serif);
-  font-size: clamp(0.91rem, 2.1vw, 1.26rem);  /* was clamp(1.3rem, 3vw, 1.8rem) (-30%) */
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
   font-style: italic;
   font-weight: 600;
   background: linear-gradient(180deg, var(--gold-bright), var(--gold));
@@ -3751,7 +3745,7 @@ input.calc-input:focus {
   .saas-conclusion { font-size: 1.3rem !important; }
 
   .global-footer { padding: 3rem 1.2rem 2.5rem; }
-  .gf-logo { max-width: 140px; }  /* was 165px (-15%) */
+  .gf-logo { max-width: 165px; }
 
   .bh-mark { top: 0.7rem; right: 0.9rem; font-size: 0.78rem; }
   .layer-pillar-building::before,
@@ -5978,7 +5972,7 @@ body.ve-active [data-edit].ve-selected {
   position: absolute;
   top: 0;
   left: 11.5rem;
-  height: var(--top-strip-height);  /* matches navy strip height for true vertical centering */
+  height: 2.4rem;             /* matches navy strip height */
   display: inline-flex;
   align-items: center;        /* vertically center icons in the strip */
   gap: 0.7rem;
@@ -6039,7 +6033,7 @@ body.ve-active [data-edit].ve-selected {
 /* Mobile adjustments */
 @media (max-width: 600px) {
   .header-actions {
-    height: var(--top-strip-height);  /* matches navy strip height for true vertical centering */
+    height: 1.8rem;
     left: 9.2rem;
     gap: 0.55rem;
   }
@@ -6824,5 +6818,17 @@ button.opt-value.opt-toggle:focus-visible {
 
 
 /* prop-card as <a> link (bypasses JS routing) */
-a.prop-card-link {
-  t
+a.prop-card-link,
+a.prop-card-link:link,
+a.prop-card-link:visited,
+a.prop-card-link:hover,
+a.prop-card-link:active {
+  text-decoration: none !important;
+  color: inherit;
+  display: block;
+}
+a.prop-card-link *,
+a.prop-card-link *::before,
+a.prop-card-link *::after {
+  text-decoration: none !important;
+}

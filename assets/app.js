@@ -1552,13 +1552,20 @@ function navigateTo(layerId, opts = {}) {
 
 function readHashAndNavigate() {
   const hash = window.location.hash || '';
+  const pageLayer = _pageSplit_layerForCurrentPage();
   const route = ROUTES[hash];
+
+  // If hash points at master (or hash is empty) but we're on a deeper page,
+  // stay on the current page's layer instead of redirecting to index.html.
+  if (route && route.layer === 'master' && pageLayer !== 'master') {
+    navigateTo(pageLayer);
+    return;
+  }
+
   if (route) {
     navigateTo(route.layer, route);
   } else {
-    // No matching hash → activate the layer for the current page
-    // (do NOT navigate to master from a deeper page on first load)
-    navigateTo(_pageSplit_layerForCurrentPage());
+    navigateTo(pageLayer);
   }
 }
 
