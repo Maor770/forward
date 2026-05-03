@@ -6131,10 +6131,10 @@ body.ve-active [data-edit].ve-selected {
 }
 .addr-block-lean { flex: 1; }
 .addr-lean {
-  font-family: var(--serif-elegant);
-  font-style: italic;
+  font-family: var(--serif);
+  font-style: normal;
   font-size: clamp(1.6rem, 3vw, 2rem);
-  font-weight: 600;
+  font-weight: 400;
   color: var(--gold-bright);
   line-height: 1.1;
   margin: 0 0 0.5rem;

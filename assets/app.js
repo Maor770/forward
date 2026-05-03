@@ -1900,17 +1900,19 @@ function renderPropertyOptions() {
 // Bargain Sale Calculator
 // =========================================
 function calcBargainSale() {
+  if (!document.getElementById('i-bs-sale')) return;
+
   const get = (id) => {
     const el = document.getElementById(id);
     if (!el) return 0;
-    const clean = String(el.value).replace(/,/g, '');
-    return parseFloat(clean) || 0;
+    const clean = String(el.value).replace(/,/g, '').trim();
+    const n = parseFloat(clean);
+    return Number.isFinite(n) ? n : 0;
   };
-  if (!document.getElementById('i-bs-sale')) return;
 
   const sale    = get('i-bs-sale');
   const fmv     = get('i-bs-fmv');
-  const basis   = get('i-bs-basis');
+  const basis   = get('i-bs-basis');  // reserved for future IRC 1011(b) calc
   const rpttPct = get('i-bs-rptt');
   const bracket = get('i-bs-bracket');
 
@@ -1919,17 +1921,26 @@ function calcBargainSale() {
   const taxSavings     = deduction * (bracket / 100);
   const totalSavings   = rpttSaved + taxSavings;
   const forProfitEquiv = sale + totalSavings;
-  const discountFmv    = fmv > 0 ? (fmv - sale) / fmv : 0;
-  const discountAdj    = fmv > 0 ? (fmv - forProfitEquiv) / fmv : 0;
+  const discountFmv    = fmv > 0 ? ((fmv - sale) / fmv) * 100 : 0;
+  const discountAdj    = fmv > 0 ? ((fmv - forProfitEquiv) / fmv) * 100 : 0;
 
-  setOut('bs-deduction',      fmt.dollar(deduction));
-  setOut('bs-rptt-saved',     fmt.dollar(rpttSaved));
-  setOut('bs-tax-saved',      fmt.dollar(taxSavings));
-  setOut('bs-sale-display',   fmt.dollar(sale));
-  setOut('bs-equiv',          fmt.dollar(forProfitEquiv));
-  setOut('bs-total-savings',  fmt.dollar(totalSavings));
-  setOut('bs-discount-fmv',   fmt.percent(discountFmv * 100, 1));
-  setOut('bs-discount-adj',   fmt.percent(discountAdj * 100, 1));
+  // Update each output using a tiny helper so the green-banner outputs use
+  // the same code path as the rest. Direct DOM update guards against any
+  // setOut/fmt issue surfacing only here.
+  const update = (selector, value) => {
+    document.querySelectorAll('[data-out="' + selector + '"]').forEach(el => {
+      el.textContent = value;
+    });
+  };
+
+  update('bs-deduction',      fmt.dollar(deduction));
+  update('bs-rptt-saved',     fmt.dollar(rpttSaved));
+  update('bs-tax-saved',      fmt.dollar(taxSavings));
+  update('bs-sale-display',   fmt.dollar(sale));
+  update('bs-equiv',          fmt.dollar(forProfitEquiv));
+  update('bs-total-savings',  fmt.dollar(totalSavings));
+  update('bs-discount-fmv',   discountFmv.toFixed(1) + '%');
+  update('bs-discount-adj',   discountAdj.toFixed(1) + '%');
 }
 
 // Dedicated init for the bargain calculator - guarantees listeners attach
@@ -2760,6 +2771,11 @@ if (document.readyState !== 'loading') {
     return f || 'index.html';
   }
 
+  // Pages that map to the same logical layer (property covers 417 + 653)
+  const SAME_LAYER_PAGES = {
+    property: ['property.html', 'property-653.html'],
+  };
+
   // Wrap the (final) showLayer to redirect across pages when needed.
   const _pageSplit_origShowLayer = window.showLayer;
   window.showLayer = function(layerId) {
@@ -2767,7 +2783,10 @@ if (document.readyState !== 'loading') {
     if (!targetFile) return _pageSplit_origShowLayer.apply(this, arguments);
 
     const here = currentFile();
-    const isHere = (here === targetFile) || (layerId === 'master' && (here === '' || here === 'index.html'));
+    const sameLayer = SAME_LAYER_PAGES[layerId] || [];
+    const isHere = (here === targetFile)
+      || sameLayer.includes(here)
+      || (layerId === 'master' && (here === '' || here === 'index.html'));
     if (isHere) {
       // Same page → behave as before (scroll to top, activate layer)
       return _pageSplit_origShowLayer.apply(this, arguments);
