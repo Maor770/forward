@@ -2945,13 +2945,9 @@ input.calc-input:focus {
   height: 2px;
 }
 
-/* Hero - warmer burgundy hint at the bottom */
+/* Hero — solid color matched to image edges (#000914) — overrides earlier rules */
 .mh-hero {
-  background:
-    radial-gradient(ellipse at 50% 30%, rgba(232, 201, 125, 0.20) 0%, transparent 55%),
-    radial-gradient(ellipse at 50% 110%, rgba(155, 27, 46, 0.30) 0%, transparent 60%),
-    radial-gradient(ellipse at 100% 100%, rgba(155, 27, 46, 0.18) 0%, transparent 50%),
-    var(--bg-navy-deep);
+  background: #000914;
 }
 
 /* Pillars section - softer burgundy accent on the right side */
