@@ -654,11 +654,19 @@ function loadDefaults() {
 
 // ---- Recalc + Render cycle ----
 function recalc() {
-  const inputs = readInputs();
-  const result = calculate(inputs);
-  render(result, inputs);
-  // Bargain Sale - independent calculator, recalc whenever any input changes
-  if (typeof calcBargainSale === 'function') calcBargainSale();
+  try {
+    const inputs = readInputs();
+    const result = calculate(inputs);
+    render(result, inputs);
+  } catch (e) {
+    console.warn('[recalc] main calc failed:', e);
+  }
+  // Bargain Sale - independent calculator, MUST run even if main calc throws
+  try {
+    if (typeof calcBargainSale === 'function') calcBargainSale();
+  } catch (e) {
+    console.warn('[recalc] calcBargainSale failed:', e);
+  }
 }
 
 // ---- Accordion / collapsible toggle ----
@@ -1953,11 +1961,16 @@ function initBargainSaleCalc() {
     if (!el) return;
     if (el.dataset.bsWired === '1') return;
     el.dataset.bsWired = '1';
-    el.addEventListener('input', calcBargainSale);
-    el.addEventListener('change', calcBargainSale);
+    ['input', 'change', 'keyup', 'blur'].forEach(ev => {
+      el.addEventListener(ev, () => {
+        try { calcBargainSale(); } catch (e) { console.warn('[BS] calc failed:', e); }
+      });
+    });
     attached = true;
   });
-  if (attached) calcBargainSale();
+  if (attached) {
+    try { calcBargainSale(); } catch (e) { console.warn('[BS] initial calc failed:', e); }
+  }
 }
 
 if (typeof window !== 'undefined') {
