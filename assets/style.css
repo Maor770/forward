@@ -3780,25 +3780,32 @@ input.calc-input:focus {
   margin-right: 0.7rem;
 }
 
-/* Decided / Strategic - gold (locked-in framework) */
-.bb-status.tag-decided {
+/* Concept - gray-blue (idea articulated, not yet researched) */
+.bb-status.tag-concept {
+  background: rgba(140, 160, 180, 0.10);
+  border-color: #8FA4B8;
+  color: #8FA4B8;
+}
+
+/* Initial Research - burgundy (gathering info, exploring direction) */
+.bb-status.tag-initial {
+  background: rgba(155, 27, 46, 0.12);
+  border-color: var(--burgundy-light);
+  color: var(--burgundy-light);
+}
+
+/* Deep Research - gold (detailed analysis with experts) */
+.bb-status.tag-deep {
   background: var(--gold-glow);
   border-color: var(--gold-line);
   color: var(--gold-bright);
 }
 
-/* Active - green (in motion now) */
+/* Active - green (in motion now, day-to-day activity) */
 .bb-status.tag-active {
   background: rgba(146, 224, 168, 0.10);
   border-color: var(--green);
   color: var(--green);
-}
-
-/* Research / In Counsel - burgundy (under expert review) */
-.bb-status.tag-research {
-  background: rgba(155, 27, 46, 0.12);
-  border-color: var(--burgundy-light);
-  color: var(--burgundy-light);
 }
 
 /* On mobile, status pills move below the title */
@@ -6828,13 +6835,4 @@ a.prop-card-link,
 a.prop-card-link:link,
 a.prop-card-link:visited,
 a.prop-card-link:hover,
-a.prop-card-link:active {
-  text-decoration: none !important;
-  color: inherit;
-  display: block;
-}
-a.prop-card-link *,
-a.prop-card-link *::before,
-a.prop-card-link *::after {
-  text-decoration: none !important;
-}
+a.pr
