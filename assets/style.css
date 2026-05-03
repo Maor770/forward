@@ -3220,7 +3220,7 @@ input.calc-input:focus {
 }
 .gf-logo {
   width: 100%;
-  max-width: 210px;
+  max-width: 178px;  /* was 210px (-15%) */
   height: auto;
   filter:
     drop-shadow(0 0 20px rgba(232, 201, 125, 0.3))
@@ -3229,7 +3229,7 @@ input.calc-input:focus {
 }
 .gf-slogan {
   font-family: var(--serif);
-  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-size: clamp(0.77rem, 1.78vw, 1.07rem);  /* was clamp(1.3,3vw,1.8) — combined -40.5% (-30% + -15%) */
   font-style: italic;
   font-weight: 600;
   background: linear-gradient(180deg, var(--gold-bright), var(--gold));
@@ -3751,7 +3751,7 @@ input.calc-input:focus {
   .saas-conclusion { font-size: 1.3rem !important; }
 
   .global-footer { padding: 3rem 1.2rem 2.5rem; }
-  .gf-logo { max-width: 165px; }
+  .gf-logo { max-width: 140px; }  /* was 165px (-15%) */
 
   .bh-mark { top: 0.7rem; right: 0.9rem; font-size: 0.78rem; }
   .layer-pillar-building::before,
@@ -5978,9 +5978,9 @@ body.ve-active [data-edit].ve-selected {
   position: absolute;
   top: 0;
   left: 11.5rem;
-  height: 2.4rem;             /* matches navy strip height */
+  height: var(--top-strip-height);  /* full strip height (64px desktop / 50px mobile) */
   display: inline-flex;
-  align-items: center;        /* vertically center icons in the strip */
+  align-items: center;        /* vertically center icons within full strip height */
   gap: 0.7rem;
   z-index: 100;
 }
