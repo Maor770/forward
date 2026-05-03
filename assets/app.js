@@ -1631,10 +1631,7 @@ function initRouting() {
     });
   });
 
-  // Property card - full navigation to the property's dedicated page.
-  // Note: this listener and the one in initLayerNav both fire; both navigate to
-  // the same URL, so the duplicate is harmless. We update hash here so a user
-  // who lands directly on /building#building/properties/653-maple gets a sane URL.
+  // Property card - full navigation to the property's dedicated page
   document.querySelectorAll('[data-target-property]').forEach((btn) => {
     if (btn.classList.contains('is-pending')) return;
     btn.addEventListener('click', () => {
@@ -1828,13 +1825,11 @@ if (document.readyState !== 'loading') {
 // =========================================
 // Property Options (Bargain / Growth toggles)
 // =========================================
-// Storage key per page (so 417 and 653 keep separate values)
 const OPT_STORAGE_KEY = 'maorforward.options.' + (
   (typeof location !== 'undefined' && location.pathname.includes('653')) ? '653' : '417'
 );
 
 function getOptionState() {
-  // Load from localStorage if present, else use DATA defaults
   try {
     const raw = localStorage.getItem(OPT_STORAGE_KEY);
     if (raw) return JSON.parse(raw);
@@ -1843,9 +1838,7 @@ function getOptionState() {
 }
 
 function saveOptionState(state) {
-  try {
-    localStorage.setItem(OPT_STORAGE_KEY, JSON.stringify(state));
-  } catch (e) { /* ignore */ }
+  try { localStorage.setItem(OPT_STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
 }
 
 function setOption(name, value) {
@@ -1867,7 +1860,6 @@ function applyBargainVisibility(value) {
   else            section.classList.remove('is-hidden');
 }
 
-// Cycle order: Yes → Maybe → No → Yes
 const OPT_CYCLE = ['Yes', 'Maybe', 'No'];
 function nextOptValue(current) {
   const idx = OPT_CYCLE.findIndex(v => v.toLowerCase() === String(current).toLowerCase());
@@ -1880,12 +1872,11 @@ function renderPropertyOptions() {
   setOption('growthOption',  opts.growth);
   applyBargainVisibility(opts.bargain);
 
-  // Wire up toggle buttons (idempotent: skip if already wired)
   document.querySelectorAll('[data-toggle]').forEach(btn => {
     if (btn.dataset.wired === '1') return;
     btn.dataset.wired = '1';
     btn.addEventListener('click', () => {
-      const name = btn.dataset.toggle; // 'bargainOption' or 'growthOption'
+      const name = btn.dataset.toggle;
       const current = btn.textContent.trim();
       const next = nextOptValue(current);
       const state = getOptionState();
@@ -1908,31 +1899,21 @@ function calcBargainSale() {
     const clean = String(el.value).replace(/,/g, '');
     return parseFloat(clean) || 0;
   };
-
-  // If the section isn't on this page, abort silently
   if (!document.getElementById('i-bs-sale')) return;
 
-  const sale    = get('i-bs-sale');     // Maor's offer (cash)
-  const fmv     = get('i-bs-fmv');      // Appraised value
-  const basis   = get('i-bs-basis');    // Seller's adjusted basis
-  const rpttPct = get('i-bs-rptt');     // NYC RPTT %
-  const bracket = get('i-bs-bracket');  // Tax bracket %
+  const sale    = get('i-bs-sale');
+  const fmv     = get('i-bs-fmv');
+  const basis   = get('i-bs-basis');
+  const rpttPct = get('i-bs-rptt');
+  const bracket = get('i-bs-bracket');
 
-  // Per Excel model:
-  //   Charitable Deduction = FMV - Sale Price
-  //   NYC Transfer Tax Saved = Sale Price * RPTT Rate
-  //   Income Tax Savings = Charitable Deduction * Bracket
-  //   Total Savings = Transfer Tax + Income Tax
-  //   For-Profit Equivalent = Sale Price + Total Savings
   const deduction      = Math.max(0, fmv - sale);
   const rpttSaved      = sale * (rpttPct / 100);
   const taxSavings     = deduction * (bracket / 100);
   const totalSavings   = rpttSaved + taxSavings;
   const forProfitEquiv = sale + totalSavings;
-
-  // Discount calculations (from Maor's perspective)
-  const discountFmv   = fmv > 0 ? (fmv - sale) / fmv : 0;
-  const discountAdj   = fmv > 0 ? (fmv - forProfitEquiv) / fmv : 0;
+  const discountFmv    = fmv > 0 ? (fmv - sale) / fmv : 0;
+  const discountAdj    = fmv > 0 ? (fmv - forProfitEquiv) / fmv : 0;
 
   setOut('bs-deduction',      fmt.dollar(deduction));
   setOut('bs-rptt-saved',     fmt.dollar(rpttSaved));
@@ -2604,4 +2585,161 @@ function veCreateFlameButton() {
           <stop offset="100%" stop-color="#C9A961"/>
         </linearGradient>
       </defs>
-      <path d="M 17 3 C 14 8, 10 12, 9 17 C 8 22, 10 28, 14 31 C 11 27, 12 22,
+      <path d="M 17 3 C 14 8, 10 12, 9 17 C 8 22, 10 28, 14 31 C 11 27, 12 22, 15 18 C 16 22, 17 26, 21 28 C 26 30, 28 24, 27 19 C 26 14, 22 10, 19 6 C 18 9, 18 11, 17 13 C 17 9, 17 6, 17 3 Z" fill="url(#ve-flame-grad)" stroke="#9B7F3F" stroke-width="0.6" stroke-linejoin="round"/>
+    </svg>
+  `;
+  document.body.appendChild(btn);
+
+  // Menu
+  const menu = document.createElement('div');
+  menu.id = 've-flame-menu';
+  menu.className = 've-flame-menu';
+  menu.innerHTML = `
+    <div class="vfm-header">Editor Tools</div>
+    <button class="vfm-item" data-action="visual" type="button">
+      <span class="vfm-icon">✎</span>
+      <span class="vfm-label">
+        <strong>Visual Editor</strong>
+        <em>Edit text, fonts, colors</em>
+      </span>
+    </button>
+    <button class="vfm-item" data-action="financial" type="button">
+      <span class="vfm-icon">$</span>
+      <span class="vfm-label">
+        <strong>Financial Editor</strong>
+        <em>Edit prices, scenarios, defaults</em>
+      </span>
+    </button>
+    <button class="vfm-item" data-action="export-edits" type="button">
+      <span class="vfm-icon">⬇</span>
+      <span class="vfm-label">
+        <strong>Export All Edits</strong>
+        <em>Download JSON to share</em>
+      </span>
+    </button>
+    <button class="vfm-item vfm-item-danger" data-action="reset" type="button">
+      <span class="vfm-icon">↺</span>
+      <span class="vfm-label">
+        <strong>Reset Everything</strong>
+        <em>Restore originals</em>
+      </span>
+    </button>
+  `;
+  document.body.appendChild(menu);
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.toggle('is-open');
+  });
+
+  // Close menu on outside click
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove('is-open');
+    }
+  });
+
+  // Menu actions
+  menu.addEventListener('click', (e) => {
+    const item = e.target.closest('.vfm-item');
+    if (!item) return;
+    const action = item.dataset.action;
+    menu.classList.remove('is-open');
+
+    if (action === 'visual') {
+      veCreatePanel();
+      veToggleEditMode();
+    } else if (action === 'financial') {
+      // Re-initialize save panel listeners (in case they failed at first load)
+      if (typeof initSavePanel === 'function') {
+        initSavePanel();
+      }
+      if (typeof openSavePanel === 'function') {
+        openSavePanel();
+      }
+    } else if (action === 'export-edits') {
+      veExport();
+    } else if (action === 'reset') {
+      if (confirm('Reset all visual edits? This cannot be undone.')) {
+        VE.changes = {};
+        veSave();
+        location.reload();
+      }
+    }
+  });
+}
+
+// =============================================================
+// Init
+// =============================================================
+function veInit() {
+  veLoad();
+  veCreateFlameButton();
+
+  // Apply saved changes after layers/sub-pages render
+  setTimeout(() => {
+    veGenerateCodes();
+    veApplyChanges();
+  }, 200);
+
+  // Re-generate codes when navigating to detail pages (engine, audience)
+  // Hook into the existing navigateTo
+  if (typeof navigateTo === 'function') {
+    const origNavigate = navigateTo;
+    window.navigateTo = function(layerId, opts = {}) {
+      origNavigate(layerId, opts);
+      setTimeout(() => {
+        veGenerateCodes();
+        veApplyChanges();
+      }, 100);
+    };
+  }
+}
+
+if (document.readyState !== 'loading') {
+  veInit();
+} else {
+  document.addEventListener('DOMContentLoaded', veInit);
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE-SPLIT NAVIGATION (auto-injected by split.py)
+// Each layer is now its own HTML file. showLayer() is wrapped to
+// navigate to the right page when a layer isn't on the current one.
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const PAGE_MAP = {
+    master:   'index.html',
+    building: 'building.html',
+    property: 'property.html',
+    ai:       'ai.html',
+    engine:   'engine.html',
+    audience: 'audience.html'
+  };
+
+  function currentFile() {
+    // Cloudflare Pages strips .html — normalize to always include it
+    let f = (window.location.pathname.split('/').filter(Boolean).pop() || '').toLowerCase();
+    if (f && !f.includes('.')) f = f + '.html';
+    return f || 'index.html';
+  }
+
+  // Wrap the (final) showLayer to redirect across pages when needed.
+  const _pageSplit_origShowLayer = window.showLayer;
+  window.showLayer = function(layerId) {
+    const targetFile = PAGE_MAP[layerId];
+    if (!targetFile) return _pageSplit_origShowLayer.apply(this, arguments);
+
+    const here = currentFile();
+    const isHere = (here === targetFile) || (layerId === 'master' && (here === '' || here === 'index.html'));
+    if (isHere) {
+      // Same page → behave as before (scroll to top, activate layer)
+      return _pageSplit_origShowLayer.apply(this, arguments);
+    }
+
+    // Different page → navigate, preserving hash (so engine/audience slug routing keeps working)
+    const hash = window.location.hash || '';
+    window.location.href = targetFile + hash;
+  };
+})();

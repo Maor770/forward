@@ -265,7 +265,7 @@
             <button type="button" class="opt-value opt-toggle opt-yes" data-toggle="growthOption" data-out="growthOption" aria-label="Toggle growth option">Yes</button>
           </div>
         </div>
-        <p class="opt-hint">Click a value to cycle: Yes → Maybe → No</p>
+        <p class="opt-hint">Click a value to cycle: Yes -> Maybe -> No</p>
       </div>
 
       <!-- ============ BARGAIN SALE CALCULATOR ============ -->
@@ -273,12 +273,12 @@
         <h4>Bargain Sale to Non-Profit <span class="h4-sub">- IRC §170 / NYC RPTT</span></h4>
 
         <p class="bs-intro">
-          A non-profit purchase delivers two tax benefits to the seller: <strong>NYC transfer-tax exemption</strong> and a <strong>charitable deduction</strong> on the gap between FMV and sale price. Below is the seller's effective return - the basis for negotiation.
+          A non-profit purchase delivers two tax benefits to the seller: <strong>NYC transfer-tax exemption</strong> and a <strong>charitable deduction</strong> on the gap between FMV and sale price. Below is the seller’s effective return - the basis for negotiation.
         </p>
 
         <div class="bs-inputs">
           <div class="bs-input-row">
-            <span class="bs-label">Sale Price <em class="bs-sub">(Maor's offer)</em></span>
+            <span class="bs-label">Sale Price <em class="bs-sub">(Maor’s offer)</em></span>
             <span class="bs-input-wrap"><span class="li-prefix">$</span><input class="calc-input bs-input" type="number" id="i-bs-sale"></span>
           </div>
           <div class="bs-input-row">
@@ -286,7 +286,7 @@
             <span class="bs-input-wrap"><span class="li-prefix">$</span><input class="calc-input bs-input" type="number" id="i-bs-fmv"></span>
           </div>
           <div class="bs-input-row">
-            <span class="bs-label">Seller's Basis</span>
+            <span class="bs-label">Seller’s Basis</span>
             <span class="bs-input-wrap"><span class="li-prefix">$</span><input class="calc-input bs-input" type="number" id="i-bs-basis"></span>
           </div>
           <div class="bs-input-row bs-input-row-pct">
@@ -329,7 +329,7 @@
         </div>
 
         <div class="bs-discount-box">
-          <span class="bs-discount-label">Maor's Effective Discount</span>
+          <span class="bs-discount-label">Maor’s Effective Discount</span>
           <div class="bs-discount-row">
             <div class="bs-disc-item">
               <span class="bs-disc-num" data-out="bs-discount-fmv"></span>
@@ -442,6 +442,73 @@
   </div>
 </footer>
 
+<!-- ═══════════════════════════════════════════════════════════
+     SAVE DEFAULTS PANEL (hidden, accessed via Ctrl+Shift+E or "maor")
+     ═══════════════════════════════════════════════════════════ -->
+<div class="save-panel-overlay" id="savePanelOverlay">
+  <div class="save-panel">
+    <div class="save-panel-header">
+      <h3>Underwriting Defaults - Edit Mode</h3>
+      <button class="save-panel-close" id="savePanelClose" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="save-panel-body">
+
+      <p>
+        Hidden control panel for managing the calculator's default values. Three options below: save current values to your browser as your local default, export current values as JSON to send to Claude for permanent code update, or restore the original code defaults.
+      </p>
+
+      <div class="save-panel-section">
+        <h4>Save Current Values as Local Default</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.6rem;">
+          Stores the current 22 input values in your browser. Next time you open this file (in this browser), these values will load instead of the code defaults. Cleared if you clear browser data.
+        </p>
+        <div class="save-panel-actions">
+          <button class="btn btn-primary" id="btnSaveLocal" type="button">Save to Browser</button>
+          <button class="btn" id="btnClearLocal" type="button">Clear Local Save</button>
+        </div>
+        <div class="save-panel-toast" id="toastLocal"></div>
+      </div>
+
+      <div class="save-panel-section">
+        <h4>Export JSON for Permanent Update</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.6rem;">
+          Exports the current values as a JSON snippet. Copy and send to Claude - Claude will embed it as the new code default for all future versions of this file. This is the way to make the values "stick" forever.
+        </p>
+        <div class="save-panel-actions">
+          <button class="btn" id="btnExportJson" type="button">Show JSON</button>
+          <button class="btn" id="btnCopyJson" type="button">Copy to Clipboard</button>
+        </div>
+        <pre class="save-panel-output" id="jsonOutput"></pre>
+        <div class="save-panel-toast" id="toastCopy"></div>
+      </div>
+
+      <div class="save-panel-section">
+        <h4>Restore Original Code Defaults</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.6rem;">
+          Resets all 22 values back to the original DATA defaults built into this file's code. Also clears any local browser save.
+        </p>
+        <div class="save-panel-actions">
+          <button class="btn btn-warn" id="btnRestoreDefaults" type="button">Restore Defaults</button>
+        </div>
+      </div>
+
+      <div class="save-panel-section">
+        <h4>How to Open This Panel</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.65;">
+          <strong style="color: var(--gold-bright);">Desktop:</strong> Press <code style="background: var(--bg-deepest); padding: 0.1rem 0.4rem; border-radius: 2px; color: var(--gold-bright); font-family: monospace;">Ctrl + Shift + E</code> (or <code style="background: var(--bg-deepest); padding: 0.1rem 0.4rem; border-radius: 2px; color: var(--gold-bright); font-family: monospace;">Cmd + Shift + E</code> on Mac).
+          <br><br>
+          <strong style="color: var(--gold-bright);">Anywhere:</strong> Type the word <code style="background: var(--bg-deepest); padding: 0.1rem 0.4rem; border-radius: 2px; color: var(--gold-bright); font-family: monospace;">maor</code> on the keyboard (anywhere on the page, no input focus needed).
+          <br><br>
+          <strong style="color: var(--gold-bright);">Mobile:</strong> Long-press (1.5 seconds) on the bottom-right corner of the screen.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Hidden trigger for mobile long-press -->
+<button class="secret-trigger" id="secretTrigger" type="button" aria-label="Hidden edit trigger" tabindex="-1"></button>
 <script src="assets/app.js"></script>
 </body>
 </html>

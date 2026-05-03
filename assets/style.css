@@ -6536,12 +6536,8 @@ button.opt-value.opt-toggle:focus-visible {
 /* ============================================
    Bargain Sale Calculator
    ============================================ */
-#bargainSection {
-  transition: opacity 0.25s ease, max-height 0.4s ease;
-}
-#bargainSection.is-hidden {
-  display: none;
-}
+#bargainSection { transition: opacity 0.25s ease, max-height 0.4s ease; }
+#bargainSection.is-hidden { display: none; }
 .bs-intro {
   font-size: 0.92rem;
   color: var(--text-warm);
@@ -6553,7 +6549,6 @@ button.opt-value.opt-toggle:focus-visible {
   border-radius: 0 6px 6px 0;
 }
 .bs-intro strong { color: var(--gold-bright); font-weight: 600; }
-
 .bs-inputs {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -6570,38 +6565,12 @@ button.opt-value.opt-toggle:focus-visible {
   border-radius: 6px;
   gap: 0.6rem;
 }
-.bs-label {
-  font-size: 0.86rem;
-  color: var(--text-warm);
-  font-weight: 500;
-  flex: 1;
-}
-.bs-sub {
-  font-style: italic;
-  color: var(--text-dim);
-  font-size: 0.78rem;
-  font-weight: 400;
-  margin-left: 0.3rem;
-}
-.bs-input-wrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.15rem;
-}
-.bs-input-wrap .li-prefix {
-  color: var(--text-dim);
-  font-size: 0.88rem;
-  margin-right: 0.1rem;
-}
-.bs-input-wrap .dc-suffix {
-  color: var(--text-dim);
-  font-size: 0.88rem;
-  margin-left: 0.15rem;
-}
-.calc-input.bs-input {
-  width: 7.5rem;
-  text-align: right;
-}
+.bs-label { font-size: 0.86rem; color: var(--text-warm); font-weight: 500; flex: 1; }
+.bs-sub { font-style: italic; color: var(--text-dim); font-size: 0.78rem; font-weight: 400; margin-left: 0.3rem; }
+.bs-input-wrap { display: inline-flex; align-items: center; gap: 0.15rem; }
+.bs-input-wrap .li-prefix { color: var(--text-dim); font-size: 0.88rem; margin-right: 0.1rem; }
+.bs-input-wrap .dc-suffix { color: var(--text-dim); font-size: 0.88rem; margin-left: 0.15rem; }
+.calc-input.bs-input { width: 7.5rem; text-align: right; }
 @media (max-width: 700px) {
   .bs-inputs { grid-template-columns: 1fr; }
   .calc-input.bs-input { width: 6.5rem; }
@@ -6622,16 +6591,8 @@ button.opt-value.opt-toggle:focus-visible {
   border-bottom: 1px dashed rgba(201, 169, 97, 0.15);
 }
 .bs-calc-row:last-child { border-bottom: none; }
-.bs-calc-label {
-  color: var(--text-warm);
-  font-size: 0.92rem;
-}
-.bs-calc-value {
-  font-family: var(--sans-num, inherit);
-  color: var(--gold-pale);
-  font-size: 1.1rem;
-  font-weight: 500;
-}
+.bs-calc-label { color: var(--text-warm); font-size: 0.92rem; }
+.bs-calc-value { font-family: var(--sans-num, inherit); color: var(--gold-pale); font-size: 1.1rem; font-weight: 500; }
 
 .bs-comparison {
   display: grid;
@@ -6650,51 +6611,16 @@ button.opt-value.opt-toggle:focus-visible {
   flex-direction: column;
   justify-content: center;
 }
-.bs-side-right {
-  background: linear-gradient(155deg, rgba(201, 169, 97, 0.10), rgba(201, 169, 97, 0.04));
-  border-color: rgba(201, 169, 97, 0.5);
-}
-.bs-side-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  font-weight: 600;
-  margin-bottom: 0.55rem;
-}
-.bs-side-value {
-  font-family: var(--sans-num, inherit);
-  font-size: 1.7rem;
-  color: var(--gold-bright);
-  line-height: 1;
-  font-weight: 500;
-  margin-bottom: 0.45rem;
-}
+.bs-side-right { background: linear-gradient(155deg, rgba(201, 169, 97, 0.10), rgba(201, 169, 97, 0.04)); border-color: rgba(201, 169, 97, 0.5); }
+.bs-side-label { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); font-weight: 600; margin-bottom: 0.55rem; }
+.bs-side-value { font-family: var(--sans-num, inherit); font-size: 1.7rem; color: var(--gold-bright); line-height: 1; font-weight: 500; margin-bottom: 0.45rem; }
 .bs-side-right .bs-side-value { color: var(--gold-pale); }
-.bs-side-sub {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-}
-.bs-side-sub [data-out] {
-  color: var(--gold-bright);
-  font-weight: 600;
-}
-.bs-arrow {
-  align-self: center;
-  font-family: var(--serif, serif);
-  font-size: 2rem;
-  color: var(--gold-deep);
-  font-weight: 300;
-}
+.bs-side-sub { font-size: 0.78rem; color: var(--text-dim); }
+.bs-side-sub [data-out] { color: var(--gold-bright); font-weight: 600; }
+.bs-arrow { align-self: center; font-family: var(--serif, serif); font-size: 2rem; color: var(--gold-deep); font-weight: 300; }
 @media (max-width: 700px) {
-  .bs-comparison {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-  .bs-arrow {
-    transform: rotate(90deg);
-    margin: 0;
-  }
+  .bs-comparison { grid-template-columns: 1fr; gap: 0.5rem; }
+  .bs-arrow { transform: rotate(90deg); margin: 0; }
 }
 
 .bs-discount-box {
@@ -6703,47 +6629,12 @@ button.opt-value.opt-toggle:focus-visible {
   border-radius: 10px;
   padding: 1.1rem 1.3rem;
 }
-.bs-discount-label {
-  display: block;
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--green, #92E0A8);
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-  text-align: center;
-}
-.bs-discount-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-}
-.bs-disc-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-  text-align: center;
-}
-.bs-disc-num {
-  font-family: var(--sans-num, inherit);
-  font-size: 1.4rem;
-  color: var(--green, #92E0A8);
-  line-height: 1;
-  font-weight: 500;
-  margin-bottom: 0.3rem;
-}
-.bs-disc-cap {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-  letter-spacing: 0.04em;
-}
-.bs-disc-divider {
-  width: 1px;
-  height: 38px;
-  background: rgba(146, 224, 168, 0.25);
-}
+.bs-discount-label { display: block; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green, #92E0A8); font-weight: 600; margin-bottom: 0.7rem; text-align: center; }
+.bs-discount-row { display: flex; justify-content: center; align-items: center; gap: 1.5rem; }
+.bs-disc-item { display: flex; flex-direction: column; align-items: center; flex: 1; text-align: center; }
+.bs-disc-num { font-family: var(--sans-num, inherit); font-size: 1.4rem; color: var(--green, #92E0A8); line-height: 1; font-weight: 500; margin-bottom: 0.3rem; }
+.bs-disc-cap { font-size: 0.78rem; color: var(--text-dim); letter-spacing: 0.04em; }
+.bs-disc-divider { width: 1px; height: 38px; background: rgba(146, 224, 168, 0.25); }
 @media (max-width: 700px) {
   .bs-discount-row { gap: 0.8rem; }
   .bs-disc-num { font-size: 1.2rem; }
