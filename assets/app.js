@@ -1552,20 +1552,13 @@ function navigateTo(layerId, opts = {}) {
 
 function readHashAndNavigate() {
   const hash = window.location.hash || '';
-  const pageLayer = _pageSplit_layerForCurrentPage();
   const route = ROUTES[hash];
-
-  // If hash points at master (or hash is empty) but we're on a deeper page,
-  // stay on the current page's layer instead of redirecting to index.html.
-  if (route && route.layer === 'master' && pageLayer !== 'master') {
-    navigateTo(pageLayer);
-    return;
-  }
-
   if (route) {
     navigateTo(route.layer, route);
   } else {
-    navigateTo(pageLayer);
+    // No matching hash → activate the layer for the current page
+    // (do NOT navigate to master from a deeper page on first load)
+    navigateTo(_pageSplit_layerForCurrentPage());
   }
 }
 
@@ -1930,6 +1923,34 @@ function calcBargainSale() {
   setOut('bs-total-savings',  fmt.dollar(totalSavings));
   setOut('bs-discount-fmv',   fmt.percent(discountFmv * 100, 1));
   setOut('bs-discount-adj',   fmt.percent(discountAdj * 100, 1));
+}
+
+// Dedicated init for the bargain calculator - guarantees listeners attach
+// even if something upstream in init() failed.
+function initBargainSaleCalc() {
+  const ids = ['i-bs-sale', 'i-bs-fmv', 'i-bs-basis', 'i-bs-rptt', 'i-bs-bracket'];
+  let attached = false;
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.dataset.bsWired === '1') return;
+    el.dataset.bsWired = '1';
+    el.addEventListener('input', calcBargainSale);
+    el.addEventListener('change', calcBargainSale);
+    attached = true;
+  });
+  if (attached) calcBargainSale();
+}
+
+if (typeof window !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      // Run after main init has had a chance
+      setTimeout(initBargainSaleCalc, 200);
+    });
+  } else {
+    setTimeout(initBargainSaleCalc, 200);
+  }
 }
 
 // Score-jump button (header → score section)
