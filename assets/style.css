@@ -3220,7 +3220,7 @@ input.calc-input:focus {
 }
 .gf-logo {
   width: 100%;
-  max-width: 210px;
+  max-width: 178px;  /* was 210px (-15%) */
   height: auto;
   filter:
     drop-shadow(0 0 20px rgba(232, 201, 125, 0.3))
@@ -3229,7 +3229,7 @@ input.calc-input:focus {
 }
 .gf-slogan {
   font-family: var(--serif);
-  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-size: clamp(0.91rem, 2.1vw, 1.26rem);  /* was clamp(1.3rem, 3vw, 1.8rem) (-30%) */
   font-style: italic;
   font-weight: 600;
   background: linear-gradient(180deg, var(--gold-bright), var(--gold));
@@ -3751,7 +3751,7 @@ input.calc-input:focus {
   .saas-conclusion { font-size: 1.3rem !important; }
 
   .global-footer { padding: 3rem 1.2rem 2.5rem; }
-  .gf-logo { max-width: 165px; }
+  .gf-logo { max-width: 140px; }  /* was 165px (-15%) */
 
   .bh-mark { top: 0.7rem; right: 0.9rem; font-size: 0.78rem; }
   .layer-pillar-building::before,
