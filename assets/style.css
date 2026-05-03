@@ -2646,7 +2646,7 @@ input.calc-input:focus {
    MOBILE FINE-TUNING
    ════════════════════════════════════════════════════════════════ */
 @media (max-width: 699px) {
-  .mh-hero { padding: 3.5rem 1.2rem 2.5rem; }
+  .mh-hero { padding: 0; }
   .mh-about { padding: 3rem 1.2rem 1.5rem; }
   .mh-stats-section { padding: 3rem 1rem; margin: 3rem 0 0; }
   .mh-pillars-section { padding: 3rem 1.2rem 4rem; }
@@ -6802,12 +6802,7 @@ button.opt-value.opt-toggle:focus-visible {
     object-position: center center;
   }
   .mh-hero-building {
-    left: 2%;
-    width: clamp(75px, 22%, 120px);
-    filter:
-      drop-shadow(0 0 16px rgba(201, 169, 97, 0.40))
-      drop-shadow(0 0 5px rgba(232, 201, 125, 0.30))
-      drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
+    display: none;
   }
 }
 
@@ -6845,3 +6840,4 @@ a.prop-card-link *::before,
 a.prop-card-link *::after {
   text-decoration: none !important;
 }
+                                                                                                                                                                                                                          
