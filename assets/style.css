@@ -219,7 +219,7 @@ input.calc-input:focus {
    LAYER 1 - MASTER HUB
    ════════════════════════════════════════════════════════════════ */
 .master-hub {
-  background: var(--bg-navy);
+  background: transparent;
 }
 
 /* ─── HERO ─── PDF page 1 inspired: flame logo placeholder + dramatic title */
@@ -6848,4 +6848,4 @@ a.prop-card-link *::before,
 a.prop-card-link *::after {
   text-decoration: none !important;
 }
-                                   
+                                      
