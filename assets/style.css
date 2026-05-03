@@ -346,6 +346,9 @@ input.calc-input:focus {
   grid-template-columns: 1fr;
   gap: 2.5rem;
   margin-bottom: 3rem;
+  /* Each block sized to its own content (no stretching to match the tallest)
+     so blocks with less text don't show empty space at the bottom */
+  align-items: start;
 }
 @media (min-width: 800px) {
   .mh-about-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
