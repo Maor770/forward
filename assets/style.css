@@ -6824,18 +6824,25 @@ button.opt-value.opt-toggle:focus-visible {
   50%      { transform: translateY(-6px); }
 }
 
-/* Single ambient halo — fills the hero, fades to fully transparent before
-   the element's rectangular edges, so the rectangle is never visible. */
+/* Single ambient halo — spans the full width of .mh-hero (100vw) so it
+   doesn't get cut off where .mh-hero-wrap (max 1100px) ends. The radial
+   gradient is offset to align with the building (which sits at 14% of the
+   wrap, ie. 50vw - 396px in the full 100vw band). */
 .mh-hero-wrap::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle 700px at 14% 100%,
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 1900px;
+  height: 100%;
+  background: radial-gradient(circle 700px at calc(50% - 396px) 100%,
     rgba(232, 201, 125, 0.50) 0%,
-    rgba(201, 169, 97, 0.32) 10%,
-    rgba(155, 27, 46, 0.22) 24%,
-    rgba(155, 27, 46, 0.07) 42%,
-    transparent 62%);
+    rgba(201, 169, 97, 0.32) 12%,
+    rgba(155, 27, 46, 0.22) 28%,
+    rgba(155, 27, 46, 0.08) 48%,
+    transparent 70%);
   opacity: 0;
   pointer-events: none;
   z-index: 10;
