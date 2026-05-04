@@ -6801,17 +6801,46 @@ button.opt-value.opt-toggle:focus-visible {
   50%      { transform: translateY(-6px); }
 }
 
-/* Glow burst — a one-time pulse of light that emanates from the building
-   when the build-up finishes, then dissipates across the world */
+/* Lasting ambient glow — large soft halo that appears after the burst and stays.
+   Centered on the building's base, blooms across the whole world image. */
+.mh-hero-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 70% 80% at 14% 92%,
+    rgba(232, 201, 125, 0.38) 0%,
+    rgba(201, 169, 97, 0.22) 20%,
+    rgba(155, 27, 46, 0.16) 42%,
+    transparent 72%);
+  filter: blur(28px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  animation: mhAmbientGlowIn 1.8s ease-in 2.7s forwards;
+}
+
+@keyframes mhAmbientGlowIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Glow burst — a one-time pulse of light that emanates from the building.
+   Soft-blurred so the edges fade rather than clip into a square. */
 .mh-hero-wrap::after {
   content: '';
   position: absolute;
   bottom: 8%;
   left: 14%;
-  width: 240px;
-  height: 240px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(232, 201, 125, 0.85) 0%, rgba(232, 201, 125, 0.40) 30%, transparent 65%);
+  background: radial-gradient(circle,
+    rgba(232, 201, 125, 0.85) 0%,
+    rgba(232, 201, 125, 0.40) 22%,
+    rgba(155, 27, 46, 0.22) 45%,
+    transparent 70%);
+  filter: blur(12px);
   transform: translate(-50%, 50%) scale(0);
   opacity: 0;
   pointer-events: none;
@@ -6823,7 +6852,7 @@ button.opt-value.opt-toggle:focus-visible {
   0%   { transform: translate(-50%, 50%) scale(0); opacity: 0; }
   30%  { opacity: 0.85; }
   60%  { opacity: 0.45; }
-  100% { transform: translate(-50%, 50%) scale(3.5); opacity: 0; }
+  100% { transform: translate(-50%, 50%) scale(2.4); opacity: 0; }
 }
 
 /* Tablet */
@@ -6854,7 +6883,8 @@ button.opt-value.opt-toggle:focus-visible {
   .mh-hero-building {
     display: none;
   }
-  /* No building means no glow burst on mobile */
+  /* No building means no glow on mobile */
+  .mh-hero-wrap::before,
   .mh-hero-wrap::after {
     display: none;
   }
@@ -6881,6 +6911,7 @@ button.opt-value.opt-toggle:focus-visible {
     filter: saturate(1.18) contrast(1.06) brightness(1.02);
     animation: none;
   }
+  .mh-hero-wrap::before,
   .mh-hero-wrap::after {
     display: none;
   }
