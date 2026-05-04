@@ -15,23 +15,24 @@ const AI_DATA = {
       researchUrl: 'https://leafy-gecko-4a464d.netlify.app/',
       problems: [
         { icon: '⚡', title: 'Stories Lack Originality', cause: 'Regression to the Mean', body: 'Generic LLMs draw from the average of all children\'s stories — predictable plots, flat characters, on-the-nose moral lessons.' },
-        { icon: '🎯', title: 'Missing Chabad Cultural Nuance', cause: 'Underrepresentation in Training', body: 'Day-to-day Chabad life is too narrow a niche. The model knows Chabad encyclopedically — but not as lived experience.' },
-        { icon: '🎭', title: 'Jokes & Situations Don\'t Land', cause: 'Missing Cultural Theory of Mind', body: 'Humor breaks expectations. Without the baseline of Chabad daily life, the model can\'t break expectations correctly.' },
-        { icon: '👤', title: 'Characters Lack Depth & Growth', cause: 'No Character Bible', body: 'Models repeat the same traits episode after episode. Real shows reveal something new each time — that takes season-level planning.' },
-        { icon: '✨', title: 'The Missing Writer\'s Spark', cause: 'Pattern Matchers vs. Creators', body: 'A great writer finds the unlikely-but-perfect continuation. LLMs find the most-likely continuation. Different jobs entirely.' }
+        { icon: '🎯', title: 'Missing Cultural Nuance', cause: 'Underrepresentation in Training', body: 'Niche audiences are too narrow in the training data. The model knows Chabad encyclopedically — but not as lived experience.' },
+        { icon: '✨', title: 'The Missing Writer\'s Spark', cause: 'Pattern Matchers vs. Creators', body: 'A great writer finds the unlikely-but-perfect continuation. LLMs find the most-likely one. Different jobs entirely.' }
+      ],
+      audiences: [
+        { tag: 'Audience One', name: 'Frum Children', body: 'Voice Guide tuned to broader Orthodox dialects — Litvish, Chassidish, Modern Orthodox — without losing depth.' },
+        { tag: 'Audience Two', name: 'Secular Jewish Children', body: 'A different register entirely — proud and joyful Jewish identity that lands on YouTube and TikTok, without preaching.' },
+        { tag: 'Audience Three', name: 'Children of the World', body: 'Universal storytelling around the Seven Noahide Laws — the first professional serialized content of its kind.' }
       ],
       pipeline: [
-        { num: '01', name: 'Season Planning', tech: 'Claude Opus + Human Expert', body: 'Character arcs, revelation schedule, message map — the foundation that guides every episode.' },
-        { num: '02', name: 'Concept Generation', tech: 'High temperature · 10–15 options', body: 'Generate radically different concepts. Constraint-based prompts force originality. Top 3 selected by humans.' },
-        { num: '03', name: 'Story Structure', tech: 'Beat sheet · emotional arc', body: 'Detailed structure with B-story for the message, callbacks, and a proper emotional curve.' },
-        { num: '04', name: 'Script Writing', tech: 'Voice Guide + Few-Shot Examples', body: 'Full script with Chabad-authentic dialogue, drawing on approved Maor scripts as references.' },
-        { num: '05', name: 'Multi-Layer Review', tech: 'Three lenses · low temperature', body: 'Separate passes for creative quality, cultural accuracy, and message fidelity. Adversarial critic finds problems.' },
-        { num: '06', name: 'Human Review', tech: 'Creative team + Rabbinical advisor', body: 'Final approval. Every correction feeds back into the system — making it sharper with every episode.' }
+        { num: '01', name: 'Plan', tech: 'Season bible · message map', body: 'Character arcs, revelation schedule, and message map — the foundation that guides every episode.' },
+        { num: '02', name: 'Generate', tech: 'High temperature · 10–15 options', body: 'Radically different concepts with creative constraints. Top picks selected by humans.' },
+        { num: '03', name: 'Write', tech: 'Voice Guide + few-shot', body: 'Full script with audience-authentic dialogue, drawing on approved scripts as references.' },
+        { num: '04', name: 'Review', tech: 'Three lenses + human approval', body: 'Creative quality, cultural accuracy, and message fidelity — then final human and rabbinical sign-off.' }
       ],
       knowledgeDocs: [
-        { title: 'Chabad Voice Guide', body: 'Phrase dictionary, daily-life scenes, red-flags checklist, annotated good-vs-bad examples. The single most impactful document.' },
-        { title: 'Character Bible', body: 'Per character: behavioral examples, hidden traits, fears, speech patterns, season arc with milestones, unlockable abilities.' },
-        { title: 'Message Database', body: 'The Rebbe\'s messages organized as creative writing fuel — depth layers, character mapping, anti-patterns.' }
+        { title: 'Voice Guide', body: 'Phrases, daily-life scenes, annotated good-vs-bad examples — swappable per audience.' },
+        { title: 'Character Bible', body: 'Behavioral examples, hidden traits, season arcs with milestones.' },
+        { title: 'Message Database', body: 'The Rebbe\'s messages organized as creative writing fuel — with depth layers.' }
       ],
       capabilities: [
         'Generate full episode scripts with dialogue calibrated to age group',
@@ -1253,6 +1254,22 @@ function renderEngineDetail(slug) {
     </div>
   ` : '';
 
+  const audiencesHtml = data.audiences ? `
+    <div class="detail-research-block detail-audiences-block">
+      <h3 class="detail-research-title">Built to Adapt</h3>
+      <p class="detail-research-lead">The same engine — three new audiences. Each gets its own Voice Guide, character set, and message palette. The pipeline stays the same.</p>
+      <div class="detail-audiences-grid">
+        ${data.audiences.map(a => `
+          <div class="detail-audience-card">
+            <span class="dac-tag">${a.tag}</span>
+            <h4>${a.name}</h4>
+            <p>${a.body}</p>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  ` : '';
+
   const pipelineHtml = data.pipeline ? `
     <div class="detail-research-block">
       <h3 class="detail-research-title">Our Multi-Layer Pipeline</h3>
@@ -1311,6 +1328,7 @@ function renderEngineDetail(slug) {
     </div>
 
     ${problemsHtml}
+    ${audiencesHtml}
     ${pipelineHtml}
     ${knowledgeHtml}
     ${researchLinkHtml}
