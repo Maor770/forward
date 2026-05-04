@@ -6875,11 +6875,40 @@ a.prop-card-link *::after {
 
 /* (5) Center the engine cards grid horizontally on the page */
 .layer-pillar-ai .engines-grid {
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-  justify-items: center;
+  justify-content: center;
 }
-.layer-pillar-ai .engines-grid > * {
+
+/* (7) Slightly larger engine subtitle (engine-domain) on AI page - +2pt */
+.layer-pillar-ai .engine-domain {
+  font-size: 1.05rem;
+}
+
+/* (8) Divider after the opening narrative ("So we're building our own.")
+   Three flames floating on a soft gold line, no background behind flames */
+.ai-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 2.5rem auto 3rem;
   width: 100%;
-  max-width: 100%;
+  max-width: 360px;
+  padding: 0 1rem;
+}
+.ai-divider::before,
+.ai-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-line) 30%, var(--gold-line) 70%, transparent);
+}
+.ai-divider span {
+  width: 11px;
+  height: 14px;
+  background: var(--flame-icon) center / contain no-repeat;
+  flex-shrink: 0;
+  opacity: 0.85;
 }
