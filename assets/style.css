@@ -6807,16 +6807,42 @@ button.opt-value.opt-toggle:focus-visible {
   100% { clip-path: inset(0 0 0 0); opacity: 1; }
 }
 
+/* Building gets only a downward shadow for depth — no gold drop-shadow,
+   because drop-shadow follows the image's rectangular alpha mask and would
+   create a square halo. The gold glow is a separate circular div instead. */
 @keyframes mhBuildingGlow {
   0% {
     filter: none;
   }
   100% {
-    filter:
-      drop-shadow(0 0 22px rgba(201, 169, 97, 0.50))
-      drop-shadow(0 0 6px rgba(232, 201, 125, 0.40))
-      drop-shadow(0 4px 12px rgba(0, 0, 0, 0.55));
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.55));
   }
+}
+
+/* Circular gold glow that sits behind the building — true round shape. */
+.mh-hero-building-glow {
+  position: absolute;
+  bottom: -2px;
+  left: 8%;
+  width: clamp(220px, 30%, 360px);
+  aspect-ratio: 1 / 1;
+  transform: translate(-15%, 22%);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(232, 201, 125, 0.55) 0%,
+    rgba(201, 169, 97, 0.32) 22%,
+    rgba(155, 27, 46, 0.18) 45%,
+    rgba(155, 27, 46, 0.05) 65%,
+    transparent 80%);
+  filter: blur(6px);
+  z-index: 11;
+  pointer-events: none;
+  opacity: 0;
+  animation: mhBuildingGlowIn 1s ease-in 1.8s forwards;
+}
+
+@keyframes mhBuildingGlowIn {
+  to { opacity: 1; }
 }
 
 @keyframes mhBuildingFloat {
@@ -6883,7 +6909,8 @@ button.opt-value.opt-toggle:focus-visible {
     object-fit: cover;
     object-position: center center;
   }
-  .mh-hero-building {
+  .mh-hero-building,
+  .mh-hero-building-glow {
     display: none;
   }
   /* No building means no glow on mobile */
