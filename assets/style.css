@@ -562,7 +562,7 @@ input.calc-input:focus {
 
 /* ─── PILLARS ─── PDF page 12 "Ultimate Partnership" inspired */
 .mh-pillars-section {
-  padding: 5rem 1.5rem 6rem;
+  padding: 2.5rem 1.5rem 6rem;
   background: var(--bg-navy);
   position: relative;
 }
@@ -2649,7 +2649,7 @@ input.calc-input:focus {
   .mh-hero { padding: 0; }
   .mh-about { padding: 3rem 1.2rem 1.5rem; }
   .mh-stats-section { padding: 3rem 1rem; margin: 3rem 0 0; }
-  .mh-pillars-section { padding: 3rem 1.2rem 4rem; }
+  .mh-pillars-section { padding: 1.5rem 1.2rem 4rem; }
   .pillar-body { padding: 1.5rem 1.6rem 1.7rem; }
 
   .pillar-hub-section { padding: 2.5rem 1.2rem; }
@@ -6849,7 +6849,7 @@ a.prop-card-link *::after {
   text-decoration: none !important;
 }
 
-/* ═══════════�
+/* ═══════════�
 /* ════════════════════════════════════════════════════════════════
    AI PAGE - tweaks specific to layer-pillar-ai
    ════════════════════════════════════════════════════════════════ */
@@ -6881,5 +6881,4 @@ a.prop-card-link *::after {
 }
 .layer-pillar-ai .engines-grid > * {
   width: 100%;
-  max-width: 100%;
-}
+  max-width: 10
