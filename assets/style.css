@@ -6987,27 +6987,33 @@ a.prop-card-link *::after {
    ENGINE STAGE BADGES + ACTIVE CARD INDICATOR (AI page)
    ════════════════════════════════════════════════════════════════ */
 
-/* Engine cards must have positioning context for the stage badge */
-.engine-card {
-  position: relative;
-}
+.engine-card { position: relative; }
 
-/* Stage badge — small pill in top-right corner */
+/* Uniform card heights across both rows */
+.engines-grid { grid-auto-rows: 1fr; }
+.engine-card,
+.engine-card-link { height: 100%; }
+
+/* Stage badge — pill at the top of the card (flow position, not absolute) */
 .engine-stage {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  display: inline-block;
+  align-self: flex-start;
   font-family: var(--sans);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 0.28rem 0.65rem;
+  padding: 0.26rem 0.7rem;
   border-radius: 12px;
   border: 1px solid;
   white-space: nowrap;
-  z-index: 5;
+  margin-bottom: 0.85rem;
   pointer-events: none;
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: auto;
+  width: auto;
 }
 
 /* Stage 1 — Research (cool blue-teal) */
@@ -7095,10 +7101,9 @@ a.prop-card-link *::after {
 /* Mobile: tighter badge */
 @media (max-width: 600px) {
   .engine-stage {
-    top: 0.55rem;
-    right: 0.55rem;
-    font-size: 0.6rem;
-    padding: 0.22rem 0.55rem;
+    font-size: 0.58rem;
+    padding: 0.22rem 0.6rem;
+    margin-bottom: 0.7rem;
   }
 }
 

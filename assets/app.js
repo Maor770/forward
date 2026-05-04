@@ -1372,7 +1372,9 @@ function renderEngineDetail(slug) {
     </div>
   `;
 
-  document.getElementById('engine-detail-content').innerHTML = html;
+  const targetEl = document.getElementById('engine-detail-content');
+  if (!targetEl) return; // Not on engine.html — the page redirect (showLayer wrapper) will handle navigation
+  targetEl.innerHTML = html;
 }
 
 // ---- Demo renderers (visual placeholders, swap for real demos later) ----
