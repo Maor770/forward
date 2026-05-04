@@ -1,0 +1,603 @@
+/* ════════════════════════════════════════════════════════════════
+   MaorForward V2 — Homepage redesign
+   Loaded AFTER style.css. Adds new components + targeted overrides
+   only on the v2 page. Existing site is untouched.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── Reset some hero defaults so v2 hero can take over ─── */
+.is-v2 .mh-hero-wrap { display: contents; }
+
+/* ════════════════════════════════════════════════════════════════
+   HERO V2 — text dominant, world+building as horizon
+   ════════════════════════════════════════════════════════════════ */
+.hero-v2 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(5rem, 10vh, 8rem) 1.5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-v2-mark {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--gold-line);
+  border-radius: 1px;
+  background: var(--gold-glow);
+  margin-bottom: 2.4rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.hero-v2-mark::before,
+.hero-v2-mark::after {
+  content: '';
+  width: 14px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.8;
+}
+
+.hero-v2-text {
+  max-width: 1080px;
+  text-align: center;
+  margin: 0 auto;
+  flex: 0 0 auto;
+}
+
+.hero-v2-headline {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 6.8vw, 5.6rem);
+  line-height: 1.04;
+  background: linear-gradient(180deg, var(--gold-pale) 0%, var(--gold-bright) 35%, var(--gold) 70%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.6rem;
+  text-shadow: 0 0 40px rgba(201, 169, 97, 0.18);
+  font-weight: 400;
+}
+.hero-v2-headline .hl-maor {
+  display: block;
+  font-size: 1.05em;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.15em;
+}
+.hero-v2-headline .hl-rest {
+  display: block;
+  font-size: 0.78em;
+  font-family: var(--serif-elegant);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.12;
+}
+
+.hero-v2-subtitle {
+  font-family: var(--serif-elegant);
+  font-size: clamp(1.05rem, 1.6vw, 1.32rem);
+  line-height: 1.65;
+  color: var(--text-warm);
+  max-width: 740px;
+  margin: 0 auto;
+  font-style: italic;
+  font-weight: 400;
+}
+.hero-v2-subtitle strong {
+  font-style: normal;
+  color: var(--gold-bright);
+  font-weight: 600;
+}
+
+/* The world+building horizon at the bottom of the hero */
+.hero-v2-horizon {
+  width: 100%;
+  max-width: 1100px;
+  margin: clamp(2.5rem, 6vh, 5rem) auto 0;
+  position: relative;
+  flex: 0 0 auto;
+}
+.hero-v2-horizon-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1100 / 320;
+  overflow: visible;
+}
+.hero-v2-horizon img.hv-world {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  border-radius: 4px;
+  opacity: 0.78;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 25%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 25%, #000 100%);
+}
+.hero-v2-horizon img.hv-building {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  width: clamp(180px, 24vw, 320px);
+  height: auto;
+  z-index: 2;
+  filter:
+    drop-shadow(0 0 28px rgba(232, 201, 125, 0.32))
+    drop-shadow(0 0 60px rgba(201, 169, 97, 0.18))
+    drop-shadow(0 8px 14px rgba(0,0,0,0.5));
+}
+.hero-v2-horizon-glow {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: clamp(280px, 36vw, 480px);
+  height: clamp(180px, 24vw, 280px);
+  background: radial-gradient(ellipse at 50% 80%,
+    rgba(232, 201, 125, 0.35) 0%,
+    rgba(201, 169, 97, 0.18) 35%,
+    transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   STATS — reuse .mh-stats but give v2 some breathing room
+   ════════════════════════════════════════════════════════════════ */
+.is-v2 .mh-stats {
+  margin: 4.5rem auto 5rem;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PROBLEM SECTION — "A Generation Desperate for the Message"
+   ════════════════════════════════════════════════════════════════ */
+.v2-section {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vh, 6rem) 1.5rem;
+  position: relative;
+}
+
+.v2-section-heading {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  line-height: 1.12;
+  background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 65%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 1.4rem;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+.v2-section-heading .vsh-italic {
+  font-family: var(--serif-elegant);
+  font-style: italic;
+  font-weight: 500;
+  display: block;
+  font-size: 0.82em;
+  margin-top: 0.15em;
+}
+
+.v2-section-lede {
+  font-family: var(--serif-elegant);
+  font-size: clamp(1.1rem, 1.85vw, 1.42rem);
+  line-height: 1.62;
+  color: var(--text-warm);
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 3rem;
+  font-style: italic;
+}
+.v2-section-lede strong {
+  font-style: normal;
+  color: var(--gold-bright);
+  font-weight: 600;
+}
+
+/* The three children — sequential, not card-y */
+.problem-children {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.problem-child {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.6rem;
+  align-items: start;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border-soft);
+}
+.problem-child:first-child { border-top: 1px solid var(--gold-line); }
+.problem-child:last-child { border-bottom: 1px solid var(--gold-line); }
+.problem-child-marker {
+  font-family: var(--serif);
+  font-size: 2.6rem;
+  color: var(--gold-deep);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  padding-top: 0.1em;
+  font-feature-settings: "lnum";
+}
+.problem-child h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  color: var(--gold-bright);
+  margin-bottom: 0.55rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.problem-child p {
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.72;
+  color: var(--text);
+  font-weight: 400;
+}
+.problem-child p strong { color: var(--gold-bright); font-weight: 600; }
+
+/* ════════════════════════════════════════════════════════════════
+   SOLUTION SECTION — "Maor Shifts Mindsets through storytelling"
+   ════════════════════════════════════════════════════════════════ */
+.solution-section {
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(201, 169, 97, 0.06) 30%,
+    rgba(201, 169, 97, 0.06) 70%,
+    transparent 100%);
+  border-top: 1px solid var(--gold-line);
+  border-bottom: 1px solid var(--gold-line);
+  padding: clamp(4rem, 9vh, 6.5rem) 1.5rem;
+}
+.solution-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+.solution-section .v2-section-heading { margin-bottom: 2rem; }
+.solution-body {
+  font-family: var(--serif-elegant);
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  line-height: 1.65;
+  color: var(--text-warm);
+  font-weight: 400;
+}
+.solution-body strong {
+  color: var(--gold-bright);
+  font-weight: 600;
+}
+.solution-body em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   BRIDGE — single line transition to the projects
+   ════════════════════════════════════════════════════════════════ */
+.bridge-section {
+  text-align: center;
+  padding: clamp(3.5rem, 8vh, 5.5rem) 1.5rem 1rem;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.bridge-line {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  line-height: 1.35;
+  color: var(--text-warm);
+  letter-spacing: -0.005em;
+  font-weight: 400;
+}
+.bridge-line .bridge-emphasis {
+  display: block;
+  margin-top: 0.6rem;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PILLARS — bullets inside cards (new)
+   ════════════════════════════════════════════════════════════════ */
+.is-v2 .mh-pillars-section { padding-top: 2rem; }
+
+.pillar-bullets {
+  list-style: none;
+  margin: 0 0 1.4rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.pillar-bullets li {
+  font-family: var(--sans);
+  font-size: 0.94rem;
+  line-height: 1.62;
+  color: var(--text);
+  padding-left: 1.3rem;
+  position: relative;
+}
+.pillar-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(201, 169, 97, 0.5);
+}
+.pillar-bullets li strong {
+  color: var(--gold-bright);
+  font-weight: 700;
+}
+.pillar-closing {
+  font-family: var(--serif-elegant);
+  font-style: italic;
+  color: var(--gold);
+  font-size: 0.96rem;
+  line-height: 1.6;
+  padding: 0.9rem 0 1.3rem;
+  border-top: 1px solid var(--border-soft);
+  margin-top: 0.4rem;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   WHY IT WORKS — three flowing ideas, no heading
+   ════════════════════════════════════════════════════════════════ */
+.why-section {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(4rem, 9vh, 6.5rem) 1.5rem;
+}
+.why-block {
+  padding: 0.5rem 0;
+}
+.why-lead {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.why-block p:not(.why-lead) {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  line-height: 1.72;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+}
+.why-block p strong {
+  color: var(--gold-bright);
+  font-weight: 600;
+}
+
+.why-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-line) 30%, var(--gold-line) 70%, transparent);
+  margin: 2.5rem 0;
+  position: relative;
+}
+.why-divider::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 14px rgba(201, 169, 97, 0.55);
+}
+
+/* Stakes — Without / With side by side */
+.stakes-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 1.4rem;
+}
+@media (min-width: 760px) {
+  .stakes-row { grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+}
+.stakes-cell {
+  padding: 1.5rem 1.6rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-navy-darker);
+  position: relative;
+}
+.stakes-cell-without {
+  border-color: rgba(155, 27, 46, 0.32);
+  background: linear-gradient(160deg, rgba(155, 27, 46, 0.08), var(--bg-navy-darker));
+}
+.stakes-cell-with {
+  border-color: var(--gold-line);
+  background: linear-gradient(160deg, rgba(201, 169, 97, 0.10), var(--bg-navy-darker));
+}
+.stakes-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  padding: 0.22rem 0.7rem;
+  border-radius: 1px;
+}
+.stakes-cell-without .stakes-tag {
+  color: #E8A6AE;
+  background: rgba(155, 27, 46, 0.18);
+  border: 1px solid rgba(155, 27, 46, 0.38);
+}
+.stakes-cell-with .stakes-tag {
+  color: var(--gold-bright);
+  background: var(--gold-glow);
+  border: 1px solid var(--gold-line);
+}
+.stakes-cell p {
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   EXPLORE THE PLAN — final CTAs before footer
+   ════════════════════════════════════════════════════════════════ */
+.explore-section {
+  padding: clamp(3.5rem, 8vh, 5.5rem) 1.5rem clamp(4rem, 9vh, 6rem);
+  max-width: 1040px;
+  margin: 0 auto;
+  text-align: center;
+}
+.explore-heading {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.explore-ctas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  max-width: 880px;
+  margin: 0 auto;
+}
+@media (min-width: 760px) {
+  .explore-ctas { grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+}
+
+.explore-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 1.5rem 1.7rem;
+  background: linear-gradient(160deg, var(--bg-navy-elevated) 0%, var(--bg-navy-deep) 100%);
+  border: 1px solid var(--gold-line);
+  border-left: 3px solid var(--gold);
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  transition: all 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+.explore-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--gold-glow), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+.explore-cta:hover {
+  border-color: var(--gold);
+  border-left-color: var(--gold-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.4), 0 0 24px rgba(201, 169, 97, 0.18);
+}
+.explore-cta:hover::before { transform: translateX(100%); }
+.explore-cta:focus-visible {
+  outline: none;
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 0 2px var(--gold-glow);
+}
+.explore-cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+.explore-cta-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.explore-cta-title {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 2.1vw, 1.45rem);
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+.explore-cta-arrow {
+  font-size: 1.6rem;
+  color: var(--gold);
+  transition: transform 0.25s ease, color 0.25s ease;
+  flex-shrink: 0;
+}
+.explore-cta:hover .explore-cta-arrow {
+  transform: translateX(8px);
+  color: var(--gold-bright);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MOBILE TUNING
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 760px) {
+  .hero-v2 { padding-top: clamp(4rem, 8vh, 6rem); }
+  .hero-v2-mark { font-size: 0.66rem; padding: 0.4rem 0.9rem; margin-bottom: 1.8rem; }
+  .hero-v2-mark::before, .hero-v2-mark::after { width: 10px; }
+  .hero-v2-headline { margin-bottom: 1.2rem; }
+  .hero-v2-horizon-inner { aspect-ratio: 1100 / 380; }
+  .hero-v2-horizon img.hv-building { width: clamp(140px, 38vw, 220px); }
+
+  .problem-child { grid-template-columns: 56px 1fr; gap: 1rem; }
+  .problem-child-marker { font-size: 2rem; }
+
+  .v2-section { padding-left: 1.1rem; padding-right: 1.1rem; }
+
+  .explore-cta { padding: 1.25rem 1.3rem; }
+}
+
+@media (max-width: 460px) {
+  .hero-v2-headline { font-size: clamp(2.1rem, 9vw, 3rem); }
+  .hero-v2-subtitle { font-size: 0.98rem; }
+  .v2-section-heading { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  .why-lead { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+  .bridge-line { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+}
