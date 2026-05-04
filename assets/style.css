@@ -6801,19 +6801,25 @@ button.opt-value.opt-toggle:focus-visible {
   50%      { transform: translateY(-6px); }
 }
 
-/* Lasting ambient glow — large soft halo that appears after the burst and stays.
-   Centered on the building's base, blooms across the whole world image. */
+/* Lasting ambient glow — a large soft circular halo emanating from the
+   building's base, with burgundy depth. Heavy blur + radial fade ensure
+   the edges never form a hard square against the hero clip-rect. */
 .mh-hero-wrap::before {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(ellipse 70% 80% at 14% 92%,
-    rgba(232, 201, 125, 0.38) 0%,
-    rgba(201, 169, 97, 0.22) 20%,
-    rgba(155, 27, 46, 0.16) 42%,
-    transparent 72%);
-  filter: blur(28px);
+  bottom: -200px;
+  left: 14%;
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(232, 201, 125, 0.45) 0%,
+    rgba(201, 169, 97, 0.28) 14%,
+    rgba(155, 27, 46, 0.18) 32%,
+    rgba(155, 27, 46, 0.06) 55%,
+    transparent 75%);
+  filter: blur(45px);
+  transform: translate(-50%, 0);
   opacity: 0;
   pointer-events: none;
   z-index: 10;
@@ -6825,34 +6831,34 @@ button.opt-value.opt-toggle:focus-visible {
   100% { opacity: 1; }
 }
 
-/* Glow burst — a one-time pulse of light that emanates from the building.
-   Soft-blurred so the edges fade rather than clip into a square. */
+/* Glow burst — a one-time pulse that radiates outward from the building. */
 .mh-hero-wrap::after {
   content: '';
   position: absolute;
-  bottom: 8%;
+  bottom: 4%;
   left: 14%;
-  width: 260px;
-  height: 260px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   background: radial-gradient(circle,
     rgba(232, 201, 125, 0.85) 0%,
-    rgba(232, 201, 125, 0.40) 22%,
-    rgba(155, 27, 46, 0.22) 45%,
-    transparent 70%);
-  filter: blur(12px);
+    rgba(232, 201, 125, 0.42) 20%,
+    rgba(155, 27, 46, 0.25) 42%,
+    rgba(155, 27, 46, 0.08) 60%,
+    transparent 75%);
+  filter: blur(20px);
   transform: translate(-50%, 50%) scale(0);
   opacity: 0;
   pointer-events: none;
   z-index: 11;
-  animation: mhGlowBurst 2s ease-out 1.7s forwards;
+  animation: mhGlowBurst 2.2s ease-out 1.7s forwards;
 }
 
 @keyframes mhGlowBurst {
   0%   { transform: translate(-50%, 50%) scale(0); opacity: 0; }
-  30%  { opacity: 0.85; }
-  60%  { opacity: 0.45; }
-  100% { transform: translate(-50%, 50%) scale(2.4); opacity: 0; }
+  25%  { opacity: 0.9; }
+  60%  { opacity: 0.55; }
+  100% { transform: translate(-50%, 50%) scale(3.2); opacity: 0; }
 }
 
 /* Tablet */
