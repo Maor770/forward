@@ -7,6 +7,27 @@
 /* ─── Reset some hero defaults so v2 hero can take over ─── */
 .is-v2 .mh-hero-wrap { display: contents; }
 
+/* Hide the duplicate "MaorForward · Capital Campaign" mark above the headline */
+.is-v2 .hero-v2-mark { display: none; }
+
+/* Thin gold line directly below the top strip (MaorForward + icons + ב"ה),
+   matching the look of the original homepage */
+.is-v2 .master-hub { position: relative; }
+.is-v2 .master-hub::before {
+  content: '';
+  position: absolute;
+  top: var(--top-strip-height);
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right,
+    transparent 0%,
+    var(--gold-line) 15%,
+    var(--gold-line) 85%,
+    transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* ════════════════════════════════════════════════════════════════
    HERO V2 — text dominant, world+building as horizon
    ════════════════════════════════════════════════════════════════ */
@@ -47,7 +68,7 @@
 }
 
 .hero-v2-text {
-  max-width: 760px;
+  max-width: 800px;
   text-align: left;
   margin: 0 auto;
   flex: 0 0 auto;
@@ -55,60 +76,54 @@
 
 .hero-v2-headline {
   font-family: 'Vidaloka', var(--serif);
-  font-size: clamp(2.6rem, 7.2vw, 6rem);
+  font-size: clamp(2.4rem, 5.6vw, 4.6rem);
   line-height: 1.04;
   letter-spacing: -0.015em;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.8rem;
   font-weight: 400;
   text-align: left;
-  /* No global gradient: each line gets its own treatment */
   background: none;
   -webkit-background-clip: initial;
   background-clip: initial;
   -webkit-text-fill-color: initial;
   text-shadow: none;
 }
-/* "Maor." — bigger, softer/dimmer gold */
-.hero-v2-headline .hl-maor {
-  display: block;
-  font-family: 'Vidaloka', var(--serif);
-  font-size: 1.55em;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.05em;
-  font-weight: 400;
-  background: linear-gradient(180deg, rgba(201, 169, 97, 0.62) 0%, rgba(155, 124, 60, 0.55) 75%, rgba(110, 88, 42, 0.50) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-/* "Because this generation..." — smaller, lighter weight, stronger gold */
+/* "Maor." and "Because this generation..." — same size, same strong gold */
+.hero-v2-headline .hl-maor,
 .hero-v2-headline .hl-rest {
   display: block;
   font-family: 'Vidaloka', var(--serif);
-  font-size: 0.55em;
+  font-size: 1em;
   font-weight: 400;
   font-style: normal;
-  letter-spacing: -0.005em;
-  line-height: 1.2;
   background: linear-gradient(180deg, var(--gold-pale) 0%, var(--gold-bright) 45%, var(--gold) 90%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 30px rgba(232, 201, 125, 0.30);
+  text-shadow: 0 0 30px rgba(232, 201, 125, 0.25);
+}
+.hero-v2-headline .hl-maor {
+  letter-spacing: -0.025em;
+  margin-bottom: 0.1em;
+}
+.hero-v2-headline .hl-rest {
+  letter-spacing: -0.005em;
+  line-height: 1.2;
 }
 
 .hero-v2-subtitle {
   font-family: 'Noto Sans', var(--sans);
-  font-size: clamp(1.05rem, 1.6vw, 1.32rem);
-  line-height: 1.65;
+  font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+  line-height: 1.6;
   color: var(--text-warm);
-  max-width: 1080px;
-  margin: 0 0 1rem;
+  max-width: 800px;
+  margin: 0 0 1.5rem;
   font-style: normal;
   font-weight: 400;
   text-align: left;
 }
 .hero-v2-subtitle:last-of-type { margin-bottom: 0; }
+.hero-v2-subtitle strong { font-style: normal; color: var(--gold-bright); font-weight: 600; }
 .hero-v2-subtitle strong {
   font-style: normal;
   color: var(--gold-bright);
@@ -322,20 +337,106 @@
    ════════════════════════════════════════════════════════════════ */
 .is-v2 .mh-pillars-section { padding-top: 2rem; }
 
-/* Make the pillar image fill its frame (was a flex placeholder originally) */
-.is-v2 .pillar-image {
-  aspect-ratio: 16 / 10;
-  background:
-    radial-gradient(ellipse at center, rgba(232, 201, 125, 0.18) 0%, transparent 70%),
-    var(--bg-navy-darker);
-}
-.is-v2 .pillar-image img {
+/* ════════════════════════════════════════════════════════════════
+   PILLAR CARDS — V2 (rewritten)
+   The optional <img> inside .pillar-image is hidden until the actual
+   PNGs are committed to /images/.  Each card gets a themed gradient
+   header instead, so the cards always look polished.
+   ════════════════════════════════════════════════════════════════ */
+.is-v2 .pillar-card {
+  background: linear-gradient(160deg, var(--bg-navy-elevated) 0%, var(--bg-navy-deep) 100%);
+  border: 1px solid var(--gold-line);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  padding: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  display: block;
-  padding: 1.5rem;
-  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.is-v2 .pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold-bright);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(201, 169, 97, 0.18);
+}
+
+/* Image header — the base64 PNG (background-image) lives in style.css
+   alongside the matching audience-card rule, so the image is shared and
+   committed inline (no external file needed). Here we set the framing. */
+.is-v2 .pillar-image {
+  aspect-ratio: 16 / 9;
+  background-color: var(--bg-navy-deep);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  border-bottom: 1px solid var(--gold-line);
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: inset 0 -1px 0 rgba(232, 201, 125, 0.10);
+}
+/* The HTML <img> is no longer needed — base64 in style.css handles display */
+.is-v2 .pillar-image img {
+  display: none;
+}
+
+/* Pillar body padding + readable colors */
+.is-v2 .pillar-body {
+  padding: 1.6rem 1.6rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  flex: 1;
+}
+.is-v2 .pillar-body .pillar-subtitle {
+  font-family: var(--serif-elegant);
+  font-style: italic;
+  color: var(--gold-deep);
+  font-size: 0.92rem;
+  font-weight: 500;
+  margin: 0;
+}
+.is-v2 .pillar-body h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  color: var(--gold-bright);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.4rem;
+  line-height: 1.18;
+}
+.is-v2 .pillar-summary {
+  font-family: var(--sans);
+  color: var(--text);
+  font-size: 0.98rem;
+  line-height: 1.62;
+  margin: 0 0 0.8rem;
+}
+.is-v2 .pillar-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-soft);
+  color: var(--gold-bright);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.is-v2 .pillar-cta-arrow { transition: transform 0.2s ease; }
+.is-v2 .pillar-card:hover .pillar-cta-arrow {
+  transform: translateX(4px);
 }
 
 .pillar-bullets {
