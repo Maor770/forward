@@ -4219,6 +4219,7 @@ a.bc-item:hover {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.4rem;
+  margin-top: 4rem;
   margin-bottom: 2.5rem;
 }
 @media (min-width: 800px) { .detail-grid { grid-template-columns: 1fr 1fr; gap: 1.6rem; } }

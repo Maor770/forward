@@ -110,8 +110,7 @@ const AI_DATA = {
         { phase: 'Q4 2025', status: 'done', label: 'Prototype · single-character scenes, 30 seconds' },
         { phase: 'Q2 2026', status: 'inprogress', label: 'Architecture · multi-character scenes, full episodes (in dev)' },
         { phase: 'Q4 2026', status: 'planned', label: 'Production · daily content output' }
-      ],
-      demo: { title: 'Sample · Character Consistency Test', type: 'animation' }
+      ]
     },
 
     'maor-anim': {
@@ -1403,10 +1402,12 @@ function renderEngineDetail(slug) {
 
     </div>
 
+    ${data.demo ? `
     <div class="detail-demo">
       <h4 class="detail-card-title">${data.demo.title}</h4>
       ${renderDemo(data.demo.type, data.name)}
     </div>
+    ` : ''}
   `;
 
   targetEl.innerHTML = html;
