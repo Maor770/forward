@@ -1228,8 +1228,13 @@ function renderEngineDetail(slug) {
   const data = AI_DATA.engines[slug];
   if (!data) return;
 
+  // Bail early if we're not on engine.html (the page redirect will handle it)
+  const targetEl = document.getElementById('engine-detail-content');
+  if (!targetEl) return;
+
   // Update breadcrumb
-  document.getElementById('bc-engine-current').textContent = data.name;
+  const bc = document.getElementById('bc-engine-current');
+  if (bc) bc.textContent = data.name;
 
   // --- Optional research-driven sections (problems / pipeline / knowledge docs) ---
   const problemsHtml = data.problems ? `
@@ -1372,8 +1377,6 @@ function renderEngineDetail(slug) {
     </div>
   `;
 
-  const targetEl = document.getElementById('engine-detail-content');
-  if (!targetEl) return; // Not on engine.html — the page redirect (showLayer wrapper) will handle navigation
   targetEl.innerHTML = html;
 }
 
@@ -1563,8 +1566,12 @@ function renderAudienceDetail(slug) {
   const data = AI_DATA.audiences[slug];
   if (!data) return;
 
-  // Update breadcrumb
-  document.getElementById('bc-audience-current').textContent = data.name;
+  // Bail early if not on audience.html
+  const audTarget = document.getElementById('audience-detail-content');
+  if (!audTarget) return;
+
+  const bc = document.getElementById('bc-audience-current');
+  if (bc) bc.textContent = data.name;
 
   // Format budget breakdown
   const budgetTotal = data.budgetBreakdown.reduce((sum, b) => sum + b.amount, 0);
@@ -1676,7 +1683,7 @@ function renderAudienceDetail(slug) {
     </div>
   `;
 
-  document.getElementById('audience-detail-content').innerHTML = html;
+  audTarget.innerHTML = html;
 }
 
 // ---- Hash-based routing ----
