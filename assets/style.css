@@ -6862,14 +6862,23 @@ button.opt-value.opt-toggle:focus-visible {
   transform: translateX(-50%);
   width: 100vw;
   height: 100%;
-  /* No fixed gradient size — let it stretch to the farthest corner of the
-     full-width element so the halo reaches the side gutters of .mh-hero. */
-  background: radial-gradient(circle at calc(50% - 396px) 100%,
-    rgba(232, 201, 125, 0.45) 0%,
-    rgba(201, 169, 97, 0.30) 8%,
-    rgba(155, 27, 46, 0.20) 18%,
-    rgba(155, 27, 46, 0.08) 35%,
-    transparent 65%);
+  /* Two-layer halo for stronger, more atmospheric lighting:
+     1. Strong gold core radiating from the building's base
+     2. Wide low-opacity spread that washes the entire hero with warmth */
+  background:
+    radial-gradient(circle at calc(50% - 396px) 100%,
+      rgba(232, 201, 125, 0.65) 0%,
+      rgba(232, 201, 125, 0.45) 8%,
+      rgba(201, 169, 97, 0.32) 18%,
+      rgba(155, 27, 46, 0.22) 35%,
+      rgba(155, 27, 46, 0.10) 55%,
+      transparent 80%),
+    radial-gradient(ellipse 75% 60% at 50% 115%,
+      rgba(232, 201, 125, 0.28) 0%,
+      rgba(201, 169, 97, 0.20) 25%,
+      rgba(155, 27, 46, 0.15) 50%,
+      rgba(155, 27, 46, 0.06) 70%,
+      transparent 90%);
   opacity: 0;
   pointer-events: none;
   z-index: 10;
