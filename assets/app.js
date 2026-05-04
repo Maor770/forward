@@ -1228,8 +1228,8 @@ const PROPERTY_PAGES = {
   '653-maple': 'property-653',
 };
 
-// Engine routes (5)
-['maor-script', 'maor-anim', 'maor-voice', 'maor-sound', 'maor-sync'].forEach((slug) => {
+// Engine routes (6)
+['maor-research', 'maor-script', 'maor-visual', 'maor-voice', 'maor-sound', 'maor-sync'].forEach((slug) => {
   ROUTES[`#ai/engines/${slug}`] = { layer: 'engine', engine: slug };
 });
 
