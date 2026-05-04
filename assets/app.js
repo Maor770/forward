@@ -1753,6 +1753,7 @@ function _pageSplit_layerForCurrentPage() {
   if (!file) file = 'index.html';
   const map = {
     'index.html': 'master',
+    'index-v2.html': 'master',
     'building.html': 'building',
     'property.html': 'property',
     'property-653.html': 'property',
@@ -2952,9 +2953,11 @@ if (document.readyState !== 'loading') {
     return f || 'index.html';
   }
 
-  // Pages that map to the same logical layer (property covers 417 + 653)
+  // Pages that map to the same logical layer (property covers 417 + 653,
+  // master covers index.html and the v2 prototype index-v2.html)
   const SAME_LAYER_PAGES = {
     property: ['property.html', 'property-653.html'],
+    master:   ['index.html', 'index-v2.html'],
   };
 
   // Wrap the (final) showLayer to redirect across pages when needed.
