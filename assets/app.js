@@ -9,9 +9,30 @@ const AI_DATA = {
     'maor-script': {
       name: 'MaorScript',
       domain: 'Writing & Narrative',
-      stage: 'Beta',
-      tagline: 'The voice of a Mashpia who grew up on the Rebbe\'s Sichos.',
-      hero: 'Fine-tuned large language model trained on a decade of Maor scripts, vetted Chassidic storytelling frameworks, and the authentic register of Anash.',
+      stage: 'Architecture',
+      tagline: 'A custom writers\' room AI — built for the voice of Anash and the depth of the Rebbe\'s Sichos.',
+      hero: 'Generic LLMs gravitate to the average of all children\'s stories — predictable plots, missing cultural nuance, jokes that don\'t land. MaorScript is a multi-layer pipeline that mirrors a real writers\' room, with each stage tuned for what it does best.',
+      researchUrl: 'https://leafy-gecko-4a464d.netlify.app/',
+      problems: [
+        { icon: '⚡', title: 'Stories Lack Originality', cause: 'Regression to the Mean', body: 'Generic LLMs draw from the average of all children\'s stories — predictable plots, flat characters, on-the-nose moral lessons.' },
+        { icon: '🎯', title: 'Missing Chabad Cultural Nuance', cause: 'Underrepresentation in Training', body: 'Day-to-day Chabad life is too narrow a niche. The model knows Chabad encyclopedically — but not as lived experience.' },
+        { icon: '🎭', title: 'Jokes & Situations Don\'t Land', cause: 'Missing Cultural Theory of Mind', body: 'Humor breaks expectations. Without the baseline of Chabad daily life, the model can\'t break expectations correctly.' },
+        { icon: '👤', title: 'Characters Lack Depth & Growth', cause: 'No Character Bible', body: 'Models repeat the same traits episode after episode. Real shows reveal something new each time — that takes season-level planning.' },
+        { icon: '✨', title: 'The Missing Writer\'s Spark', cause: 'Pattern Matchers vs. Creators', body: 'A great writer finds the unlikely-but-perfect continuation. LLMs find the most-likely continuation. Different jobs entirely.' }
+      ],
+      pipeline: [
+        { num: '01', name: 'Season Planning', tech: 'Claude Opus + Human Expert', body: 'Character arcs, revelation schedule, message map — the foundation that guides every episode.' },
+        { num: '02', name: 'Concept Generation', tech: 'High temperature · 10–15 options', body: 'Generate radically different concepts. Constraint-based prompts force originality. Top 3 selected by humans.' },
+        { num: '03', name: 'Story Structure', tech: 'Beat sheet · emotional arc', body: 'Detailed structure with B-story for the message, callbacks, and a proper emotional curve.' },
+        { num: '04', name: 'Script Writing', tech: 'Voice Guide + Few-Shot Examples', body: 'Full script with Chabad-authentic dialogue, drawing on approved Maor scripts as references.' },
+        { num: '05', name: 'Multi-Layer Review', tech: 'Three lenses · low temperature', body: 'Separate passes for creative quality, cultural accuracy, and message fidelity. Adversarial critic finds problems.' },
+        { num: '06', name: 'Human Review', tech: 'Creative team + Rabbinical advisor', body: 'Final approval. Every correction feeds back into the system — making it sharper with every episode.' }
+      ],
+      knowledgeDocs: [
+        { title: 'Chabad Voice Guide', body: 'Phrase dictionary, daily-life scenes, red-flags checklist, annotated good-vs-bad examples. The single most impactful document.' },
+        { title: 'Character Bible', body: 'Per character: behavioral examples, hidden traits, fears, speech patterns, season arc with milestones, unlockable abilities.' },
+        { title: 'Message Database', body: 'The Rebbe\'s messages organized as creative writing fuel — depth layers, character mapping, anti-patterns.' }
+      ],
       capabilities: [
         'Generate full episode scripts with dialogue calibrated to age group',
         'Write age-appropriate adaptations of Sichos and Maamarim',
@@ -38,6 +59,44 @@ const AI_DATA = {
         title: 'Sample · Episode Opening',
         type: 'script',
       },
+    },
+
+    'maor-visual': {
+      name: 'MaorVisual',
+      domain: 'Animation & Video',
+      stage: 'Architecture',
+      tagline: 'Hollywood-level animation at a fraction of the cost — built on 10 years of character libraries.',
+      hero: 'Custom video pipeline combining state-of-the-art generative models with proprietary character consistency systems and Maor\'s own rigging.',
+      researchUrl: '',
+      researchNote: 'Detailed research paper coming soon — currently in active development with the production team.',
+      problems: [
+        { icon: '🎬', title: 'Generic Models Break Character', cause: 'No Memory Across Scenes', body: 'Runway, Pika, and Sora produce impressive but inconsistent characters. The same Yanky looks different in two consecutive scenes.' },
+        { icon: '🎨', title: 'No Director-Level Control', cause: 'Surface-Only Prompting', body: 'Off-the-shelf tools take a prompt and render. They don\'t understand pacing, beat sheets, or emotional arc.' },
+        { icon: '📚', title: 'Cannot Use Existing IP', cause: 'No Custom Training', body: 'Cannot integrate ten years of Maor character libraries — every scene starts from zero.' }
+      ],
+      capabilities: [
+        'Animate full episodes from script to final render',
+        'Maintain character consistency across scenes, episodes, and seasons',
+        'Generate B-roll and establishing shots from text descriptions',
+        'Adapt existing Maor characters to new scenarios while preserving recognizability',
+        'Produce both 2D-style and pseudo-3D animation depending on content needs'
+      ],
+      difference: {
+        commercial: 'Inconsistent characters across scenes. No control over emotion or pacing. Cannot integrate existing IP libraries.',
+        maor: 'Built on 10 years of character libraries — Yanky, Mendy, the Maor family. Character consistency across 20+ scenes. Episode that costs $80K traditional now costs $3K–$8K.'
+      },
+      stack: [
+        { layer: 'Base models', value: 'Runway Gen-3, Pika 1.5, custom diffusion' },
+        { layer: 'Character library', value: '40+ proprietary character rigs from 10 years of production' },
+        { layer: 'Consistency layer', value: 'Custom character embedding system' },
+        { layer: 'Quality control', value: 'Frame-by-frame review pipeline + auto-correction' }
+      ],
+      roadmap: [
+        { phase: 'Q4 2025', status: 'done', label: 'Prototype · single-character scenes, 30 seconds' },
+        { phase: 'Q2 2026', status: 'inprogress', label: 'Architecture · multi-character scenes, full episodes (in dev)' },
+        { phase: 'Q4 2026', status: 'planned', label: 'Production · daily content output' }
+      ],
+      demo: { title: 'Sample · Character Consistency Test', type: 'animation' }
     },
 
     'maor-anim': {
@@ -1172,6 +1231,68 @@ function renderEngineDetail(slug) {
   // Update breadcrumb
   document.getElementById('bc-engine-current').textContent = data.name;
 
+  // --- Optional research-driven sections (problems / pipeline / knowledge docs) ---
+  const problemsHtml = data.problems ? `
+    <div class="detail-research-block">
+      <h3 class="detail-research-title">Why Generic AI Falls Short</h3>
+      <div class="detail-problems-grid">
+        ${data.problems.map(p => `
+          <div class="detail-problem-card">
+            <span class="dpc-icon">${p.icon}</span>
+            <h4>${p.title}</h4>
+            <span class="dpc-cause">${p.cause}</span>
+            <p>${p.body}</p>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  ` : '';
+
+  const pipelineHtml = data.pipeline ? `
+    <div class="detail-research-block">
+      <h3 class="detail-research-title">Our Multi-Layer Pipeline</h3>
+      <p class="detail-research-lead">A real writers' room — each stage tuned for what it does best.</p>
+      <div class="detail-pipeline-list">
+        ${data.pipeline.map(layer => `
+          <div class="detail-pipeline-item">
+            <span class="dpl-num">${layer.num}</span>
+            <div class="dpl-body">
+              <h4>${layer.name}</h4>
+              <span class="dpl-tech">${layer.tech}</span>
+              <p>${layer.body}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  ` : '';
+
+  const knowledgeHtml = data.knowledgeDocs ? `
+    <div class="detail-research-block">
+      <h3 class="detail-research-title">Critical Knowledge Documents</h3>
+      <p class="detail-research-lead">The backbone of the system — what makes the difference between generic output and culturally authentic, creatively rich scripts.</p>
+      <div class="detail-knowledge-grid">
+        ${data.knowledgeDocs.map(d => `
+          <div class="detail-knowledge-card">
+            <h4>${d.title}</h4>
+            <p>${d.body}</p>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  ` : '';
+
+  const researchLinkHtml = data.researchUrl ? `
+    <div class="detail-research-link">
+      <a href="${data.researchUrl}" target="_blank" rel="noopener">
+        <span>Read the full research</span>
+        <span class="drl-arrow">→</span>
+      </a>
+    </div>
+  ` : (data.researchNote ? `
+    <div class="detail-research-note"><p>${data.researchNote}</p></div>
+  ` : '');
+
   // Build content
   const html = `
     <div class="detail-header">
@@ -1183,6 +1304,11 @@ function renderEngineDetail(slug) {
     <div class="detail-hero-block">
       <p>${data.hero}</p>
     </div>
+
+    ${problemsHtml}
+    ${pipelineHtml}
+    ${knowledgeHtml}
+    ${researchLinkHtml}
 
     <div class="detail-grid">
 
