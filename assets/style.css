@@ -3308,11 +3308,11 @@ input.calc-input:focus {
 }
 
 .ai-section {
-  margin-bottom: 5rem;
+  margin-bottom: 7rem;
 }
 .ai-section-saas {
   background: linear-gradient(180deg, transparent 0%, rgba(155, 27, 46, 0.08) 50%, transparent 100%);
-  padding: 3.5rem 0;
+  padding: 4.5rem 0;
   margin-left: -1.2rem;
   margin-right: -1.2rem;
   padding-left: 1.2rem;
@@ -6865,7 +6865,7 @@ a.prop-card-link *::after {
 
 /* (2) Add breathing room before "The Reach" section (which follows the SaaS narrative) */
 .layer-pillar-ai .ai-section-saas + .ai-section {
-  margin-top: 5rem;
+  margin-top: 7rem;
 }
 
 /* (4) Hide $100K starter capital + View full plan footer in audience cards */
@@ -6893,7 +6893,7 @@ a.prop-card-link *::after {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  margin: 2.5rem auto 3rem;
+  margin: 3.5rem auto 4rem;
   width: 100%;
   max-width: 360px;
   padding: 0 1rem;
