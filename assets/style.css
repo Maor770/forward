@@ -6835,14 +6835,15 @@ button.opt-value.opt-toggle:focus-visible {
   left: 50%;
   transform: translateX(-50%);
   width: 100vw;
-  max-width: 1900px;
   height: 100%;
-  background: radial-gradient(circle 700px at calc(50% - 396px) 100%,
-    rgba(232, 201, 125, 0.50) 0%,
-    rgba(201, 169, 97, 0.32) 12%,
-    rgba(155, 27, 46, 0.22) 28%,
-    rgba(155, 27, 46, 0.08) 48%,
-    transparent 70%);
+  /* No fixed gradient size — let it stretch to the farthest corner of the
+     full-width element so the halo reaches the side gutters of .mh-hero. */
+  background: radial-gradient(circle at calc(50% - 396px) 100%,
+    rgba(232, 201, 125, 0.45) 0%,
+    rgba(201, 169, 97, 0.30) 8%,
+    rgba(155, 27, 46, 0.20) 18%,
+    rgba(155, 27, 46, 0.08) 35%,
+    transparent 65%);
   opacity: 0;
   pointer-events: none;
   z-index: 10;
