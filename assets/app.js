@@ -66,31 +66,45 @@ const AI_DATA = {
       name: 'MaorVisual',
       domain: 'Animation & Video',
       stage: 'Architecture',
-      tagline: 'Hollywood-level animation at a fraction of the cost — built on 10 years of character libraries.',
-      hero: 'Custom video pipeline combining state-of-the-art generative models with proprietary character consistency systems and Maor\'s own rigging.',
-      researchUrl: '',
-      researchNote: 'Detailed research paper coming soon — currently in active development with the production team.',
+      tagline: 'A custom video pipeline — built for the rigor of a serialized show, not the dazzle of a one-off demo.',
+      hero: 'Generic video models look stunning in demos and unpredictable in production. Inconsistent characters, no control over backgrounds, no real way to fix mistakes. MaorVisual is a video pipeline designed to learn a specific look — characters, world, style — and deliver it episode after episode, audience after audience.',
       problems: [
-        { icon: '🎬', title: 'Generic Models Break Character', cause: 'No Memory Across Scenes', body: 'Runway, Pika, and Sora produce impressive but inconsistent characters. The same Yanky looks different in two consecutive scenes.' },
-        { icon: '🎨', title: 'No Director-Level Control', cause: 'Surface-Only Prompting', body: 'Off-the-shelf tools take a prompt and render. They don\'t understand pacing, beat sheets, or emotional arc.' },
-        { icon: '📚', title: 'Cannot Use Existing IP', cause: 'No Custom Training', body: 'Cannot integrate ten years of Maor character libraries — every scene starts from zero.' }
+        { icon: '🎨', title: 'Backgrounds & Characters Drift', cause: 'Diffusion ≠ Pixel Control', body: 'Generic models can\'t enforce exact colors, sets, or character appearance. The same scene looks different every render. Our pipeline locks a full-scene keyframe before any animation begins.' },
+        { icon: '🎬', title: 'No Director-Level Control', cause: 'Prompt Drift & Token Loss', body: 'Long prompts get partly forgotten. Off-the-shelf tools "interpret" — swap words, ignore details, render their own version. We use scene decomposition + image-to-video so each shot starts from a locked frame.' },
+        { icon: '🔧', title: 'No Real Way to Fix a Shot', cause: 'Regeneration ≠ Editing', body: '"Fix this scene" usually means generating from new noise — different result every time. We use video inpainting and keyframe editing for true targeted corrections.' },
+        { icon: '⏱️', title: 'Manual Work Doesn\'t Scale', cause: 'No Open Pipeline', body: 'Generic tools cap at 10–30 seconds and require manual stitching. Our pipeline is automated end-to-end: script in, episode out, with API access to every model in the stack.' }
+      ],
+      audiences: [
+        { tag: 'Audience One', name: 'Frum Children', body: 'Visual language anchored in familiar Chassidic settings — 770, Beis Medrash, the Shabbos table — recognizable from the first frame.' },
+        { tag: 'Audience Two', name: 'Secular Jewish Children', body: 'Modern animation that competes with what they\'re already watching on YouTube and TikTok — while staying unmistakably Jewish.' },
+        { tag: 'Audience Three', name: 'Children of the World', body: 'Universal visual storytelling — diverse settings and characters that feel familiar to children everywhere.' }
+      ],
+      pipeline: [
+        { num: '01', name: 'Plan', tech: 'Scene decomposition', body: 'Break the script into shot-by-shot beats. Each shot gets its own brief — what we see, who is in it, what camera does.' },
+        { num: '02', name: 'Lock', tech: 'Keyframe generation', body: 'Generate the exact opening frame for each shot — character, background, lighting, composition. Iterate until the look is right before any motion.' },
+        { num: '03', name: 'Animate', tech: 'Image-to-video', body: 'Animate each locked keyframe with controlled camera motion. Per-scene, not whole-episode — keeps consistency tight.' },
+        { num: '04', name: 'Assemble', tech: 'Stitch + QC', body: 'Combine shots, run frame-by-frame consistency checks, and render the final episode. Targeted re-renders for any shot that needs a fix.' }
+      ],
+      knowledgeDocs: [
+        { title: 'Character Library', body: '40+ proprietary character rigs from 10 years of production — Yanky, Mendy, the Maor family — locked and reusable.' },
+        { title: 'Scene Bible', body: 'Reusable backgrounds and environments — the same world from one episode to the next, swappable per audience.' },
+        { title: 'Style Guide', body: 'Color palettes, camera language, animation principles — tuned per audience without rebuilding the engine.' }
       ],
       capabilities: [
         'Animate full episodes from script to final render',
         'Maintain character consistency across scenes, episodes, and seasons',
-        'Generate B-roll and establishing shots from text descriptions',
         'Adapt existing Maor characters to new scenarios while preserving recognizability',
         'Produce both 2D-style and pseudo-3D animation depending on content needs'
       ],
       difference: {
         commercial: 'Inconsistent characters across scenes. No control over emotion or pacing. Cannot integrate existing IP libraries.',
-        maor: 'Built on 10 years of character libraries — Yanky, Mendy, the Maor family. Character consistency across 20+ scenes. Episode that costs $80K traditional now costs $3K–$8K.'
+        maor: 'Built on 10 years of character libraries. Character consistency across 20+ scenes. An episode that costs $80K traditional now costs $3K–$8K.'
       },
       stack: [
-        { layer: 'Base models', value: 'Runway Gen-3, Pika 1.5, custom diffusion' },
-        { layer: 'Character library', value: '40+ proprietary character rigs from 10 years of production' },
-        { layer: 'Consistency layer', value: 'Custom character embedding system' },
-        { layer: 'Quality control', value: 'Frame-by-frame review pipeline + auto-correction' }
+        { layer: 'Base models', value: 'Multi-model — Runway, Kling, Wan, custom diffusion' },
+        { layer: 'Character library', value: '40+ proprietary character rigs' },
+        { layer: 'Consistency layer', value: 'Custom character embedding + scene-bible system' },
+        { layer: 'Pipeline', value: 'Automated script → keyframes → animation → assembly' }
       ],
       roadmap: [
         { phase: 'Q4 2025', status: 'done', label: 'Prototype · single-character scenes, 30 seconds' },
