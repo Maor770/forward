@@ -47,7 +47,7 @@
 }
 
 .hero-v2-text {
-  max-width: 1080px;
+  max-width: 760px;
   text-align: left;
   margin: 0 auto;
   flex: 0 0 auto;
@@ -55,34 +55,46 @@
 
 .hero-v2-headline {
   font-family: 'Vidaloka', var(--serif);
-  font-size: clamp(2.6rem, 6.8vw, 5.6rem);
+  font-size: clamp(2.6rem, 7.2vw, 6rem);
   line-height: 1.04;
-  background: linear-gradient(180deg, var(--gold-pale) 0%, var(--gold-bright) 35%, var(--gold) 70%, var(--gold-deep) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
   letter-spacing: -0.015em;
   margin-bottom: 1.6rem;
-  text-shadow: 0 0 40px rgba(201, 169, 97, 0.18);
   font-weight: 400;
   text-align: left;
+  /* No global gradient: each line gets its own treatment */
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: initial;
+  text-shadow: none;
 }
+/* "Maor." — bigger, softer/dimmer gold */
 .hero-v2-headline .hl-maor {
   display: block;
   font-family: 'Vidaloka', var(--serif);
-  font-size: 1.05em;
-  letter-spacing: -0.025em;
-  margin-bottom: 0.15em;
+  font-size: 1.55em;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.05em;
   font-weight: 400;
+  background: linear-gradient(180deg, rgba(201, 169, 97, 0.62) 0%, rgba(155, 124, 60, 0.55) 75%, rgba(110, 88, 42, 0.50) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+/* "Because this generation..." — smaller, lighter weight, stronger gold */
 .hero-v2-headline .hl-rest {
   display: block;
   font-family: 'Vidaloka', var(--serif);
-  font-size: 0.78em;
+  font-size: 0.55em;
   font-weight: 400;
   font-style: normal;
   letter-spacing: -0.005em;
-  line-height: 1.12;
+  line-height: 1.2;
+  background: linear-gradient(180deg, var(--gold-pale) 0%, var(--gold-bright) 45%, var(--gold) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(232, 201, 125, 0.30);
 }
 
 .hero-v2-subtitle {
