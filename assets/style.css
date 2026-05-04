@@ -7358,4 +7358,263 @@ a.prop-card-link *::after {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(201, 169, 97, 0.20);
 }
-.detail-re
+.detail-research-block {
+  margin: 4rem auto 0;
+  max-width: 1080px;
+}
+.detail-research-title {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--gold-bright);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.detail-research-lead {
+  text-align: center;
+  font-family: var(--serif-elegant);
+  font-style: italic;
+  color: var(--text-warm);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Problems grid */
+.detail-problems-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+  margin-top: 2rem;
+}
+@media (min-width: 720px) {
+  .detail-problems-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1100px) {
+  .detail-problems-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.detail-problem-card {
+  background: rgba(11, 30, 63, 0.55);
+  border: 1px solid var(--gold-line);
+  border-left: 3px solid rgba(216, 142, 58, 0.7);
+  border-radius: 4px;
+  padding: 1.6rem 1.4rem;
+  position: relative;
+}
+.dpc-icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 0.6rem;
+  filter: drop-shadow(0 0 8px rgba(216, 142, 58, 0.4));
+}
+.detail-problem-card h4 {
+  font-family: var(--serif);
+  font-size: 1.18rem;
+  color: var(--gold-bright);
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+}
+.dpc-cause {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #E8B27D;
+  margin-bottom: 0.7rem;
+  padding: 0.18rem 0.55rem;
+  border: 1px solid rgba(216, 142, 58, 0.4);
+  border-radius: 3px;
+  background: rgba(216, 142, 58, 0.08);
+}
+.detail-problem-card p {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Pipeline list */
+.detail-pipeline-list {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+.detail-pipeline-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1.2rem;
+  align-items: start;
+  padding: 1.5rem 1.4rem;
+  background: rgba(11, 30, 63, 0.45);
+  border: 1px solid var(--gold-line);
+  border-radius: 4px;
+  position: relative;
+}
+.dpl-num {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.dpl-body h4 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--gold-bright);
+  margin: 0 0 0.3rem;
+  font-weight: 700;
+}
+.dpl-tech {
+  display: inline-block;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.04em;
+}
+.dpl-body p {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Knowledge docs grid */
+.detail-knowledge-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+@media (min-width: 800px) {
+  .detail-knowledge-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.detail-knowledge-card {
+  background: linear-gradient(165deg, rgba(155, 27, 46, 0.10) 0%, rgba(11, 30, 63, 0.55) 70%);
+  border: 1px solid var(--gold-line);
+  border-radius: 4px;
+  padding: 1.5rem 1.3rem;
+}
+.detail-knowledge-card h4 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--gold-bright);
+  margin: 0 0 0.6rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--gold-line);
+  padding-bottom: 0.6rem;
+}
+.detail-knowledge-card p {
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Research link CTA */
+.detail-research-link {
+  text-align: center;
+  margin: 3rem auto 4rem;
+}
+.detail-research-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 2rem;
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  color: var(--gold-bright);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: rgba(11, 30, 63, 0.4);
+  transition: all 0.2s ease;
+}
+.detail-research-link a:hover {
+  background: rgba(201, 169, 97, 0.15);
+  border-color: var(--gold-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(201, 169, 97, 0.20);
+}
+.detail-research-link .drl-arrow {
+  font-size: 1.3rem;
+  transition: transform 0.2s ease;
+}
+.detail-research-link a:hover .drl-arrow {
+  transform: translateX(4px);
+}
+
+.detail-research-note {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 1.2rem 1.5rem;
+  border: 1px dashed var(--gold-line);
+  border-radius: 4px;
+  text-align: center;
+}
+.detail-research-note p {
+  color: var(--text-warm);
+  font-style: italic;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Audiences block — "Built to Adapt" section */
+.detail-audiences-block {
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(216, 142, 58, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 100% 100%, rgba(75, 155, 179, 0.06) 0%, transparent 60%);
+  border: 1px solid var(--gold-line);
+  border-radius: 6px;
+  padding: 2.5rem 1.8rem;
+}
+.detail-audiences-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  margin-top: 1.4rem;
+}
+@media (min-width: 800px) {
+  .detail-audiences-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.detail-audience-card {
+  background: rgba(11, 30, 63, 0.55);
+  border: 1px solid var(--gold-line);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  padding: 1.2rem 1.1rem;
+}
+.dac-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.detail-audience-card h4 {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--gold-bright);
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+.detail-audience-card p {
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0;
+}
