@@ -6757,13 +6757,19 @@ button.opt-value.opt-toggle:focus-visible {
   position: relative;
 }
 
-/* World image — slight saturation/contrast lift so it doesn't look dead */
+/* World image — starts dim, brightens as the building lights it up */
 .mh-hero-image {
-  filter: saturate(1.18) contrast(1.06) brightness(1.02);
+  filter: brightness(0.45) saturate(0.6) contrast(1.06);
   display: block;
+  animation: mhWorldIlluminate 1.2s ease-in 1.3s forwards;
 }
 
-/* Building layer */
+@keyframes mhWorldIlluminate {
+  0%   { filter: brightness(0.45) saturate(0.6) contrast(1.06); }
+  100% { filter: brightness(1.02) saturate(1.18) contrast(1.06); }
+}
+
+/* Building layer — rises from the ground, then floats */
 .mh-hero-building {
   position: absolute;
   bottom: -2px;
@@ -6776,13 +6782,48 @@ button.opt-value.opt-toggle:focus-visible {
     drop-shadow(0 0 28px rgba(201, 169, 97, 0.45))
     drop-shadow(0 0 8px rgba(232, 201, 125, 0.40))
     drop-shadow(0 4px 14px rgba(0, 0, 0, 0.55));
-  animation: mhBuildingFloat 6s ease-in-out infinite;
-  will-change: transform;
+  clip-path: inset(100% 0 0 0);
+  opacity: 0;
+  animation:
+    mhBuildingRise 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards,
+    mhBuildingFloat 6s ease-in-out 2.5s infinite;
+  will-change: transform, clip-path;
+}
+
+@keyframes mhBuildingRise {
+  0%   { clip-path: inset(100% 0 0 0); opacity: 0; }
+  8%   { opacity: 1; }
+  100% { clip-path: inset(0 0 0 0); opacity: 1; }
 }
 
 @keyframes mhBuildingFloat {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-6px); }
+}
+
+/* Glow burst — a one-time pulse of light that emanates from the building
+   when the build-up finishes, then dissipates across the world */
+.mh-hero-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 8%;
+  left: 14%;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 201, 125, 0.85) 0%, rgba(232, 201, 125, 0.40) 30%, transparent 65%);
+  transform: translate(-50%, 50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 11;
+  animation: mhGlowBurst 2s ease-out 1.7s forwards;
+}
+
+@keyframes mhGlowBurst {
+  0%   { transform: translate(-50%, 50%) scale(0); opacity: 0; }
+  30%  { opacity: 0.85; }
+  60%  { opacity: 0.45; }
+  100% { transform: translate(-50%, 50%) scale(3.5); opacity: 0; }
 }
 
 /* Tablet */
@@ -6813,6 +6854,10 @@ button.opt-value.opt-toggle:focus-visible {
   .mh-hero-building {
     display: none;
   }
+  /* No building means no glow burst on mobile */
+  .mh-hero-wrap::after {
+    display: none;
+  }
 }
 
 /* Very small phones */
@@ -6825,9 +6870,20 @@ button.opt-value.opt-toggle:focus-visible {
   }
 }
 
-/* Reduced motion: stop the float */
+/* Reduced motion: skip all hero animations, show end state */
 @media (prefers-reduced-motion: reduce) {
-  .mh-hero-building { animation: none; }
+  .mh-hero-building {
+    clip-path: none;
+    opacity: 1;
+    animation: none;
+  }
+  .mh-hero-image {
+    filter: saturate(1.18) contrast(1.06) brightness(1.02);
+    animation: none;
+  }
+  .mh-hero-wrap::after {
+    display: none;
+  }
 }
 
 /* Hide the duplicate HTML tagline — text already in world.jpg */
@@ -7302,73 +7358,4 @@ a.prop-card-link *::after {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(201, 169, 97, 0.20);
 }
-.detail-research-link .drl-arrow {
-  font-size: 1.3rem;
-  transition: transform 0.2s ease;
-}
-.detail-research-link a:hover .drl-arrow {
-  transform: translateX(4px);
-}
-
-.detail-research-note {
-  max-width: 720px;
-  margin: 2rem auto;
-  padding: 1.2rem 1.5rem;
-  border: 1px dashed var(--gold-line);
-  border-radius: 4px;
-  text-align: center;
-}
-.detail-research-note p {
-  color: var(--text-warm);
-  font-style: italic;
-  font-size: 0.95rem;
-  margin: 0;
-}
-
-/* Audiences block — "Built to Adapt" section */
-.detail-audiences-block {
-  background:
-    radial-gradient(ellipse at 0% 0%, rgba(216, 142, 58, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 100% 100%, rgba(75, 155, 179, 0.06) 0%, transparent 60%);
-  border: 1px solid var(--gold-line);
-  border-radius: 6px;
-  padding: 2.5rem 1.8rem;
-}
-.detail-audiences-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.1rem;
-  margin-top: 1.4rem;
-}
-@media (min-width: 800px) {
-  .detail-audiences-grid { grid-template-columns: repeat(3, 1fr); }
-}
-.detail-audience-card {
-  background: rgba(11, 30, 63, 0.55);
-  border: 1px solid var(--gold-line);
-  border-left: 3px solid var(--gold);
-  border-radius: 4px;
-  padding: 1.2rem 1.1rem;
-}
-.dac-tag {
-  display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-}
-.detail-audience-card h4 {
-  font-family: var(--serif);
-  font-size: 1.1rem;
-  color: var(--gold-bright);
-  margin: 0 0 0.5rem;
-  font-weight: 700;
-}
-.detail-audience-card p {
-  color: var(--text);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  margin: 0;
-}
+.detail-re
