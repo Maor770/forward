@@ -6757,7 +6757,20 @@ button.opt-value.opt-toggle:focus-visible {
   position: relative;
 }
 
-/* World image — starts dim, brightens as the building lights it up */
+/* ──────────────────────────────────────────────────────────────
+   HERO INTRO ANIMATION — clean rewrite
+   Sequence:
+     0.3s   Building begins to rise (clip-path), NO glow at all
+     1.3s   World begins to brighten (filter)
+     1.8s   Building has finished rising → glow fades in around it,
+            and a single ambient halo blooms from its base. Both stay.
+     2.8s   Building begins floating (existing float anim)
+   The single ambient halo is contained inside .mh-hero-wrap (inset:0)
+   with a radial gradient that fades fully to transparent before the
+   element's edges, so no rectangular cut shows. No blur is used.
+   ────────────────────────────────────────────────────────────── */
+
+/* World image — starts dim, brightens once and stays */
 .mh-hero-image {
   filter: brightness(0.45) saturate(0.6) contrast(1.06);
   display: block;
@@ -6769,7 +6782,7 @@ button.opt-value.opt-toggle:focus-visible {
   100% { filter: brightness(1.02) saturate(1.18) contrast(1.06); }
 }
 
-/* Building layer — rises from the ground, then floats */
+/* Building layer — rises CLEAN (no shadow), then shadow fades in, then floats */
 .mh-hero-building {
   position: absolute;
   bottom: -2px;
@@ -6778,16 +6791,14 @@ button.opt-value.opt-toggle:focus-visible {
   height: auto;
   z-index: 12;
   pointer-events: none;
-  filter:
-    drop-shadow(0 0 28px rgba(201, 169, 97, 0.45))
-    drop-shadow(0 0 8px rgba(232, 201, 125, 0.40))
-    drop-shadow(0 4px 14px rgba(0, 0, 0, 0.55));
+  filter: none;                       /* zero glow during the rise */
   clip-path: inset(100% 0 0 0);
   opacity: 0;
   animation:
-    mhBuildingRise 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards,
-    mhBuildingFloat 6s ease-in-out 2.5s infinite;
-  will-change: transform, clip-path;
+    mhBuildingRise  1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards,
+    mhBuildingGlow  1.0s ease-in 1.8s forwards,
+    mhBuildingFloat 6.0s ease-in-out 2.8s infinite;
+  will-change: transform, clip-path, filter;
 }
 
 @keyframes mhBuildingRise {
@@ -6796,34 +6807,39 @@ button.opt-value.opt-toggle:focus-visible {
   100% { clip-path: inset(0 0 0 0); opacity: 1; }
 }
 
+@keyframes mhBuildingGlow {
+  0% {
+    filter: none;
+  }
+  100% {
+    filter:
+      drop-shadow(0 0 22px rgba(201, 169, 97, 0.50))
+      drop-shadow(0 0 6px rgba(232, 201, 125, 0.40))
+      drop-shadow(0 4px 12px rgba(0, 0, 0, 0.55));
+  }
+}
+
 @keyframes mhBuildingFloat {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-6px); }
 }
 
-/* Lasting ambient glow — a large soft circular halo emanating from the
-   building's base, with burgundy depth. Heavy blur + radial fade ensure
-   the edges never form a hard square against the hero clip-rect. */
+/* Single ambient halo — fills the hero, fades to fully transparent before
+   the element's rectangular edges, so the rectangle is never visible. */
 .mh-hero-wrap::before {
   content: '';
   position: absolute;
-  bottom: -200px;
-  left: 14%;
-  width: 900px;
-  height: 900px;
-  border-radius: 50%;
-  background: radial-gradient(circle,
-    rgba(232, 201, 125, 0.45) 0%,
-    rgba(201, 169, 97, 0.28) 14%,
-    rgba(155, 27, 46, 0.18) 32%,
-    rgba(155, 27, 46, 0.06) 55%,
-    transparent 75%);
-  filter: blur(45px);
-  transform: translate(-50%, 0);
+  inset: 0;
+  background: radial-gradient(circle 700px at 14% 100%,
+    rgba(232, 201, 125, 0.50) 0%,
+    rgba(201, 169, 97, 0.32) 10%,
+    rgba(155, 27, 46, 0.22) 24%,
+    rgba(155, 27, 46, 0.07) 42%,
+    transparent 62%);
   opacity: 0;
   pointer-events: none;
   z-index: 10;
-  animation: mhAmbientGlowIn 1.8s ease-in 2.7s forwards;
+  animation: mhAmbientGlowIn 1.4s ease-in 1.8s forwards;
 }
 
 @keyframes mhAmbientGlowIn {
@@ -6831,35 +6847,8 @@ button.opt-value.opt-toggle:focus-visible {
   100% { opacity: 1; }
 }
 
-/* Glow burst — a one-time pulse that radiates outward from the building. */
-.mh-hero-wrap::after {
-  content: '';
-  position: absolute;
-  bottom: 4%;
-  left: 14%;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  background: radial-gradient(circle,
-    rgba(232, 201, 125, 0.85) 0%,
-    rgba(232, 201, 125, 0.42) 20%,
-    rgba(155, 27, 46, 0.25) 42%,
-    rgba(155, 27, 46, 0.08) 60%,
-    transparent 75%);
-  filter: blur(20px);
-  transform: translate(-50%, 50%) scale(0);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 11;
-  animation: mhGlowBurst 2.2s ease-out 1.7s forwards;
-}
-
-@keyframes mhGlowBurst {
-  0%   { transform: translate(-50%, 50%) scale(0); opacity: 0; }
-  25%  { opacity: 0.9; }
-  60%  { opacity: 0.55; }
-  100% { transform: translate(-50%, 50%) scale(3.2); opacity: 0; }
-}
+/* No second pulse / burst — keeping it to a single steady glow */
+.mh-hero-wrap::after { display: none; }
 
 /* Tablet */
 @media (max-width: 900px) {
