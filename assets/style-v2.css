@@ -373,19 +373,20 @@
 .is-v2 .pillar-image {
   aspect-ratio: 16 / 9;
   background-color: var(--bg-navy-deep);
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
   position: relative;
   border-bottom: 1px solid var(--gold-line);
   margin: 0;
   width: 100%;
   overflow: hidden;
-  box-shadow: inset 0 -1px 0 rgba(232, 201, 125, 0.10);
 }
-/* The HTML <img> is no longer needed — base64 in style.css handles display */
 .is-v2 .pillar-image img {
-  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 /* Pillar body padding + readable colors */
