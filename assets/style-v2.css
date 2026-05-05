@@ -337,6 +337,45 @@
    ════════════════════════════════════════════════════════════════ */
 .is-v2 .mh-pillars-section { padding-top: 2rem; }
 
+/* ── Override "FIX 5" cream rules from style.css (those use !important
+   globally; we need !important here too to win on the v2 page) ── */
+.is-v2 .pillar-card {
+  background: linear-gradient(160deg, var(--bg-navy-elevated) 0%, var(--bg-navy-deep) 100%) !important;
+  border-color: var(--gold-line) !important;
+  color: var(--text) !important;
+}
+.is-v2 .pillar-card:hover {
+  border-color: var(--gold-bright) !important;
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(201, 169, 97, 0.18) !important;
+}
+.is-v2 .pillar-image {
+  background: var(--bg-navy-deep) !important;
+  border-bottom-color: var(--gold-line) !important;
+}
+.is-v2 .pillar-card h3 {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold)) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+.is-v2 .pillar-body .pillar-subtitle {
+  color: var(--gold-deep) !important;
+  font-weight: 500 !important;
+  font-size: 0.92rem !important;
+  letter-spacing: normal !important;
+}
+.is-v2 .pillar-summary {
+  color: var(--text) !important;
+  font-weight: 400 !important;
+}
+.is-v2 .pillar-cta {
+  border-top-color: var(--border-soft) !important;
+  color: var(--gold-bright) !important;
+}
+.is-v2 .pillar-cta-arrow { color: var(--gold-bright) !important; }
+.is-v2 .pillar-card:hover .pillar-cta-arrow { color: var(--gold-bright) !important; }
+
 /* ════════════════════════════════════════════════════════════════
    PILLAR CARDS — V2 (rewritten)
    The optional <img> inside .pillar-image is hidden until the actual
@@ -371,20 +410,21 @@
    alongside the matching audience-card rule, so the image is shared and
    committed inline (no external file needed). Here we set the framing. */
 .is-v2 .pillar-image {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   background-color: var(--bg-navy-deep);
   position: relative;
   border-bottom: 1px solid var(--gold-line);
   margin: 0;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .is-v2 .pillar-image img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
   object-position: center;
   display: block;
 }
