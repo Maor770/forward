@@ -177,8 +177,6 @@ body.is-v3 .bh-mark {
   max-width: 460px;
   height: auto;
   object-fit: contain;
-  mix-blend-mode: multiply;
-  filter: sepia(1) saturate(2.2) hue-rotate(-18deg) brightness(0.85) contrast(1.1);
 }
 
 /* ───────────────────────────────────────────────
