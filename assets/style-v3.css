@@ -66,13 +66,13 @@ body.is-v3 {
   pointer-events: none;
 }
 
-/* On V3 the header should sit on cream — override the dark bg */
+/* On V3 the wordmark sits directly on the hero — no background plate */
 body.is-v3 .campaign-wordmark {
-  background: rgba(244, 236, 216, 0.85);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   color: var(--v3-gold-warm);
-  border-bottom-color: rgba(158, 110, 54, 0.18);
+  border-bottom: none;
 }
 body.is-v3 .campaign-wordmark .cwm-text {
   color: var(--v3-gold-warm);
@@ -99,8 +99,7 @@ body.is-v3 .bh-mark {
   min-height: 88vh;
   padding: 9rem 6vw 6rem;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, var(--v3-cream-soft) 0%, var(--v3-cream) 60%, var(--v3-cream-deep) 100%);
+  background: var(--v3-cream);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,7 +112,7 @@ body.is-v3 .bh-mark {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.18;
+  opacity: 1;
   pointer-events: none;
 }
 .v3-hero-inner {
@@ -129,32 +128,20 @@ body.is-v3 .bh-mark {
 .v3-hero-text {
   max-width: 620px;
 }
-.v3-hero-kicker {
-  display: inline-block;
-  font-family: var(--v3-heading);
-  font-weight: 500;
-  font-stretch: 75%;
-  font-variation-settings: "wdth" 75;
-  font-size: 0.78rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--v3-gold-warm);
-  margin-bottom: 1.6rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid rgba(158, 110, 54, 0.3);
-}
 .v3-hero-h1 {
   font-size: clamp(2.6rem, 5.6vw, 4.6rem);
   line-height: 1.05;
-  margin-bottom: 1.8rem;
+  margin-bottom: 2.8rem;
 }
 .v3-hero-h1 .hl-maor {
-  display: inline;
+  display: block;
   color: var(--v3-gold-warm);
 }
 .v3-hero-h1 .hl-rest {
-  display: inline;
+  display: block;
   color: var(--v3-brown-soft);
+  font-size: 0.85em;
+  margin-top: 0.15em;
 }
 .v3-hero-sub {
   font-family: 'Noto Sans', var(--sans);
@@ -186,7 +173,11 @@ body.is-v3 .bh-mark {
   max-width: 620px;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 18px 40px rgba(101, 85, 60, 0.25));
+  /* Source PNG is on a black background. Invert flips the light pencil
+     strokes to dark and the black canvas to white; multiply then drops
+     the white into the cream page so only the sketch remains. */
+  filter: invert(1);
+  mix-blend-mode: multiply;
 }
 
 /* ───────────────────────────────────────────────
