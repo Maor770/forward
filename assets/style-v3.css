@@ -746,7 +746,7 @@ body.is-v3 .bh-mark {
   background: var(--v3-blue-deeper);
   padding: 5rem 6vw 6rem;
 }
-.v3-explore-h {
+.is-v3 .v3-explore-h {
   text-align: center;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   color: var(--gold-bright);
