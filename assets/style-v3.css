@@ -250,8 +250,49 @@ body.is-v3 .bh-mark {
   color: var(--text-warm);
   overflow: hidden;
 }
-.v3-section + .v3-section {
-  border-top: 1px solid rgba(232, 201, 125, 0.06);
+/* ─── Section dividers — subtle gold rule with a tiny center mark ─── */
+.v3-section,
+.v3-bridge,
+.v3-pillars,
+.v3-explore {
+  position: relative;
+}
+.v3-stats + .v3-section::before,
+.v3-section + .v3-section::before,
+.v3-section + .v3-bridge::before,
+.v3-bridge + .v3-pillars::before,
+.v3-pillars + .v3-section::before,
+.v3-section + .v3-explore::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(420px, 65%);
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(232, 201, 125, 0.40) 50%,
+    transparent 100%);
+  z-index: 3;
+}
+.v3-stats + .v3-section::after,
+.v3-section + .v3-section::after,
+.v3-section + .v3-bridge::after,
+.v3-bridge + .v3-pillars::after,
+.v3-pillars + .v3-section::after,
+.v3-section + .v3-explore::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--gold-bright);
+  opacity: 0.7;
+  transform: translateX(-50%) rotate(45deg);
+  pointer-events: none;
+  z-index: 4;
 }
 .v3-section-inner {
   max-width: 920px;
@@ -709,7 +750,7 @@ body.is-v3 .bh-mark {
   text-align: center;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   color: var(--gold-bright);
-  margin-bottom: 2.5rem;
+  margin-bottom: 4rem;
 }
 .v3-explore-ctas {
   max-width: 920px;
@@ -722,8 +763,8 @@ body.is-v3 .bh-mark {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1.4rem 1.6rem;
+  gap: 0.85rem;
+  padding: 1.19rem 1.36rem;
   background: var(--v3-blue-elevated);
   border: 1px solid rgba(232, 201, 125, 0.22);
   border-radius: 10px;
@@ -745,7 +786,7 @@ body.is-v3 .bh-mark {
 }
 .v3-explore-cta-label {
   font-family: 'Noto Sans', var(--sans);
-  font-size: 0.74rem;
+  font-size: 0.63rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--v3-gold-glow);
@@ -755,11 +796,11 @@ body.is-v3 .bh-mark {
   font-weight: 500;
   font-stretch: 75%;
   font-variation-settings: "wdth" 75;
-  font-size: 1.15rem;
+  font-size: 0.98rem;
   color: var(--gold-bright);
 }
 .v3-explore-cta-arrow {
-  font-size: 1.4rem;
+  font-size: 1.19rem;
   color: var(--gold-bright);
   transition: transform 0.25s ease;
 }
