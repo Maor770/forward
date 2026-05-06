@@ -303,7 +303,7 @@ body.is-v3 .bh-mark {
 .v3-problem-rows {
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 1.2rem;
   margin-top: 3.5rem;
 }
 .v3-problem-row {
@@ -345,7 +345,7 @@ body.is-v3 .bh-mark {
   background-repeat: no-repeat;
   position: relative;
   isolation: isolate;
-  opacity: 0.32;
+  opacity: 0.18;
   filter: none;
 }
 .v3-problem-img::before {
