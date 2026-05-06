@@ -185,14 +185,7 @@ body.is-v3 .bh-mark {
 .v3-stats {
   position: relative;
   padding: 5rem 4vw 6rem;
-  /* Gold band: deep at edges, glow in the middle. Acts as the warm
-     visual punctuation between the cream hero and the navy below. */
-  background:
-    linear-gradient(180deg,
-      var(--v3-gold-warm) 0%,
-      var(--v3-gold-glow) 35%,
-      var(--v3-gold-glow) 65%,
-      var(--v3-gold-warm) 100%);
+  background: var(--v3-blue-deep);
 }
 .v3-stats-grid {
   position: relative;
@@ -214,7 +207,7 @@ body.is-v3 .bh-mark {
 .v3-stat-icon {
   width: 64px;
   height: 64px;
-  color: var(--v3-blue-deep);
+  color: var(--v3-gold-glow);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -227,8 +220,8 @@ body.is-v3 .bh-mark {
 }
 .v3-stat-num {
   font-size: clamp(2.2rem, 4.2vw, 3.2rem);
-  color: var(--v3-blue-deep);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: var(--gold-bright);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   line-height: 1;
 }
 .v3-stat-plus {
@@ -244,7 +237,7 @@ body.is-v3 .bh-mark {
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(10, 26, 56, 0.72);
+  color: rgba(245, 235, 211, 0.78);
 }
 
 /* ───────────────────────────────────────────────
