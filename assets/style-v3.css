@@ -48,11 +48,19 @@ body.is-v3 {
 
 /* ───────────────────────────────────────────────
    HEADER STRIP — thin gold gradient line under
-   the existing campaign-wordmark / header bar
+   the existing campaign-wordmark / header bar.
+   The whole top bar (wordmark + icons + BH + strip)
+   is pinned to the viewport top — overrides the
+   default `position: absolute` from style.css.
    ─────────────────────────────────────────────── */
+body.is-v3 .campaign-wordmark,
+body.is-v3 .header-actions,
+body.is-v3 .bh-mark {
+  position: fixed;
+}
 .v3-top-strip {
   position: fixed;
-  top: 56px;
+  top: var(--top-strip-height, 50px);
   left: 0;
   right: 0;
   height: 2px;
@@ -62,7 +70,7 @@ body.is-v3 {
     rgba(158, 110, 54, 0.65) 50%,
     rgba(158, 110, 54, 0.0) 92%,
     transparent 100%);
-  z-index: 9;
+  z-index: 99;
   pointer-events: none;
 }
 
@@ -96,12 +104,12 @@ body.is-v3 .bh-mark {
    ─────────────────────────────────────────────── */
 .v3-hero {
   position: relative;
-  min-height: 88vh;
-  padding: 9rem 6vw 6rem;
+  min-height: 0;
+  padding: calc(var(--top-strip-height, 50px) + 1.5rem) 6vw 3rem;
   overflow: hidden;
   background: var(--v3-cream);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 .v3-hero-bg {
@@ -110,7 +118,8 @@ body.is-v3 .bh-mark {
   z-index: 0;
   background-image: url("../images/hero-bg-wide.jpg");
   background-size: cover;
-  background-position: center;
+  /* anchor the texture to the top so any cropping happens at the bottom */
+  background-position: center top;
   background-repeat: no-repeat;
   opacity: 1;
   pointer-events: none;
@@ -129,9 +138,10 @@ body.is-v3 .bh-mark {
   max-width: 620px;
 }
 .v3-hero-h1 {
-  font-size: clamp(2.6rem, 5.6vw, 4.6rem);
+  /* H1 reduced ~10% from previous clamp(2.6rem, 5.6vw, 4.6rem) */
+  font-size: clamp(2.34rem, 5.04vw, 4.14rem);
   line-height: 1.05;
-  margin-bottom: 2.8rem;
+  margin-bottom: 4.2rem;
 }
 .v3-hero-h1 .hl-maor {
   display: block;
@@ -145,15 +155,16 @@ body.is-v3 .bh-mark {
 }
 .v3-hero-sub {
   font-family: 'Noto Sans', var(--sans);
-  font-size: clamp(1.05rem, 1.45vw, 1.2rem);
-  line-height: 1.65;
-  color: var(--v3-brown-soft);
-  margin-bottom: 1.1rem;
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.6;
+  color: #4a3c28;
+  margin-bottom: 1.2rem;
   max-width: 56ch;
 }
 .v3-hero-sub strong {
   color: var(--v3-gold-warm);
-  font-weight: 600;
+  font-weight: 700;
 }
 .v3-hero-sub:last-child {
   margin-bottom: 0;
@@ -173,11 +184,6 @@ body.is-v3 .bh-mark {
   max-width: 620px;
   height: auto;
   object-fit: contain;
-  /* Source PNG is on a black background. Invert flips the light pencil
-     strokes to dark and the black canvas to white; multiply then drops
-     the white into the cream page so only the sketch remains. */
-  filter: invert(1);
-  mix-blend-mode: multiply;
 }
 
 /* ───────────────────────────────────────────────
@@ -186,11 +192,15 @@ body.is-v3 .bh-mark {
 .v3-stats {
   position: relative;
   padding: 5rem 4vw 6rem;
+  /* Warm sunset-style transition cream → tan → brown → navy.
+     Avoids the muddy gray midpoint of a direct cream→navy interp. */
   background:
     linear-gradient(180deg,
       var(--v3-cream-deep) 0%,
-      var(--v3-cream-deep) 8%,
-      #524a4a 50%,
+      #d8b98a 14%,
+      #a87f51 30%,
+      #5e4e36 48%,
+      #2a3354 70%,
       var(--v3-blue-deep) 92%,
       var(--v3-blue-deep) 100%);
 }
@@ -717,7 +727,7 @@ body.is-v3 .bh-mark {
    ─────────────────────────────────────────────── */
 @media (max-width: 800px) {
   .v3-hero {
-    padding: 7rem 5vw 4rem;
+    padding: calc(var(--top-strip-height, 50px) + 1rem) 5vw 2.5rem;
     min-height: auto;
   }
   .v3-hero-inner {
