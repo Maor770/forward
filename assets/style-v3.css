@@ -268,7 +268,7 @@ body.is-v3 .bh-mark {
   border-top: 1px solid rgba(232, 201, 125, 0.06);
 }
 .v3-section-inner {
-  max-width: 1080px;
+  max-width: 920px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
@@ -676,7 +676,7 @@ body.is-v3 .bh-mark {
   margin-bottom: 2.5rem;
 }
 .v3-explore-ctas {
-  max-width: 1080px;
+  max-width: 920px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
