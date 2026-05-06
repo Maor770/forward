@@ -489,7 +489,7 @@ body.is-v3 .bh-mark {
   position: relative;
   background: var(--v3-cream);
   border: 1px solid rgba(101, 85, 60, 0.22);
-  border-radius: 14px;
+  border-radius: 6px;
   padding: 0.6rem 0.6rem 0;
   text-align: left;
   cursor: pointer;
@@ -509,10 +509,9 @@ body.is-v3 .bh-mark {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
-  opacity: 0.85;
-  z-index: 2;
+  height: 4px;
+  background: linear-gradient(to right, var(--gold-deep) 0%, var(--gold) 25%, var(--gold-bright) 50%, var(--gold) 75%, var(--gold-deep) 100%);
+  z-index: 3;
 }
 .v3-pillar-card::after {
   content: '';
