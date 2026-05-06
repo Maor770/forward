@@ -194,25 +194,6 @@ body.is-v3 .bh-mark {
       var(--v3-gold-glow) 65%,
       var(--v3-gold-warm) 100%);
 }
-/* Smooth color hand-offs at top and bottom edges of the gold band */
-.v3-stats::before,
-.v3-stats::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 24px;
-  z-index: 1;
-  pointer-events: none;
-}
-.v3-stats::before {
-  top: 0;
-  background: linear-gradient(180deg, #e7dfd5 0%, transparent 100%);
-}
-.v3-stats::after {
-  bottom: 0;
-  background: linear-gradient(180deg, transparent 0%, var(--v3-blue-deep) 100%);
-}
 .v3-stats-grid {
   position: relative;
   z-index: 2;
