@@ -185,18 +185,37 @@ body.is-v3 .bh-mark {
 .v3-stats {
   position: relative;
   padding: 5rem 4vw 6rem;
-  /* Cream (#e7dfd5 — matches the hero texture) eases through cool
-     gray-blue tones into the deep navy used by the rest of the site. */
+  /* Gold band: deep at edges, glow in the middle. Acts as the warm
+     visual punctuation between the cream hero and the navy below. */
   background:
     linear-gradient(180deg,
-      #e7dfd5 0%,
-      #c4c2c5 18%,
-      #8990a3 38%,
-      #4a5775 58%,
-      #1d2c4d 80%,
-      var(--v3-blue-deep) 100%);
+      var(--v3-gold-warm) 0%,
+      var(--v3-gold-glow) 35%,
+      var(--v3-gold-glow) 65%,
+      var(--v3-gold-warm) 100%);
+}
+/* Smooth color hand-offs at top and bottom edges of the gold band */
+.v3-stats::before,
+.v3-stats::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 24px;
+  z-index: 1;
+  pointer-events: none;
+}
+.v3-stats::before {
+  top: 0;
+  background: linear-gradient(180deg, #e7dfd5 0%, transparent 100%);
+}
+.v3-stats::after {
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, var(--v3-blue-deep) 100%);
 }
 .v3-stats-grid {
+  position: relative;
+  z-index: 2;
   max-width: 1180px;
   margin: 0 auto;
   display: grid;
@@ -214,7 +233,7 @@ body.is-v3 .bh-mark {
 .v3-stat-icon {
   width: 64px;
   height: 64px;
-  color: var(--v3-gold-glow);
+  color: var(--v3-blue-deep);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -227,8 +246,8 @@ body.is-v3 .bh-mark {
 }
 .v3-stat-num {
   font-size: clamp(2.2rem, 4.2vw, 3.2rem);
-  color: var(--gold-bright);
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  color: var(--v3-blue-deep);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.18);
   line-height: 1;
 }
 .v3-stat-plus {
@@ -244,7 +263,7 @@ body.is-v3 .bh-mark {
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(245, 235, 211, 0.78);
+  color: rgba(10, 26, 56, 0.72);
 }
 
 /* ───────────────────────────────────────────────
