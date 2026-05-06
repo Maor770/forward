@@ -185,16 +185,15 @@ body.is-v3 .bh-mark {
 .v3-stats {
   position: relative;
   padding: 5rem 4vw 6rem;
-  /* Warm sunset-style transition cream → tan → brown → navy.
-     Avoids the muddy gray midpoint of a direct cream→navy interp. */
+  /* Cream (#e7dfd5 — matches the hero texture) eases through cool
+     gray-blue tones into the deep navy used by the rest of the site. */
   background:
     linear-gradient(180deg,
-      var(--v3-cream-deep) 0%,
-      #d8b98a 14%,
-      #a87f51 30%,
-      #5e4e36 48%,
-      #2a3354 70%,
-      var(--v3-blue-deep) 92%,
+      #e7dfd5 0%,
+      #c4c2c5 18%,
+      #8990a3 38%,
+      #4a5775 58%,
+      #1d2c4d 80%,
       var(--v3-blue-deep) 100%);
 }
 .v3-stats-grid {
