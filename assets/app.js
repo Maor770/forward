@@ -1753,6 +1753,7 @@ function _pageSplit_layerForCurrentPage() {
   if (!file) file = 'index.html';
   const map = {
     'index.html': 'master',
+    'index-v1.html': 'master',
     'index-v2.html': 'master',
     'index-v3.html': 'master',
     'building.html': 'building',
@@ -2958,7 +2959,7 @@ if (document.readyState !== 'loading') {
   // master covers index.html and the v2 prototype index-v2.html)
   const SAME_LAYER_PAGES = {
     property: ['property.html', 'property-653.html'],
-    master:   ['index.html', 'index-v2.html', 'index-v3.html'],
+    master:   ['index.html', 'index-v1.html', 'index-v2.html', 'index-v3.html'],
   };
 
   // Wrap the (final) showLayer to redirect across pages when needed.
