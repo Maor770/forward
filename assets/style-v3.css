@@ -49,17 +49,11 @@ body.is-v3 {
 /* ───────────────────────────────────────────────
    HEADER STRIP — thin gold gradient line under
    the existing campaign-wordmark / header bar.
-   The whole top bar (wordmark + icons + BH + strip)
-   is pinned to the viewport top — overrides the
-   default `position: absolute` from style.css.
+   The top bar scrolls with the page (absolute
+   positioning inherited from style.css).
    ─────────────────────────────────────────────── */
-body.is-v3 .campaign-wordmark,
-body.is-v3 .header-actions,
-body.is-v3 .bh-mark {
-  position: fixed;
-}
 .v3-top-strip {
-  position: fixed;
+  position: absolute;
   top: var(--top-strip-height, 50px);
   left: 0;
   right: 0;
@@ -137,10 +131,10 @@ body.is-v3 .bh-mark {
 .v3-hero-text {
   max-width: 620px;
 }
-.v3-hero-h1 {
+.is-v3 .v3-hero-h1 {
   font-size: clamp(2.1rem, 4.4vw, 3.6rem);
   line-height: 1.05;
-  margin-bottom: 4rem;
+  margin-bottom: 1.2rem;
 }
 .v3-hero-h1 .hl-maor {
   display: block;
@@ -183,6 +177,8 @@ body.is-v3 .bh-mark {
   max-width: 460px;
   height: auto;
   object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: sepia(1) saturate(2.2) hue-rotate(-18deg) brightness(0.85) contrast(1.1);
 }
 
 /* ───────────────────────────────────────────────
