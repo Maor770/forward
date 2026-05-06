@@ -268,7 +268,7 @@ body.is-v3 .bh-mark {
 }
 .v3-section-heading {
   font-size: clamp(2rem, 4vw, 3rem);
-  color: var(--v3-gold-warm);
+  color: var(--gold-bright);
   text-align: center;
   line-height: 1.15;
   margin-bottom: 1.4rem;
@@ -411,7 +411,7 @@ body.is-v3 .bh-mark {
 .v3-solution-h .ln1 {
   display: block;
   font-size: clamp(2rem, 4vw, 3rem);
-  color: var(--v3-gold-warm);
+  color: var(--gold-bright);
   line-height: 1.1;
 }
 .v3-solution-h .ln2 {
@@ -467,7 +467,7 @@ body.is-v3 .bh-mark {
   font-stretch: 75%;
   font-variation-settings: "wdth" 75;
   font-size: clamp(1.5rem, 2.6vw, 2rem);
-  color: var(--v3-gold-warm);
+  color: var(--gold-bright);
   letter-spacing: -0.005em;
 }
 
@@ -716,7 +716,7 @@ body.is-v3 .bh-mark {
 .v3-explore-h {
   text-align: center;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
-  color: var(--v3-gold-warm);
+  color: var(--gold-bright);
   margin-bottom: 2.5rem;
 }
 .v3-explore-ctas {
