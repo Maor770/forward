@@ -738,6 +738,7 @@ body.is-v3 .bh-mark {
   gap: 2rem;
 }
 .v3-point-card {
+  position: relative;
   background: var(--v3-blue-elevated);
   border: 1px solid rgba(232, 201, 125, 0.18);
   border-radius: 12px;
@@ -745,9 +746,32 @@ body.is-v3 .bh-mark {
 }
 .is-v3 .v3-point-card h3 {
   font-size: 1.7rem;
-  color: #9e6e36;
+  color: var(--gold-bright);
   margin-bottom: 1.1rem;
   line-height: 1.2;
+}
+/* Floating gold "badge" icon: half-in / half-above, top-right */
+.v3-point-icon {
+  position: absolute;
+  top: -22px;
+  right: 22px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #f0d18a 0%, #c9a961 50%, #9b7f3f 100%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--v3-blue-deep);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(232, 201, 125, 0.55);
+  z-index: 2;
+}
+.v3-point-icon svg {
+  width: 28px;
+  height: 28px;
 }
 .v3-point-card p {
   font-family: 'Noto Sans', var(--sans);
