@@ -260,7 +260,6 @@ body.is-v3 .bh-mark {
 .v3-stats + .v3-section::before,
 .v3-section + .v3-section::before,
 .v3-section + .v3-bridge::before,
-.v3-bridge + .v3-pillars::before,
 .v3-pillars + .v3-section::before,
 .v3-section + .v3-explore::before {
   content: '';
@@ -279,7 +278,6 @@ body.is-v3 .bh-mark {
 .v3-stats + .v3-section::after,
 .v3-section + .v3-section::after,
 .v3-section + .v3-bridge::after,
-.v3-bridge + .v3-pillars::after,
 .v3-pillars + .v3-section::after,
 .v3-section + .v3-explore::after {
   content: '';
@@ -508,7 +506,7 @@ body.is-v3 .bh-mark {
   font-family: 'Noto Sans', var(--sans);
 }
 .v3-bridge .l1 {
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
   color: var(--text-warm);
   margin-bottom: 0.6rem;
 }
