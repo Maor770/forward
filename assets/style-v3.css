@@ -460,6 +460,24 @@ body.is-v3 .bh-mark {
 .v3-solution-section {
   background: #e7dfd5;
   color: #0a1a38;
+  position: relative;
+  overflow: hidden;
+}
+/* Faint looping background video — adds motion without competing with copy */
+.v3-solution-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.v3-solution-section .v3-section-inner {
+  position: relative;
+  z-index: 1;
 }
 .is-v3 .v3-solution-h {
   text-align: center;
