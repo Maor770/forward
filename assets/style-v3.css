@@ -156,25 +156,21 @@
   display: none !important;
 }
 
-/* The Reach section → solid cream */
+/* The Reach section → solid cream BG, extending down to the footer */
 .layer-pillar-ai .ai-section-reach {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding: 4rem 1.4rem 5rem;
   background: #e7dfd5;
+  position: relative;
 }
-.layer-pillar-ai .ai-section-reach .kicker,
-.layer-pillar-ai .ai-section-reach h2 {
-  color: #9e6e36;
-  background: none;
-  -webkit-text-fill-color: initial;
-  -webkit-background-clip: initial;
-  background-clip: initial;
-}
-.layer-pillar-ai .ai-section-reach .section-lead,
-.layer-pillar-ai .ai-section-reach p {
-  color: #4a3c28;
+.layer-pillar-ai .ai-section-reach::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: -9999px;
+  right: -9999px;
+  height: 9999px;
+  background: #e7dfd5;
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Suppress the duplicate B"H pseudo-element on pillar pages —
