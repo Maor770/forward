@@ -54,6 +54,12 @@
   margin: 0.6rem 0 0.9rem;
 }
 .layer-pillar-building .pillar-hub-header .ph-tagline {
+  /* Match the Hero sub-paragraph style on the home page */
+  font-family: 'Noto Sans', var(--sans);
+  font-style: normal;
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.6;
   color: #4a3c28;
 }
 .layer-pillar-building .pillar-hub-header .ph-allocation {
@@ -174,17 +180,79 @@
   color: #c69556;
 }
 
-/* Candidate Properties section → cream block */
+/* Candidate Properties section → solid cream block (no paper texture) */
 .layer-pillar-building .property-selector-section {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   padding: 4rem 1.4rem 5rem;
-  background:
-    url("../images/hero-bg-wide.jpg") center / cover no-repeat,
-    #e7dfd5;
+  background: #e7dfd5;
   position: relative;
 }
+/* Gold divider line + diamond ornament on top of cream section,
+   matching the home-page section dividers */
+.layer-pillar-building .property-selector-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(420px, 65%);
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(232, 201, 125, 0.40) 50%,
+    transparent 100%);
+  z-index: 3;
+}
+.layer-pillar-building .property-selector-section::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--gold-bright);
+  opacity: 0.7;
+  transform: translateX(-50%) rotate(45deg);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Section dividers on AI pillar (between hero / Engine / Reach) */
+.layer-pillar-ai .ai-section {
+  position: relative;
+}
+.layer-pillar-ai .ai-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(420px, 65%);
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(232, 201, 125, 0.40) 50%,
+    transparent 100%);
+  z-index: 3;
+}
+.layer-pillar-ai .ai-section::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--gold-bright);
+  opacity: 0.7;
+  transform: translateX(-50%) rotate(45deg);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Section divider on building between blocks and Candidate Properties
+   already handled above on .property-selector-section::before/::after */
 .layer-pillar-building .property-selector-section .ps-header h2,
 .layer-pillar-building .property-selector-section .ps-header .kicker {
   color: #9e6e36;
@@ -220,24 +288,51 @@ body.is-v3 {
   color: var(--v3-brown-soft);
 }
 
-/* Hide page scrollbar entirely (Firefox / IE / Webkit) and force the
-   body to exactly fit the viewport so no html-bg strip leaks on the side */
-html, body.is-v3 {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+/* Hide page scrollbar entirely — aggressive approach for Android Chrome
+   which sometimes ignores scrollbar-width:none on the html element */
+:root {
+  color-scheme: light only;
+}
+html, body, body.is-v3 {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  background: var(--v3-cream, #F4ECD8);
+}
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 html::-webkit-scrollbar,
 body::-webkit-scrollbar,
-body.is-v3::-webkit-scrollbar {
+body.is-v3::-webkit-scrollbar,
+*::-webkit-scrollbar {
   display: none !important;
   width: 0 !important;
   height: 0 !important;
   background: transparent !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
 }
-html { background: var(--v3-cream, #F4ECD8); }
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+  background: transparent !important;
+  display: none !important;
+}
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+  background: transparent !important;
+  display: none !important;
+}
+html::-webkit-scrollbar-corner,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  display: none !important;
+}
 
 /* The master container holds the whole homepage */
 .layer.is-v3 {
