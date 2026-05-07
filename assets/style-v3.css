@@ -158,25 +158,21 @@
   display: none !important;
 }
 
-/* The Reach section → solid cream, full viewport width, extending to footer */
+/* The Reach section → cream that visually extends to viewport edges
+   AND down to the footer, WITHOUT changing the section's own width
+   or its inner column layout */
 .layer-pillar-ai .ai-section-reach {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding: 4rem 1.4rem 5rem;
   background: #e7dfd5;
   position: relative;
-}
-.layer-pillar-ai .ai-section-reach::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  height: 9999px;
-  background: #e7dfd5;
-  z-index: -1;
-  pointer-events: none;
+  /* Extend cream sideways via a giant box-shadow, clipped so it only
+     leaks horizontally and downward (not above the section) */
+  box-shadow:
+    100vmax 0 0 #e7dfd5,
+    -100vmax 0 0 #e7dfd5,
+    0 100vmax 0 #e7dfd5,
+    100vmax 100vmax 0 #e7dfd5,
+    -100vmax 100vmax 0 #e7dfd5;
+  clip-path: inset(0 -100vmax -100vmax -100vmax);
 }
 /* Header copy: title in warm gold (matching "Maor"), lead in the
    home Hero sub-paragraph style (Noto Sans 600, dark warm) */
@@ -207,8 +203,12 @@
   display: none !important;
   content: none !important;
 }
-/* "So we're building our own." — Fredoka heading style */
-.layer-pillar-ai .pillar-hub-header .ai-intro-tagline {
+/* "So we're building our own." — Fredoka heading style.
+   The base .ai-intro-lead:last-child applies a gold-bright→gold
+   gradient via background-clip:text — explicitly reset that so
+   the solid #9e6e36 wins. */
+.layer-pillar-ai .pillar-hub-header .ai-intro-tagline,
+.layer-pillar-ai .pillar-hub-header .ai-intro-lead:last-child {
   font-family: 'Fredoka', 'Inter', system-ui, sans-serif;
   font-weight: 500;
   font-stretch: 75%;
@@ -216,7 +216,11 @@
   letter-spacing: -0.01em;
   font-size: clamp(1.5rem, 2.4vw, 1.85rem);
   font-style: normal;
-  color: #9e6e36;
+  color: #9e6e36 !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #9e6e36 !important;
   margin-top: 1rem;
 }
 /* The dotted divider that follows — re-tone for cream */
