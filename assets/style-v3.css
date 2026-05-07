@@ -166,6 +166,7 @@
 .layer-pillar-ai .ai-section-reach {
   background: #e7dfd5;
   position: relative;
+  padding-top: 4rem; /* breathing room below the boundary divider */
 }
 .layer-pillar-ai .ai-section-reach::before {
   content: '' !important;
@@ -195,6 +196,33 @@
   z-index: -1 !important;
   pointer-events: none !important;
   border-radius: 0 !important;
+}
+/* Section-divider element placed exactly on the navy→cream boundary
+   (top of The Reach), matching the home page divider style */
+.layer-pillar-ai .ai-section-reach .ai-section-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(420px, 65%);
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(232, 201, 125, 0.55) 50%,
+    transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.layer-pillar-ai .ai-section-reach .ai-section-divider::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--gold-bright);
+  opacity: 0.85;
+  transform: translateX(-50%) rotate(45deg);
 }
 /* Header copy: title in warm gold (matching "Maor"), lead in the
    home Hero sub-paragraph style (Noto Sans 600, dark warm) */
