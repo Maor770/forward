@@ -1731,6 +1731,15 @@ function readHashAndNavigate() {
   const pageLayer = _pageSplit_layerForCurrentPage();
   const route = ROUTES[hash];
 
+  // If we're on the master (index.html) and the hash points at a deeper
+  // page (e.g. #building, #ai), don't redirect away on refresh / back —
+  // strip the hash and stay on master.
+  if (pageLayer === 'master' && route && route.layer !== 'master') {
+    history.replaceState(null, '', window.location.pathname);
+    navigateTo('master');
+    return;
+  }
+
   // If hash points at master (or hash is empty) but we're on a deeper page,
   // stay on the current page's layer instead of redirecting to index.html.
   if (route && route.layer === 'master' && pageLayer !== 'master') {
