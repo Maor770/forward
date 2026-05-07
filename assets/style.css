@@ -3260,9 +3260,11 @@ input.calc-input:focus {
 }
 .gf-name {
   font-family: var(--serif);
-  font-size: 1.2rem;
-  color: var(--gold-bright);
-  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--gold);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
 }
 .gf-meta {
   font-size: 0.88rem;
@@ -6089,18 +6091,19 @@ body.ve-active [data-edit].ve-selected {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem;
-  margin-top: 0.4rem;
+  gap: 1rem;
+  margin-top: 0.6rem;
 }
 
 .footer-action-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 44px;
+  height: 44px;
   background: transparent;
-  border: none;
+  border: 1px solid rgba(201, 169, 97, 0.35);
+  border-radius: 999px;
   color: var(--gold);
   cursor: pointer;
   text-decoration: none;
@@ -6110,19 +6113,56 @@ body.ve-active [data-edit].ve-selected {
 }
 .footer-action-btn:hover {
   color: var(--gold-bright);
+  border-color: var(--gold-bright);
   transform: translateY(-1px);
   filter: drop-shadow(0 0 8px rgba(232, 201, 125, 0.6));
 }
 .footer-action-btn svg {
   display: block;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Filled "Let's Talk" CTA — replaces the icon-only WhatsApp button.
+   Same href + behavior as before, just with text + icon together. */
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  height: 44px;
+  padding: 0 1.3rem;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #0a1428;
+  border: none;
+  border-radius: 999px;
+  font-family: 'Fredoka', var(--sans);
+  font-weight: 500;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 10px rgba(232, 201, 125, 0.20);
+}
+.footer-cta:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(232, 201, 125, 0.34);
+}
+.footer-cta svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 @media (max-width: 600px) {
-  .gf-contact-row { gap: 0.9rem; }
-  .footer-action-btn { width: 24px; height: 24px; }
-  .footer-action-btn svg { width: 20px; height: 20px; }
+  .gf-contact-row { gap: 0.7rem; }
+  .footer-action-btn { width: 42px; height: 42px; }
+  .footer-action-btn svg { width: 18px; height: 18px; }
+  .footer-cta { height: 42px; padding: 0 1.1rem; font-size: 0.94rem; }
 }
 
 /* ════════════════════════════════════════════════════════════════
