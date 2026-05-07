@@ -300,12 +300,12 @@ body.is-v3 .bh-mark {
   position: relative;
   z-index: 2;
 }
-.v3-section-heading {
+.is-v3 .v3-section-heading {
   font-size: clamp(2rem, 4vw, 3rem);
   color: var(--gold-bright);
   text-align: center;
   line-height: 1.15;
-  margin-bottom: 1.4rem;
+  margin-bottom: 2.6rem;
 }
 .v3-section-heading.v3-heading-shrink {
   font-size: clamp(1.8rem, 3.6vw, 2.7rem);
@@ -343,7 +343,7 @@ body.is-v3 .bh-mark {
 .v3-problem-row {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 1.5rem;
   padding: 0.4rem 0;
@@ -382,15 +382,15 @@ body.is-v3 .bh-mark {
   background-image: url("../images/audience-world-cream.png");
 }
 .v3-problem-img {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   background-size: contain;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   position: relative;
   isolation: isolate;
   opacity: 1;
-  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.78));
 }
 /* Big faded duplicate on the opposite side of the row */
 .v3-problem-bg {
@@ -481,6 +481,9 @@ body.is-v3 .bh-mark {
   text-align: center;
   max-width: 70ch;
   margin: 0 auto;
+}
+.v3-solution-body + .v3-solution-body {
+  margin-top: 1.5rem;
 }
 .v3-solution-body strong {
   color: #9e6e36;
