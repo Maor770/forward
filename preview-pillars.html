@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pillars preview — MaorForward</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style-v3.css">
+<style>
+/* ════════════════════════════════════════════════════════════════
+   PREVIEW STYLES — applied only on this page (.is-preview)
+   ════════════════════════════════════════════════════════════════ */
+.is-preview {
+  --pv-cream:        #F4ECD8;
+  --pv-cream-tile:   #ede4ce;   /* slightly darker cream for bullet tiles */
+  --pv-tile-border:  rgba(101, 85, 60, 0.14);
+  --pv-card-border:  rgba(101, 85, 60, 0.30);
+  --pv-ink:          #2a2110;   /* dark warm body text */
+  --pv-meta:         #8a7a5a;   /* "Project #1" subtitle */
+  --pv-keyword:      #9e6e36;   /* gold-warm keyword */
+  --pv-accent:       #b07a3e;   /* CTA orange-gold */
+  --pv-accent-deep:  #8c5f30;
+}
+.is-preview {
+  background: var(--v3-blue-deep);
+  color: #fff;
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  margin: 0;
+  padding: 4rem 2rem;
+  min-height: 100vh;
+}
+
+.preview-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #c69556;
+}
+.preview-header h1 {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-stretch: 75%;
+  font-size: 1.6rem;
+  margin: 0 0 0.4rem;
+}
+.preview-header p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.preview-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4rem;
+}
+
+.pv-pillar {
+  position: relative;
+  background: var(--pv-cream);
+  border: 1px solid var(--pv-card-border);
+  border-radius: 6px;
+  padding: 0.6rem 0.6rem 0;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: var(--pv-ink);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow:
+    0 12px 28px rgba(8, 14, 30, 0.45),
+    0 4px 10px rgba(8, 14, 30, 0.30);
+}
+.pv-pillar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(to right,
+    var(--pv-accent-deep) 0%,
+    var(--pv-accent) 25%,
+    #d4a86a 50%,
+    var(--pv-accent) 75%,
+    var(--pv-accent-deep) 100%);
+  z-index: 3;
+}
+.pv-pillar::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(158, 110, 54, 0.42);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── image ─── */
+.pv-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--v3-cream-deep);
+  border-radius: 4px;
+  position: relative;
+  z-index: 2;
+}
+.pv-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── body ─── */
+.pv-body {
+  padding: 1.7rem 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+.pv-meta {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--pv-meta);
+  margin-bottom: 0.3rem;
+}
+.pv-title {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  font-size: clamp(1.4rem, 2vw, 1.7rem);
+  color: var(--pv-ink);
+  letter-spacing: -0.005em;
+  line-height: 1.15;
+  margin: 0 0 0.9rem;
+}
+.pv-summary {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--pv-ink);
+  margin: 0 0 1.4rem;
+  opacity: 0.86;
+}
+
+/* ─── bullet tiles ─── */
+.pv-bullets {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.pv-bullets li {
+  background: var(--pv-cream-tile);
+  border: 1px solid var(--pv-tile-border);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--pv-ink);
+}
+.pv-bullets li strong {
+  color: var(--pv-keyword);
+  font-weight: 700;
+  margin-right: 0.18em;
+}
+.pv-bullets li em {
+  color: var(--pv-keyword) !important;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* ─── filled CTA button ─── */
+.pv-cta {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, var(--pv-accent) 0%, var(--pv-accent-deep) 100%);
+  color: #f4ecd8;
+  border: none;
+  border-radius: 6px;
+  padding: 1.05rem 1.2rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+.pv-cta:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+/* swatch row at bottom */
+.preview-swatches {
+  max-width: 1200px;
+  margin: 4rem auto 0;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(232, 201, 125, 0.18);
+  border-radius: 6px;
+  color: #d4cba8;
+}
+.preview-swatches h3 {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-stretch: 75%;
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: #c69556;
+}
+.preview-swatches-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.swatch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: monospace;
+  font-size: 0.78rem;
+}
+.swatch-chip {
+  width: 28px; height: 28px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+@media (max-width: 800px) {
+  .preview-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body class="is-v3 is-preview">
+
+<div class="preview-header">
+  <h1>Pillar cards — preview</h1>
+  <p>Standalone proposal. Not yet wired into index.html.</p>
+</div>
+
+<div class="preview-grid">
+
+  <!-- ─── Pillar 1 ─── -->
+  <article class="pv-pillar">
+    <div class="pv-image">
+      <img src="images/pillar-building.jpg" alt="Maor Headquarters & Visitor Center">
+    </div>
+    <div class="pv-body">
+      <div class="pv-meta">Project #1</div>
+      <h3 class="pv-title">Maor Headquarters &amp; Visitor Center</h3>
+      <p class="pv-summary">
+        A multi-floor building housing production offices, distribution center, and an interactive Visitor Center.
+      </p>
+      <ul class="pv-bullets">
+        <li><strong>Office Space.</strong> Physical space required to plan, create, and distribute our three new program tracks and distribute Maor products.</li>
+        <li><strong>Visitor Center.</strong> Kids will be able to experience Maor's mission live! They will step into a 3D, live-action scenario where they face real-life challenges. They will use the Rebbe's sichos to navigate these scenarios, walking out empowered and thinking, <em>"Wow, I can do this in my real life."</em></li>
+        <li><strong>Rentals.</strong> Generating rental income to sustain the building.</li>
+      </ul>
+      <button class="pv-cta" type="button">Enter Building Plan</button>
+    </div>
+  </article>
+
+  <!-- ─── Pillar 2 ─── -->
+  <article class="pv-pillar">
+    <div class="pv-image">
+      <img src="images/pillar-ai.jpg" alt="Custom, Proprietary AI System">
+    </div>
+    <div class="pv-body">
+      <div class="pv-meta">Project #2</div>
+      <h3 class="pv-title">Custom, Proprietary AI System</h3>
+      <p class="pv-summary">
+        Current AI models default to secular concepts and humor. The custom system we are building allows us strict control over the narrative, characters, and messaging, ensuring every frame aligns with the Rebbe's teachings.
+      </p>
+      <ul class="pv-bullets">
+        <li><strong>Script Creation.</strong> A custom-built AI generation system specifically trained on the Rebbe's values and visual guidelines.</li>
+        <li><strong>Animations.</strong> We will produce Disney-quality, 3D animations for just $2,000–$3,000 per video (a fraction of the industry standard $80k+).</li>
+        <li><strong>New Channels.</strong> We will create custom AI systems to create videos for the non-Lubavitch, not-frum and non-Jewish child, targeting them and furthering the mission.</li>
+      </ul>
+      <button class="pv-cta" type="button">Enter AI Plan</button>
+    </div>
+  </article>
+
+</div>
+
+<!-- color reference for quick eyeball -->
+<div class="preview-swatches">
+  <h3>Color tokens used</h3>
+  <div class="preview-swatches-row">
+    <div class="swatch"><span class="swatch-chip" style="background:#F4ECD8"></span>card #F4ECD8</div>
+    <div class="swatch"><span class="swatch-chip" style="background:#ede4ce"></span>tile #ede4ce</div>
+    <div class="swatch"><span class="swatch-chip" style="background:#9e6e36"></span>keyword #9e6e36</div>
+    <div class="swatch"><span class="swatch-chip" style="background:#b07a3e"></span>cta-top #b07a3e</div>
+    <div class="swatch"><span class="swatch-chip" style="background:#8c5f30"></span>cta-bot #8c5f30</div>
+    <div class="swatch"><span class="swatch-chip" style="background:#2a2110"></span>ink #2a2110</div>
+  </div>
+</div>
+
+</body>
+</html>
