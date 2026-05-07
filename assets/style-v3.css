@@ -308,6 +308,9 @@ body.is-v3 .bh-mark {
 .v3-section-heading.v3-heading-shrink {
   font-size: clamp(1.8rem, 3.6vw, 2.7rem);
 }
+.is-v3 .v3-section-heading.v3-heading-shrink {
+  margin-bottom: 1.7rem;
+}
 .v3-section-lede {
   font-family: 'Noto Sans', var(--sans);
   font-size: clamp(1.05rem, 1.45vw, 1.2rem);
@@ -336,7 +339,7 @@ body.is-v3 .bh-mark {
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  margin: 1.5rem auto 0;
+  margin: 1.8rem auto 0;
 }
 .v3-problem-row {
   position: relative;
