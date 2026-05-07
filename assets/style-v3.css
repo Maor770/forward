@@ -25,6 +25,19 @@ body.is-v3 {
   color: var(--v3-brown-soft);
 }
 
+/* Hide page scrollbar entirely (Firefox / IE / Webkit) */
+html, body.is-v3 {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar,
+body.is-v3::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
 /* The master container holds the whole homepage */
 .layer.is-v3 {
   background: transparent;
@@ -732,8 +745,22 @@ body.is-v3 .bh-mark {
 .v3-pillar-card:hover .v3-pillar-cta {
   filter: brightness(1.08);
 }
+/* Stack the label + small arrow vertically inside the CTA */
+.v3-pillar-cta-text {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
 .v3-pillar-cta-arrow {
-  display: none;
+  display: inline-block;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  opacity: 0.85;
+  transition: transform 0.25s ease;
+}
+.v3-pillar-card:hover .v3-pillar-cta-arrow {
+  transform: translateX(4px);
 }
 /* Allocation tag sitting on the CTA — same chip style as the hero
    campaign badge */
@@ -1012,21 +1039,6 @@ body.is-v3 .bh-mark {
    Responsive: stack everything below 800 px
    ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  /* Hide the page scrollbar entirely on mobile/tablet (still scrollable,
-     just no visible track). Apply to both html and body because some
-     browsers attach the scroll to one and some to the other. */
-  html, body, body.is-v3 {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar,
-  body.is-v3::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
-    background: transparent;
-  }
   .v3-hero {
     padding: calc(var(--top-strip-height, 50px) + 1rem) 5vw 2.5rem;
     min-height: auto;
@@ -1052,17 +1064,31 @@ body.is-v3 .bh-mark {
   .v3-section {
     padding: 4.5rem 5vw;
   }
-  .v3-problem-row,
-  .v3-problem-row.row-image-left,
-  .v3-problem-row.row-image-right {
-    grid-template-columns: 1fr;
-    gap: 1.4rem;
-    text-align: center;
-    padding: 1.4rem 0;
+  /* Mobile: icon stacks above the text instead of taking half the row */
+  .v3-problem-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 0;
   }
-  .v3-problem-row.row-image-right .v3-problem-content,
-  .v3-problem-row.row-image-right .v3-problem-img-wrap {
-    order: initial;
+  .v3-problem-img {
+    width: 110px;
+    height: 110px;
+  }
+  .v3-problem-content {
+    flex: 0 1 auto;
+    max-width: 100%;
+    text-align: center;
+  }
+  .v3-problem-content h3 {
+    text-align: center;
+  }
+  .v3-problem-content h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .v3-problem-bg {
+    display: none;
   }
   .v3-problem-content h3 {
     text-align: center;
