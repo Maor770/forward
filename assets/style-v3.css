@@ -205,8 +205,8 @@ body.is-v3 .bh-mark {
   gap: 0.6rem;
 }
 .v3-stat-icon {
-  width: 64px;
-  height: 64px;
+  width: 96px;
+  height: 96px;
   color: var(--v3-gold-glow);
   display: inline-flex;
   align-items: center;
@@ -220,7 +220,7 @@ body.is-v3 .bh-mark {
 }
 .v3-stat-num {
   font-size: clamp(2.2rem, 4.2vw, 3.2rem);
-  color: var(--gold-bright);
+  color: #9e6e36;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   line-height: 1;
 }
@@ -438,44 +438,41 @@ body.is-v3 .bh-mark {
 /* ───────────────────────────────────────────────
    4. SOLUTION — two-line heading, body
    ─────────────────────────────────────────────── */
-.v3-solution-h {
+/* SOLUTION section: cream bg with deep-navy body and warm-gold heading */
+.v3-solution-section {
+  background: #e7dfd5;
+  color: #0a1a38;
+}
+.is-v3 .v3-solution-h {
   text-align: center;
-  margin-bottom: 1.8rem;
-}
-.v3-solution-h .ln1 {
-  display: block;
   font-size: clamp(2rem, 4vw, 3rem);
-  color: var(--gold-bright);
-  line-height: 1.1;
+  color: #9e6e36;
+  line-height: 1.15;
+  margin-bottom: 3rem;
 }
-.v3-solution-h .ln2 {
-  display: block;
-  font-family: var(--v3-heading);
-  font-weight: 400;
-  font-stretch: 75%;
-  font-variation-settings: "wdth" 75;
-  font-size: clamp(1.4rem, 2.6vw, 2rem);
-  color: var(--v3-gold-glow);
-  line-height: 1.2;
-  margin-top: 0.4rem;
-  letter-spacing: 0.005em;
+.is-v3 .v3-solution-h em {
+  font-style: italic;
+  font-weight: inherit;
+  color: inherit !important;
+  font-family: inherit;
 }
 .v3-solution-body {
   font-family: 'Noto Sans', var(--sans);
   font-size: clamp(1.05rem, 1.45vw, 1.2rem);
   line-height: 1.85;
-  color: var(--text-warm);
+  color: #0a1a38;
   text-align: center;
   max-width: 70ch;
   margin: 0 auto;
 }
 .v3-solution-body strong {
-  color: var(--gold-bright);
-  font-weight: 600;
+  color: #9e6e36;
+  font-weight: 700;
 }
 .v3-solution-body em {
-  color: var(--gold-bright);
+  color: #9e6e36 !important;
   font-style: italic;
+  font-weight: 600;
 }
 
 /* ───────────────────────────────────────────────
