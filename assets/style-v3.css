@@ -750,25 +750,44 @@ body.is-v3 .bh-mark {
 /* ───────────────────────────────────────────────
    8. STAKES — "what if we don't succeed" placeholder
    ─────────────────────────────────────────────── */
-.v3-stakes-block {
-  max-width: 760px;
-  margin: 2.5rem auto 0;
-  padding: 2.2rem 2rem;
-  background: rgba(20, 30, 60, 0.5);
-  border: 1px solid rgba(232, 201, 125, 0.18);
-  border-left: 3px solid var(--v3-gold-warm);
-  border-radius: 6px;
+/* Stakes section: faint warning icon as background, plain centered copy */
+.v3-stakes-section {
+  position: relative;
 }
-.v3-stakes-block h3 {
-  font-size: 1.4rem;
+.v3-stakes-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("../images/icon-warning.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 380px 380px;
+  opacity: 0.32;
+  pointer-events: none;
+  z-index: 0;
+}
+.v3-stakes-section .v3-section-inner {
+  position: relative;
+  z-index: 1;
+}
+.is-v3 .v3-stakes-subheading {
+  font-family: var(--v3-heading);
+  font-weight: 500;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
   color: var(--gold-bright);
-  margin-bottom: 1rem;
+  text-align: center;
+  margin: 1.6rem auto 1rem;
+  letter-spacing: -0.005em;
 }
-.v3-stakes-block p {
+.v3-stakes-text {
   font-family: 'Noto Sans', var(--sans);
-  font-size: 1rem;
-  line-height: 1.75;
+  font-size: clamp(1.05rem, 1.45vw, 1.2rem);
+  line-height: 1.85;
   color: var(--text-warm);
+  text-align: center;
+  max-width: 64ch;
+  margin: 0 auto;
 }
 
 /* ───────────────────────────────────────────────
