@@ -471,7 +471,7 @@ body.is-v3 .bh-mark {
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  opacity: 0.09;
+  opacity: 0.05;
   mix-blend-mode: multiply;
   pointer-events: none;
 }
