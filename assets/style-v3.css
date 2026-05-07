@@ -127,6 +127,77 @@
 .layer-pillar-ai .pillar-hub-header p {
   color: #4a3c28;
 }
+.layer-pillar-ai .pillar-hub-header .ai-intro {
+  margin: 1.5rem auto 0;
+  max-width: 720px;
+}
+.layer-pillar-ai .pillar-hub-header .ai-intro-lead {
+  color: #4a3c28;
+  font-family: 'Cormorant Garamond', var(--serif-elegant);
+}
+.layer-pillar-ai .pillar-hub-header .ai-intro-lead em {
+  color: #9e6e36;
+}
+/* "So we're building our own." — Fredoka heading style */
+.layer-pillar-ai .pillar-hub-header .ai-intro-tagline {
+  font-family: 'Fredoka', 'Inter', system-ui, sans-serif;
+  font-weight: 500;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.5rem, 2.4vw, 1.85rem);
+  font-style: normal;
+  color: #9e6e36;
+  margin-top: 1rem;
+}
+/* The dotted divider that follows — re-tone for cream */
+.layer-pillar-ai .pillar-hub-header .ai-divider {
+  margin: 1.6rem auto 0;
+}
+.layer-pillar-ai .pillar-hub-header .ai-divider span {
+  background: #9e6e36;
+}
+
+/* Header chrome (wordmark / action icons / B"H) on cream pillar pages */
+.layer-pillar-building .campaign-wordmark,
+.layer-pillar-ai .campaign-wordmark,
+.layer-pillar-building .campaign-wordmark .cwm-text,
+.layer-pillar-ai .campaign-wordmark .cwm-text,
+.layer-pillar-building .header-action-btn,
+.layer-pillar-ai .header-action-btn,
+.layer-pillar-building .bh-mark,
+.layer-pillar-ai .bh-mark {
+  color: #9e6e36;
+}
+.layer-pillar-building .header-action-btn:hover,
+.layer-pillar-ai .header-action-btn:hover {
+  color: #c69556;
+}
+
+/* Candidate Properties section → cream block */
+.layer-pillar-building .property-selector-section {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 4rem 1.4rem 5rem;
+  background:
+    url("../images/hero-bg-wide.jpg") center / cover no-repeat,
+    #e7dfd5;
+  position: relative;
+}
+.layer-pillar-building .property-selector-section .ps-header h2,
+.layer-pillar-building .property-selector-section .ps-header .kicker {
+  color: #9e6e36;
+}
+.layer-pillar-building .property-selector-section .ps-header p {
+  color: #4a3c28;
+}
+.layer-pillar-building .property-selector-section .ps-header h2 {
+  background: none;
+  -webkit-text-fill-color: initial;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+}
 
 :root {
   --v3-cream:           #F4ECD8;
@@ -603,14 +674,22 @@ body.is-v3 .bh-mark {
   background: rgba(232, 201, 125, 0.45);
 }
 .v3-problem-content p {
+  /* Match the Hero sub-paragraph style on the home page so the audience
+     copy feels like a continuation of that voice rather than its own */
   font-family: 'Noto Sans', var(--sans);
-  font-size: 1.02rem;
-  line-height: 1.75;
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.6;
   color: var(--text-warm);
 }
+.v3-problem-content p strong {
+  color: var(--v3-gold-warm);
+  font-weight: 700;
+}
 .v3-problem-content p em {
-  color: var(--gold-bright);
+  color: var(--v3-gold-warm);
   font-style: italic;
+  font-weight: 600;
 }
 
 /* ───────────────────────────────────────────────
