@@ -131,6 +131,23 @@ body.is-v3 .bh-mark {
 .v3-hero-text {
   max-width: 620px;
 }
+/* Small gold chip above the Maor. heading announcing the campaign */
+.v3-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-family: 'Noto Sans', var(--sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--v3-gold-warm);
+  background: rgba(158, 110, 54, 0.10);
+  border: 1px solid rgba(158, 110, 54, 0.30);
+  padding: 0.42rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 1.2rem;
+}
 .is-v3 .v3-hero-h1 {
   font-size: clamp(2.1rem, 4.4vw, 3.6rem);
   line-height: 1.05;
@@ -717,6 +734,14 @@ body.is-v3 .bh-mark {
 }
 .v3-pillar-cta-arrow {
   display: none;
+}
+.v3-pillar-cta-sep {
+  margin: 0 0.55em;
+  opacity: 0.55;
+}
+.v3-pillar-cta-amount {
+  font-weight: 700;
+  letter-spacing: 0.005em;
 }
 
 /* ───────────────────────────────────────────────
