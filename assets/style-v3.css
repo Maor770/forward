@@ -222,6 +222,22 @@
   color: #4a3c28;
 }
 
+/* On pillar pages, pin the top bar to the viewport (matches the
+   behavior the user expects on these pages — wordmark / icons /
+   B"H / switch-btn stay anchored while the page scrolls) */
+.layer-pillar-building .campaign-wordmark,
+.layer-pillar-building .header-actions,
+.layer-pillar-building .bh-mark,
+.layer-pillar-building .pillar-switch-btn,
+.layer-pillar-building .v3-top-strip,
+.layer-pillar-ai .campaign-wordmark,
+.layer-pillar-ai .header-actions,
+.layer-pillar-ai .bh-mark,
+.layer-pillar-ai .pillar-switch-btn,
+.layer-pillar-ai .v3-top-strip {
+  position: fixed;
+}
+
 /* Cross-pillar switch button — sits on the right side, just before
    the B"H mark, in the same vertical strip as the wordmark/icons */
 .layer-pillar-building .pillar-switch-btn,
