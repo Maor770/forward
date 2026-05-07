@@ -714,7 +714,7 @@ body.is-v3 .bh-mark {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
+  gap: 0.85rem;
   background: linear-gradient(180deg, #b07a3e 0%, #8c5f30 100%);
   color: #f4ecd8;
   border: none;
@@ -735,13 +735,22 @@ body.is-v3 .bh-mark {
 .v3-pillar-cta-arrow {
   display: none;
 }
-.v3-pillar-cta-sep {
-  margin: 0 0.55em;
-  opacity: 0.55;
-}
+/* Allocation tag sitting on the CTA — same chip style as the hero
+   campaign badge */
 .v3-pillar-cta-amount {
+  font-family: 'Noto Sans', var(--sans);
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.005em;
+  font-stretch: 100%;
+  font-variation-settings: normal;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f4ecd8;
+  background: rgba(244, 236, 216, 0.14);
+  border: 1px solid rgba(244, 236, 216, 0.45);
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  line-height: 1;
 }
 
 /* ───────────────────────────────────────────────
