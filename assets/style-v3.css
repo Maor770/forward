@@ -384,6 +384,19 @@ body.is-v3 {
   color: var(--v3-brown-soft);
 }
 
+/* Mobile-scroll perf: kill background-attachment:fixed everywhere on
+   small screens. Fixed backgrounds force the browser to repaint the
+   bg on every scroll frame and are the #1 cause of scroll jank on
+   iOS Safari and Android Chrome. */
+@media (max-width: 1024px) {
+  html, body {
+    background-attachment: scroll !important;
+  }
+  body, body.is-v3 {
+    background-attachment: scroll !important;
+  }
+}
+
 /* Hide page scrollbar entirely — aggressive for Android Chrome which
    sometimes ignores scrollbar-width on html. NOTE: scoped — only the
    home (body.is-v3) gets the cream bg; other pages keep their own bg. */
