@@ -1,8 +1,132 @@
 /* ════════════════════════════════════════════════════════════════
-   STYLE-V3.CSS — Homepage V3 (built from scratch)
-   Loads AFTER style.css. Reuses shared tokens, header, footer,
-   and audience-card image classes from style.css.
+   PILLAR PAGES (building.html / ai.html) — top hero redesign + Fredoka
+   headings throughout the layer. Test-style overrides; safe to scope.
    ════════════════════════════════════════════════════════════════ */
+
+/* All headings in the building layer → Fredoka (matching the home page) */
+.layer-pillar-building h1,
+.layer-pillar-building h2,
+.layer-pillar-building h3,
+.layer-pillar-building h4 {
+  font-family: 'Fredoka', 'Inter', system-ui, sans-serif;
+  font-weight: 500;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  letter-spacing: -0.01em;
+}
+
+/* The pillar-hub-header becomes a cream "hero" with paper texture,
+   spanning the full viewport width (via the negative-margin trick) */
+.layer-pillar-building .pillar-hub-section {
+  padding-top: 0;
+}
+.layer-pillar-building .pillar-hub-header {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: 0;
+  margin-bottom: 4rem;
+  padding: 5rem 1.4rem 3rem;
+  background:
+    url("../images/hero-bg-wide.jpg") center top / cover no-repeat,
+    #e7dfd5;
+  border-bottom: none;
+  text-align: center;
+}
+.layer-pillar-building .pillar-hub-header::after {
+  display: none;
+}
+.layer-pillar-building .pillar-hub-header .kicker {
+  color: #9e6e36;
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+.layer-pillar-building .pillar-hub-header h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  background: none;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
+  -webkit-background-clip: initial;
+  color: #9e6e36;
+  margin: 0.6rem 0 0.9rem;
+}
+.layer-pillar-building .pillar-hub-header .ph-tagline {
+  color: #4a3c28;
+}
+.layer-pillar-building .pillar-hub-header .ph-allocation {
+  color: #1a2440;
+  border-top-color: rgba(158, 110, 54, 0.55);
+  border-bottom-color: rgba(158, 110, 54, 0.55);
+  background: rgba(255, 255, 255, 0.35);
+  font-family: 'Fredoka', 'Inter', system-ui, sans-serif;
+  font-weight: 500;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+}
+/* Properties banner button on cream — flip to navy fill */
+.layer-pillar-building .pillar-hub-header .properties-banner {
+  background: linear-gradient(180deg, #13284E, #0A1A38);
+  border: 1px solid rgba(158, 110, 54, 0.5);
+  color: #f4ecd8;
+}
+.layer-pillar-building .pillar-hub-header .properties-banner:hover {
+  border-color: var(--gold-bright);
+}
+
+/* Same treatment for the AI pillar page */
+.layer-pillar-ai h1,
+.layer-pillar-ai h2,
+.layer-pillar-ai h3,
+.layer-pillar-ai h4 {
+  font-family: 'Fredoka', 'Inter', system-ui, sans-serif;
+  font-weight: 500;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  letter-spacing: -0.01em;
+}
+.layer-pillar-ai .pillar-hub-section {
+  padding-top: 0;
+}
+.layer-pillar-ai .pillar-hub-header {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: 0;
+  margin-bottom: 4rem;
+  padding: 5rem 1.4rem 3rem;
+  background:
+    url("../images/hero-bg-wide.jpg") center top / cover no-repeat,
+    #e7dfd5;
+  border-bottom: none;
+  text-align: center;
+}
+.layer-pillar-ai .pillar-hub-header::after {
+  display: none;
+}
+.layer-pillar-ai .pillar-hub-header .kicker {
+  color: #9e6e36;
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+.layer-pillar-ai .pillar-hub-header h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  background: none;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
+  -webkit-background-clip: initial;
+  color: #9e6e36;
+  margin: 0.6rem 0 0.9rem;
+}
+.layer-pillar-ai .pillar-hub-header .ph-tagline,
+.layer-pillar-ai .pillar-hub-header p {
+  color: #4a3c28;
+}
 
 :root {
   --v3-cream:           #F4ECD8;
@@ -25,18 +149,24 @@ body.is-v3 {
   color: var(--v3-brown-soft);
 }
 
-/* Hide page scrollbar entirely (Firefox / IE / Webkit) */
+/* Hide page scrollbar entirely (Firefox / IE / Webkit) and force the
+   body to exactly fit the viewport so no html-bg strip leaks on the side */
 html, body.is-v3 {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 html::-webkit-scrollbar,
+body::-webkit-scrollbar,
 body.is-v3::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
-  background: transparent;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
+html { background: var(--v3-cream, #F4ECD8); }
 
 /* The master container holds the whole homepage */
 .layer.is-v3 {
@@ -745,22 +875,28 @@ body.is-v3 .bh-mark {
 .v3-pillar-card:hover .v3-pillar-cta {
   filter: brightness(1.08);
 }
-/* Stack the label + small arrow vertically inside the CTA */
+/* Label + arrow inline so the button stays single-line. Arrow hides on
+   narrow screens where it would otherwise force a second line. */
 .v3-pillar-cta-text {
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  line-height: 1;
+  gap: 0.45em;
+  line-height: 1.1;
 }
 .v3-pillar-cta-arrow {
   display: inline-block;
-  font-size: 0.85rem;
-  margin-top: 0.25rem;
-  opacity: 0.85;
+  font-size: 0.95em;
+  opacity: 0.9;
   transition: transform 0.25s ease;
 }
 .v3-pillar-card:hover .v3-pillar-cta-arrow {
   transform: translateX(4px);
+}
+@media (max-width: 900px) {
+  /* On narrow screens the arrow would push the label to a 2nd line —
+     drop it so the CTA stays clean on one row */
+  .v3-pillar-cta-arrow { display: none; }
 }
 /* Allocation tag sitting on the CTA — same chip style as the hero
    campaign badge */
@@ -1045,14 +1181,20 @@ body.is-v3 .bh-mark {
   }
   .v3-hero-inner {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 1.9rem; /* was 2.5rem — 25% smaller */
+    justify-items: center; /* center each block on the screen */
+  }
+  .v3-hero-text {
+    text-align: left;        /* keep copy aligned to the left edge */
+    margin: 0 auto;          /* …but the block itself sits centered */
+    max-width: 480px;
   }
   .v3-hero-image {
     min-height: 0;
     order: 2;
   }
   .v3-hero-image img {
-    max-width: 480px;
+    max-width: 320px;        /* was 480px — smaller building */
   }
   .v3-stats {
     padding: 4rem 5vw 5rem;
