@@ -27,9 +27,7 @@
   margin-top: 0;
   margin-bottom: 4rem;
   padding: 5rem 1.4rem 3rem;
-  background:
-    url("../images/hero-bg-wide.jpg") center top / cover no-repeat,
-    #e7dfd5;
+  background: #e7dfd5;
   border-bottom: none;
   text-align: center;
 }
@@ -137,12 +135,55 @@
   margin: 1.5rem auto 0;
   max-width: 720px;
 }
+/* Match the Hero sub-paragraph style on the home page */
 .layer-pillar-ai .pillar-hub-header .ai-intro-lead {
+  font-family: 'Noto Sans', var(--sans);
+  font-style: normal;
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.6;
   color: #4a3c28;
-  font-family: 'Cormorant Garamond', var(--serif-elegant);
 }
 .layer-pillar-ai .pillar-hub-header .ai-intro-lead em {
+  color: #9e6e36 !important;
+  font-style: italic;
+  font-weight: 700;
+}
+/* Hide the legacy three-dot/square divider — section dividers handle
+   the transitions now */
+.layer-pillar-ai .pillar-hub-header .ai-divider,
+.layer-pillar-ai .ai-divider {
+  display: none !important;
+}
+
+/* The Reach section → solid cream */
+.layer-pillar-ai .ai-section-reach {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 4rem 1.4rem 5rem;
+  background: #e7dfd5;
+}
+.layer-pillar-ai .ai-section-reach .kicker,
+.layer-pillar-ai .ai-section-reach h2 {
   color: #9e6e36;
+  background: none;
+  -webkit-text-fill-color: initial;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+}
+.layer-pillar-ai .ai-section-reach .section-lead,
+.layer-pillar-ai .ai-section-reach p {
+  color: #4a3c28;
+}
+
+/* Suppress the duplicate B"H pseudo-element on pillar pages —
+   we already have a real .bh-mark in the top bar */
+.layer-pillar-building::before,
+.layer-pillar-ai::after,
+.layer-property::after {
+  display: none !important;
+  content: none !important;
 }
 /* "So we're building our own." — Fredoka heading style */
 .layer-pillar-ai .pillar-hub-header .ai-intro-tagline {
@@ -288,18 +329,21 @@ body.is-v3 {
   color: var(--v3-brown-soft);
 }
 
-/* Hide page scrollbar entirely — aggressive approach for Android Chrome
-   which sometimes ignores scrollbar-width:none on the html element */
+/* Hide page scrollbar entirely — aggressive for Android Chrome which
+   sometimes ignores scrollbar-width on html. NOTE: scoped — only the
+   home (body.is-v3) gets the cream bg; other pages keep their own bg. */
 :root {
   color-scheme: light only;
 }
-html, body, body.is-v3 {
+body.is-v3 {
+  background: var(--v3-cream, #F4ECD8);
+}
+html, body {
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
-  background: var(--v3-cream, #F4ECD8);
 }
 * {
   scrollbar-width: none;
@@ -307,7 +351,6 @@ html, body, body.is-v3 {
 }
 html::-webkit-scrollbar,
 body::-webkit-scrollbar,
-body.is-v3::-webkit-scrollbar,
 *::-webkit-scrollbar {
   display: none !important;
   width: 0 !important;
@@ -318,16 +361,10 @@ body.is-v3::-webkit-scrollbar,
 }
 html::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track,
-*::-webkit-scrollbar-track {
-  background: transparent !important;
-  display: none !important;
-}
+*::-webkit-scrollbar-track,
 html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb,
-*::-webkit-scrollbar-thumb {
-  background: transparent !important;
-  display: none !important;
-}
+*::-webkit-scrollbar-thumb,
 html::-webkit-scrollbar-corner,
 *::-webkit-scrollbar-corner {
   background: transparent !important;
