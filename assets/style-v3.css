@@ -503,7 +503,7 @@ body.is-v3 .bh-mark {
    5. BRIDGE — two emphatic centered lines
    ─────────────────────────────────────────────── */
 .v3-bridge {
-  padding: 5rem 6vw;
+  padding: 5rem 6vw 2.5rem;
   background: var(--v3-blue-deep);
   text-align: center;
 }
@@ -531,7 +531,7 @@ body.is-v3 .bh-mark {
    ─────────────────────────────────────────────── */
 .v3-pillars {
   background: var(--v3-blue-deep);
-  padding: 4rem 6vw 6rem;
+  padding: 2rem 6vw 6rem;
 }
 .v3-pillars-grid {
   max-width: 1200px;
