@@ -358,7 +358,7 @@ body.is-v3 .bh-mark {
   padding: 0;
   margin: 0;
   position: relative;
-  z-index: 0;
+  z-index: 2;
   flex: 0 0 auto;
   display: flex;
   align-items: center;
@@ -370,35 +370,52 @@ body.is-v3 .bh-mark {
 .v3-problem-img-wrap::after {
   display: none !important;
 }
+/* Override the inline-base64 audience PNG with the cream-tinted file
+   variants (#e2d5b8) — only inside V3 home, leaves audience.html intact */
+.is-v3 .audience-card[data-audience="frum"] .audience-card-img {
+  background-image: url("../images/audience-frum-cream.png");
+}
+.is-v3 .audience-card[data-audience="secular"] .audience-card-img {
+  background-image: url("../images/audience-secular-cream.png");
+}
+.is-v3 .audience-card[data-audience="world"] .audience-card-img {
+  background-image: url("../images/audience-world-cream.png");
+}
 .v3-problem-img {
-  width: 280px;
-  height: 280px;
+  width: 200px;
+  height: 200px;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
   isolation: isolate;
-  opacity: 0.18;
-  filter: none;
+  opacity: 1;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.55));
 }
-.v3-problem-img::before {
-  content: '';
+/* Big faded duplicate on the opposite side of the row */
+.v3-problem-bg {
   position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  filter: blur(45px);
-  opacity: 0.6;
-  z-index: -1;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 700px;
+  max-width: 55%;
+  aspect-ratio: 1 / 1;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.04;
   pointer-events: none;
+  z-index: 0;
 }
-.v3-problem-img.img-frum::before {
-  background: radial-gradient(ellipse at center, rgba(232, 201, 125, 0.7) 0%, rgba(201, 169, 97, 0.35) 40%, transparent 75%);
+.v3-problem-row[data-audience="frum"] .v3-problem-bg {
+  background-image: url("../images/audience-frum-cream.png");
 }
-.v3-problem-img.img-secular::before {
-  background: radial-gradient(ellipse at center, rgba(56, 178, 172, 0.65) 0%, rgba(45, 142, 168, 0.3) 40%, transparent 75%);
+.v3-problem-row[data-audience="secular"] .v3-problem-bg {
+  background-image: url("../images/audience-secular-cream.png");
 }
-.v3-problem-img.img-world::before {
-  background: radial-gradient(ellipse at center, rgba(180, 110, 200, 0.65) 0%, rgba(155, 80, 175, 0.3) 40%, transparent 75%);
+.v3-problem-row[data-audience="world"] .v3-problem-bg {
+  background-image: url("../images/audience-world-cream.png");
 }
 .v3-problem-content {
   position: relative;
