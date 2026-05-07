@@ -63,8 +63,8 @@
   position: relative;
   background: var(--pv-cream);
   border: 1px solid var(--pv-card-border);
-  border-radius: 6px;
-  padding: 0.6rem 0.6rem 0;
+  border-radius: 22px;
+  padding: 0.7rem 0.7rem 0;
   text-align: left;
   cursor: pointer;
   font: inherit;
@@ -93,9 +93,9 @@
 .pv-pillar::after {
   content: '';
   position: absolute;
-  inset: 8px;
+  inset: 9px;
   border: 1px solid rgba(158, 110, 54, 0.42);
-  border-radius: 4px;
+  border-radius: 16px;
   pointer-events: none;
   z-index: 1;
 }
@@ -106,7 +106,7 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--v3-cream-deep);
-  border-radius: 4px;
+  border-radius: 14px;
   position: relative;
   z-index: 2;
 }
@@ -139,10 +139,10 @@
   font-stretch: 75%;
   font-variation-settings: "wdth" 75;
   font-size: clamp(1.4rem, 2vw, 1.7rem);
-  color: var(--pv-ink);
+  color: #1a2440;
   letter-spacing: -0.005em;
   line-height: 1.15;
-  margin: 0 0 0.9rem;
+  margin: 0 0 1.7rem;
 }
 .pv-summary {
   font-family: 'Noto Sans', sans-serif;
@@ -165,7 +165,7 @@
 .pv-bullets li {
   background: var(--pv-cream-tile);
   border: 1px solid var(--pv-tile-border);
-  border-radius: 6px;
+  border-radius: 12px;
   padding: 0.85rem 1rem;
   font-family: 'Noto Sans', sans-serif;
   font-size: 0.9rem;
@@ -192,7 +192,7 @@
   background: linear-gradient(180deg, var(--pv-accent) 0%, var(--pv-accent-deep) 100%);
   color: #f4ecd8;
   border: none;
-  border-radius: 6px;
+  border-radius: 14px;
   padding: 1.05rem 1.2rem;
   font-family: 'Fredoka', sans-serif;
   font-weight: 500;
