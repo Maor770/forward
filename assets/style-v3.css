@@ -158,8 +158,12 @@
   display: none !important;
 }
 
-/* The Reach section → solid cream BG, extending down to the footer */
+/* The Reach section → solid cream, full viewport width, extending to footer */
 .layer-pillar-ai .ai-section-reach {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 4rem 1.4rem 5rem;
   background: #e7dfd5;
   position: relative;
 }
@@ -167,12 +171,32 @@
   content: '';
   position: absolute;
   top: 100%;
-  left: -9999px;
-  right: -9999px;
+  left: 0;
+  right: 0;
   height: 9999px;
   background: #e7dfd5;
   z-index: -1;
   pointer-events: none;
+}
+/* Header copy: title in warm gold (matching "Maor"), lead in the
+   home Hero sub-paragraph style (Noto Sans 600, dark warm) */
+.layer-pillar-ai .ai-section-reach .ai-section-header h2 {
+  color: #9e6e36;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+}
+.layer-pillar-ai .ai-section-reach .ai-section-header .kicker {
+  color: #9e6e36;
+}
+.layer-pillar-ai .ai-section-reach .ai-section-header .section-lead {
+  font-family: 'Noto Sans', var(--sans);
+  font-style: normal;
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.6;
+  color: #4a3c28;
 }
 
 /* Suppress the duplicate B"H pseudo-element on pillar pages —
@@ -258,14 +282,16 @@
   z-index: 4;
 }
 
-/* Section dividers on AI pillar (between hero / Engine / Reach) */
+/* Section dividers on AI pillar (between hero / Engine / Reach) —
+   placed slightly INSIDE the navy section so both line + diamond
+   read on a single bg color */
 .layer-pillar-ai .ai-section {
   position: relative;
 }
 .layer-pillar-ai .ai-section::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: 24px;
   left: 50%;
   transform: translateX(-50%);
   width: min(420px, 65%);
@@ -279,15 +305,21 @@
 .layer-pillar-ai .ai-section::after {
   content: '';
   position: absolute;
-  top: -3px;
+  top: 21px;
   left: 50%;
   width: 7px;
   height: 7px;
   background: var(--gold-bright);
-  opacity: 0.7;
+  opacity: 0.8;
   transform: translateX(-50%) rotate(45deg);
   pointer-events: none;
   z-index: 4;
+}
+/* Match the kicker on AI navy sections to the h2 color (gold-bright)
+   so 'THE ENGINE' / 'THE THESIS' tone aligns with 'Six Proprietary
+   Modules' below */
+.layer-pillar-ai .ai-section .kicker {
+  color: var(--gold-bright);
 }
 
 /* Section divider on building between blocks and Candidate Properties
