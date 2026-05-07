@@ -693,6 +693,14 @@ body.is-v3 .bh-mark {
 /* ───────────────────────────────────────────────
    7. TWO IMPORTANT POINTS (placeholder)
    ─────────────────────────────────────────────── */
+/* Points section sits on cream like the Solution section, but the
+   blue point cards stay as-is */
+.v3-points-section {
+  background: #e7dfd5;
+}
+.is-v3 .v3-points-section .v3-section-heading {
+  color: #9e6e36;
+}
 .v3-points-grid {
   max-width: 1080px;
   margin: 2.5rem auto 0;
