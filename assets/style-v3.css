@@ -222,6 +222,32 @@
   color: #4a3c28;
 }
 
+/* Cross-pillar switch button — sits on the right side, just before
+   the B"H mark, in the same vertical strip as the wordmark/icons */
+.layer-pillar-building .pillar-switch-btn,
+.layer-pillar-ai .pillar-switch-btn {
+  position: absolute;
+  top: 0;
+  right: 4rem;
+  height: var(--top-strip-height, 64px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  z-index: 100;
+  color: #9e6e36;
+}
+.layer-pillar-building .pillar-switch-btn:hover,
+.layer-pillar-ai .pillar-switch-btn:hover {
+  color: #c69556;
+}
+@media (max-width: 600px) {
+  .layer-pillar-building .pillar-switch-btn,
+  .layer-pillar-ai .pillar-switch-btn {
+    right: 3.2rem;
+  }
+}
+
 /* Suppress the duplicate B"H pseudo-element on pillar pages —
    we already have a real .bh-mark in the top bar */
 .layer-pillar-building::before,
