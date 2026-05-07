@@ -741,16 +741,20 @@ body.is-v3 .bh-mark {
   border-radius: 12px;
   padding: 2rem 1.8rem;
 }
-.v3-point-card h3 {
-  font-size: 1.4rem;
+.is-v3 .v3-point-card h3 {
+  font-size: 1.7rem;
   color: var(--gold-bright);
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
+  line-height: 1.2;
 }
 .v3-point-card p {
   font-family: 'Noto Sans', var(--sans);
   font-size: 1rem;
   line-height: 1.7;
   color: var(--text-warm);
+}
+.v3-point-card p + p {
+  margin-top: 0.9rem;
 }
 .v3-placeholder {
   display: inline-block;
