@@ -337,7 +337,7 @@ body.is-v3 .bh-mark {
 .v3-problem-rows {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 2.5rem;
   margin: 1.5rem auto 0;
 }
 .v3-problem-row {
@@ -398,8 +398,8 @@ body.is-v3 .bh-mark {
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  width: 700px;
-  max-width: 55%;
+  width: 320px;
+  max-width: 30%;
   aspect-ratio: 1 / 1;
   background-size: contain;
   background-position: center;
