@@ -909,13 +909,13 @@ body.is-v3 .bh-mark {
    9. EXPLORE BUTTONS
    ─────────────────────────────────────────────── */
 .v3-explore {
-  background: var(--v3-blue-deeper);
+  background: #e7dfd5;
   padding: 5rem 6vw 6rem;
 }
 .is-v3 .v3-explore-h {
   text-align: center;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
-  color: var(--gold-bright);
+  color: #9e6e36;
   margin-bottom: 4rem;
 }
 .v3-explore-ctas {
