@@ -483,6 +483,12 @@ body.is-v3 .bh-mark {
 .v3-solution-body + .v3-solution-body {
   margin-top: 1.5rem;
 }
+/* Desktop-only line breaks (used to fine-tune copy wrapping). On
+   narrow screens we let the browser wrap naturally. */
+.desktop-br { display: inline; }
+@media (max-width: 800px) {
+  .desktop-br { display: none; }
+}
 .v3-solution-body strong {
   color: #9e6e36;
   font-weight: 700;
