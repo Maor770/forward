@@ -167,6 +167,8 @@
   background: #e7dfd5;
   position: relative;
   padding-top: 4rem; /* breathing room below the boundary divider */
+  padding-bottom: 2.5rem;
+  margin-bottom: 0 !important; /* sits flush against the footer */
 }
 .layer-pillar-ai .ai-section-reach::before {
   content: '' !important;
@@ -183,19 +185,11 @@
   pointer-events: none !important;
 }
 .layer-pillar-ai .ai-section-reach::after {
-  content: '' !important;
-  position: absolute !important;
-  top: 100% !important;
-  left: calc(-50vw + 50%) !important;
-  right: calc(-50vw + 50%) !important;
-  width: auto !important;
-  height: 9999px !important;
-  background: #e7dfd5 !important;
-  transform: none !important;
-  opacity: 1 !important;
-  z-index: -1 !important;
-  pointer-events: none !important;
-  border-radius: 0 !important;
+  content: none !important; /* no trailing cream extension — reach now sits flush above the footer */
+}
+/* Drop the section's bottom padding so the reach goes straight to footer */
+.layer-pillar-ai .pillar-hub-section {
+  padding-bottom: 0 !important;
 }
 /* Section-divider hidden — user requested no dividers */
 .layer-pillar-ai .ai-section-divider {
@@ -222,21 +216,8 @@
   color: #4a3c28;
 }
 
-/* On pillar pages, pin the top bar to the viewport (matches the
-   behavior the user expects on these pages — wordmark / icons /
-   B"H / switch-btn stay anchored while the page scrolls) */
-.layer-pillar-building .campaign-wordmark,
-.layer-pillar-building .header-actions,
-.layer-pillar-building .bh-mark,
-.layer-pillar-building .pillar-switch-btn,
-.layer-pillar-building .v3-top-strip,
-.layer-pillar-ai .campaign-wordmark,
-.layer-pillar-ai .header-actions,
-.layer-pillar-ai .bh-mark,
-.layer-pillar-ai .pillar-switch-btn,
-.layer-pillar-ai .v3-top-strip {
-  position: fixed;
-}
+/* Top bar on pillar pages: stays at the top of the document and
+   scrolls away with the page (not pinned to the viewport) */
 
 /* Cross-pillar switch button — sits on the right side, just before
    the B"H mark, in the same vertical strip as the wordmark/icons */
@@ -1538,5 +1519,19 @@ body.is-v3 .bh-mark {
   }
   .v3-hero-h1 {
     font-size: clamp(2rem, 9vw, 2.8rem);
+  }
+  /* Narrow the hero text block so it sits visibly centered on the page,
+     with the copy still left-aligned inside. The campaign badge becomes
+     a block element so it centers within that narrowed column. */
+  .v3-hero-text {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .v3-hero-badge {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
