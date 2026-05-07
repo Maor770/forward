@@ -197,32 +197,9 @@
   pointer-events: none !important;
   border-radius: 0 !important;
 }
-/* Section-divider element placed exactly on the navy→cream boundary
-   (top of The Reach), matching the home page divider style */
-.layer-pillar-ai .ai-section-reach .ai-section-divider {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(420px, 65%);
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(232, 201, 125, 0.55) 50%,
-    transparent 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-.layer-pillar-ai .ai-section-reach .ai-section-divider::after {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: 50%;
-  width: 7px;
-  height: 7px;
-  background: var(--gold-bright);
-  opacity: 0.85;
-  transform: translateX(-50%) rotate(45deg);
+/* Section-divider hidden — user requested no dividers */
+.layer-pillar-ai .ai-section-divider {
+  display: none;
 }
 /* Header copy: title in warm gold (matching "Maor"), lead in the
    home Hero sub-paragraph style (Noto Sans 600, dark warm) */
@@ -336,38 +313,9 @@
   z-index: 4;
 }
 
-/* Section dividers on AI pillar — placed EXACTLY on the boundary
-   between sections (top: 0 of each .ai-section) so they sit on the
-   cream→navy transition line */
+/* No section dividers between AI pillar sections */
 .layer-pillar-ai .ai-section {
   position: relative;
-}
-.layer-pillar-ai .ai-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(420px, 65%);
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(232, 201, 125, 0.55) 50%,
-    transparent 100%);
-  z-index: 3;
-}
-.layer-pillar-ai .ai-section::after {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: 50%;
-  width: 7px;
-  height: 7px;
-  background: var(--gold-bright);
-  opacity: 0.85;
-  transform: translateX(-50%) rotate(45deg);
-  pointer-events: none;
-  z-index: 4;
 }
 /* Match the kicker on AI navy sections to the h2 color (gold-bright)
    so 'THE ENGINE' / 'THE THESIS' tone aligns with 'Six Proprietary
