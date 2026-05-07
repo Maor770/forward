@@ -1011,16 +1011,21 @@ body.is-v3 .bh-mark {
 /* ───────────────────────────────────────────────
    Responsive: stack everything below 800 px
    ─────────────────────────────────────────────── */
-@media (max-width: 800px) {
-  /* Hide the scrollbar entirely on mobile (still scrollable, just no track) */
-  body.is-v3 {
+@media (max-width: 900px) {
+  /* Hide the page scrollbar entirely on mobile/tablet (still scrollable,
+     just no visible track). Apply to both html and body because some
+     browsers attach the scroll to one and some to the other. */
+  html, body, body.is-v3 {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
   body.is-v3::-webkit-scrollbar {
     display: none;
     width: 0;
     height: 0;
+    background: transparent;
   }
   .v3-hero {
     padding: calc(var(--top-strip-height, 50px) + 1rem) 5vw 2.5rem;
