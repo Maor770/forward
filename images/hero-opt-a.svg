@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" role="img" aria-label="Children of every background lifted by a shared light">
+  <defs>
+    <radialGradient id="aGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbe9bd"/>
+      <stop offset="45%" stop-color="#f2cf83"/>
+      <stop offset="100%" stop-color="#f2cf83" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="aGround" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8DBB8"/>
+      <stop offset="100%" stop-color="#dcc99a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- soft halo of light -->
+  <circle cx="240" cy="120" r="150" fill="url(#aGlow)"/>
+
+  <!-- rays -->
+  <g stroke="#c69556" stroke-width="5" stroke-linecap="round" opacity="0.55">
+    <line x1="240" y1="26" x2="240" y2="56"/>
+    <line x1="150" y1="48" x2="166" y2="76"/>
+    <line x1="330" y1="48" x2="314" y2="76"/>
+    <line x1="92" y1="118" x2="124" y2="124"/>
+    <line x1="388" y1="118" x2="356" y2="124"/>
+  </g>
+
+  <!-- the spark / flame of light -->
+  <g>
+    <circle cx="240" cy="120" r="30" fill="#f6d873"/>
+    <path d="M240 92 C252 108 256 120 240 150 C224 120 228 108 240 92 Z" fill="#fff4cf"/>
+    <circle cx="240" cy="124" r="11" fill="#9e6e36" opacity="0.9"/>
+  </g>
+
+  <!-- ground -->
+  <rect x="0" y="372" width="480" height="68" fill="url(#aGround)"/>
+
+  <!-- ===== CHILDREN (simple flat, varied) ===== -->
+  <!-- child 1: kippah -->
+  <g>
+    <rect x="60" y="300" width="58" height="80" rx="26" fill="#9e6e36"/>
+    <circle cx="89" cy="280" r="26" fill="#e8b98c"/>
+    <path d="M68 270 a21 16 0 0 1 42 0 Z" fill="#5b4a8a"/>
+  </g>
+  <!-- child 2: head covering / scarf -->
+  <g>
+    <rect x="150" y="300" width="58" height="80" rx="26" fill="#c69556"/>
+    <path d="M150 286 a29 29 0 0 1 58 0 l0 8 a29 22 0 0 1 -58 0 Z" fill="#1f7a6e"/>
+    <circle cx="179" cy="284" r="20" fill="#8a5a3c"/>
+    <path d="M159 280 a20 20 0 0 1 40 0 l0 8 a20 14 0 0 1 -40 0 Z" fill="#1f7a6e"/>
+  </g>
+  <!-- child 3: short hair -->
+  <g>
+    <rect x="270" y="300" width="58" height="80" rx="26" fill="#13284E"/>
+    <circle cx="299" cy="280" r="26" fill="#f2c9a0"/>
+    <path d="M276 272 a24 22 0 0 1 46 0 l0 -4 a23 18 0 0 0 -46 0 Z" fill="#3a2c1c"/>
+    <path d="M276 272 a24 20 0 0 1 46 0 q-23 -16 -46 0 Z" fill="#3a2c1c"/>
+  </g>
+  <!-- child 4: cap -->
+  <g>
+    <rect x="362" y="300" width="58" height="80" rx="26" fill="#b07a3e"/>
+    <circle cx="391" cy="280" r="26" fill="#d99a6c"/>
+    <path d="M366 276 a25 21 0 0 1 50 0 Z" fill="#2f5d8a"/>
+    <path d="M390 276 h34 a8 8 0 0 1 -8 6 h-26 Z" fill="#2f5d8a"/>
+  </g>
+</svg>

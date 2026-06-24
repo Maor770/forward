@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" role="img" aria-label="Children of every background holding hands beneath a rising light, line-engraving style">
+  <defs>
+    <clipPath id="bArc"><path d="M40 250 a200 200 0 0 1 400 0 Z"/></clipPath>
+  </defs>
+
+  <!-- rising sun: stripe rays -->
+  <g clip-path="url(#bArc)">
+    <g stroke="#c69556" stroke-width="4" opacity="0.5">
+      <line x1="240" y1="250" x2="240" y2="20"/>
+      <line x1="240" y1="250" x2="180" y2="32"/>
+      <line x1="240" y1="250" x2="300" y2="32"/>
+      <line x1="240" y1="250" x2="124" y2="70"/>
+      <line x1="240" y1="250" x2="356" y2="70"/>
+      <line x1="240" y1="250" x2="78" y2="130"/>
+      <line x1="240" y1="250" x2="402" y2="130"/>
+      <line x1="240" y1="250" x2="48" y2="206"/>
+      <line x1="240" y1="250" x2="432" y2="206"/>
+    </g>
+    <!-- horizontal engraving stripes near the horizon -->
+    <g stroke="#9e6e36" stroke-width="3" opacity="0.35">
+      <line x1="40" y1="248" x2="440" y2="248"/>
+      <line x1="40" y1="236" x2="440" y2="236"/>
+      <line x1="60" y1="224" x2="420" y2="224"/>
+      <line x1="80" y1="212" x2="400" y2="212"/>
+    </g>
+  </g>
+  <circle cx="240" cy="250" r="34" fill="#f6d873"/>
+
+  <!-- horizon line -->
+  <line x1="20" y1="250" x2="460" y2="250" stroke="#9e6e36" stroke-width="3"/>
+
+  <!-- ===== three line-art children holding hands ===== -->
+  <g fill="none" stroke="#7a5326" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- child A -->
+    <circle cx="140" cy="286" r="22"/>
+    <path d="M140 308 v54 M140 318 l-30 26 M140 318 l30 22 M140 362 l-16 44 M140 362 l16 44"/>
+    <!-- child B (center, slightly taller) -->
+    <circle cx="240" cy="272" r="24"/>
+    <path d="M240 296 v62 M240 308 l-30 32 M240 308 l30 32 M240 358 l-18 50 M240 358 l18 50"/>
+    <!-- child C -->
+    <circle cx="340" cy="286" r="22"/>
+    <path d="M340 308 v54 M340 318 l-30 22 M340 318 l30 26 M340 362 l-16 44 M340 362 l16 44"/>
+    <!-- joined hands -->
+    <path d="M170 340 q20 -6 40 0" stroke-width="3"/>
+    <path d="M270 340 q20 -6 40 0" stroke-width="3"/>
+  </g>
+</svg>

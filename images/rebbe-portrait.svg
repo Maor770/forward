@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360" role="img" aria-label="Portrait of the Lubavitcher Rebbe, line-engraving style">
+  <defs>
+    <!-- horizontal engraving hatch -->
+    <pattern id="rHatch" width="6" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="3" x2="6" y2="3" stroke="#6b573a" stroke-width="1" opacity="0.45"/>
+    </pattern>
+    <pattern id="rHatchDense" width="5" height="3" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="2" x2="5" y2="2" stroke="#4a3c28" stroke-width="1" opacity="0.6"/>
+    </pattern>
+    <clipPath id="rFace"><path d="M150 120 c44 0 60 30 60 70 c0 52 -28 96 -60 96 c-32 0 -60 -44 -60 -96 c0 -40 16 -70 60 -70 Z"/></clipPath>
+    <clipPath id="rBeard"><path d="M96 196 c8 70 40 116 54 116 c14 0 46 -46 54 -116 c-20 22 -88 22 -108 0 Z"/></clipPath>
+  </defs>
+
+  <!-- subtle oval vignette -->
+  <ellipse cx="150" cy="190" rx="118" ry="150" fill="#FAF3E2"/>
+  <ellipse cx="150" cy="190" rx="118" ry="150" fill="none" stroke="#9e6e36" stroke-width="2" opacity="0.4"/>
+
+  <!-- shoulders / coat -->
+  <path d="M60 360 c0 -54 36 -86 90 -86 c54 0 90 32 90 86 Z" fill="#2b2317"/>
+  <path d="M60 360 c0 -54 36 -86 90 -86 c54 0 90 32 90 86 Z" fill="url(#rHatchDense)"/>
+  <!-- collar -->
+  <path d="M132 282 l18 26 l18 -26 l-6 40 h-24 Z" fill="#f4ecd8"/>
+
+  <!-- face -->
+  <path d="M150 120 c44 0 60 30 60 70 c0 52 -28 96 -60 96 c-32 0 -60 -44 -60 -96 c0 -40 16 -70 60 -70 Z" fill="#efd9bd"/>
+  <g clip-path="url(#rFace)">
+    <rect x="30" y="120" width="240" height="240" fill="url(#rHatch)"/>
+    <!-- cheek shadow hatching -->
+    <rect x="180" y="150" width="40" height="120" fill="url(#rHatchDense)" opacity="0.5"/>
+    <rect x="90" y="150" width="34" height="120" fill="url(#rHatchDense)" opacity="0.4"/>
+  </g>
+
+  <!-- hat: black fedora -->
+  <ellipse cx="150" cy="126" rx="92" ry="22" fill="#1c1710"/>
+  <path d="M78 124 c0 -52 18 -86 72 -86 c54 0 72 34 72 86 c-20 -16 -52 -22 -72 -22 c-20 0 -52 6 -72 22 Z" fill="#241d12"/>
+  <path d="M78 124 c0 -52 18 -86 72 -86 c54 0 72 34 72 86 c-20 -16 -52 -22 -72 -22 c-20 0 -52 6 -72 22 Z" fill="url(#rHatchDense)"/>
+  <ellipse cx="150" cy="126" rx="92" ry="22" fill="none" stroke="#0e0b07" stroke-width="2"/>
+
+  <!-- eyebrows -->
+  <path d="M112 168 q16 -8 32 -2" fill="none" stroke="#5a4a30" stroke-width="3" stroke-linecap="round"/>
+  <path d="M156 166 q16 -6 32 2" fill="none" stroke="#5a4a30" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- glasses -->
+  <g fill="none" stroke="#2e2417" stroke-width="3">
+    <rect x="106" y="176" width="36" height="28" rx="10"/>
+    <rect x="158" y="176" width="36" height="28" rx="10"/>
+    <line x1="142" y1="188" x2="158" y2="188"/>
+    <line x1="106" y1="184" x2="86" y2="180"/>
+    <line x1="194" y1="184" x2="214" y2="180"/>
+  </g>
+  <!-- eyes -->
+  <circle cx="124" cy="190" r="3.4" fill="#2e2417"/>
+  <circle cx="176" cy="190" r="3.4" fill="#2e2417"/>
+
+  <!-- nose -->
+  <path d="M150 200 l-6 26 q6 6 12 0" fill="none" stroke="#7a6038" stroke-width="2.4" stroke-linecap="round"/>
+
+  <!-- full beard -->
+  <path d="M96 196 c8 70 40 116 54 116 c14 0 46 -46 54 -116 c-20 22 -88 22 -108 0 Z" fill="#efe7d6"/>
+  <g clip-path="url(#rBeard)">
+    <g stroke="#b9ad95" stroke-width="1.4">
+      <path d="M104 210 q46 30 92 0" fill="none"/>
+      <path d="M102 226 q48 34 96 0" fill="none"/>
+      <path d="M104 244 q46 36 92 0" fill="none"/>
+      <path d="M108 262 q42 34 84 0" fill="none"/>
+      <path d="M114 280 q36 28 72 0" fill="none"/>
+      <path d="M122 298 q28 18 56 0" fill="none"/>
+    </g>
+    <!-- moustache -->
+    <path d="M120 206 q30 16 60 0" fill="none" stroke="#a89a7e" stroke-width="2.2"/>
+  </g>
+  <path d="M96 196 c8 70 40 116 54 116 c14 0 46 -46 54 -116" fill="none" stroke="#9a8b6e" stroke-width="2" opacity="0.7"/>
+</svg>
