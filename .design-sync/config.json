@@ -1,0 +1,16 @@
+{
+  "pkg": "@maorforward/ds",
+  "globalName": "MaorForwardDS",
+  "shape": "package",
+  "buildCmd": "cd design-system && npm run build",
+  "cssEntry": "dist/styles.css",
+  "readmeHeader": ".design-sync/conventions.md",
+  "overrides": {
+    "AudienceCard": { "cardMode": "column" },
+    "ExploreCta": { "cardMode": "column" },
+    "Hero": { "cardMode": "column" },
+    "SectionHeading": { "cardMode": "column" },
+    "StakesCard": { "cardMode": "column" },
+    "StatCard": { "cardMode": "column" }
+  }
+}
